@@ -33,61 +33,62 @@
             this.panelStatus = new System.Windows.Forms.Panel();
             this.splitterStatus = new System.Windows.Forms.Splitter();
             this.panelSelect = new System.Windows.Forms.Panel();
-            this.labelSelectFolder = new System.Windows.Forms.Label();
-            this.textBoxSelectFolder = new System.Windows.Forms.TextBox();
-            this.labelSelectResource = new System.Windows.Forms.Label();
-            this.listViewSelectResource = new System.Windows.Forms.ListView();
             this.buttonSelectFolder = new System.Windows.Forms.Button();
+            this.listViewSelectResource = new System.Windows.Forms.ListView();
+            this.labelSelectResource = new System.Windows.Forms.Label();
+            this.textBoxSelectFolder = new System.Windows.Forms.TextBox();
+            this.labelSelectFolder = new System.Windows.Forms.Label();
             this.splitterSelect = new System.Windows.Forms.Splitter();
             this.panelControls = new System.Windows.Forms.Panel();
             this.tabControlControls = new System.Windows.Forms.TabControl();
-            this.tabPageConfiguration = new System.Windows.Forms.TabPage();
-            this.radioButtonModeGoogleTranslate = new System.Windows.Forms.RadioButton();
-            this.panelModeGoogleTranslate = new System.Windows.Forms.Panel();
-            this.labelModeGoogleTranslateBetweenRequests = new System.Windows.Forms.Label();
-            this.numericUpDownModeGoogleTranslateBetweenRequests = new System.Windows.Forms.NumericUpDown();
-            this.labelModeGoogleTranslateAfterBlock = new System.Windows.Forms.Label();
-            this.numericUpDownModeGoogleTranslateAfterBlock = new System.Windows.Forms.NumericUpDown();
-            this.labelModeGoogleTranslateUrl = new System.Windows.Forms.Label();
-            this.textBoxModeGoogleTranslateUrl = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.radioButtonModeGoogleApi = new System.Windows.Forms.RadioButton();
-            this.panelModeGoogleApi = new System.Windows.Forms.Panel();
-            this.labelModeGoogleApiKey = new System.Windows.Forms.Label();
-            this.textBoxModeGoogleApiKey = new System.Windows.Forms.TextBox();
-            this.labelModeGoogleApiUrl = new System.Windows.Forms.Label();
-            this.textBoxModeGoogleApiUrl = new System.Windows.Forms.TextBox();
-            this.radioButtonModeMicrosoftApi = new System.Windows.Forms.RadioButton();
-            this.panelModeMicrosoftApi = new System.Windows.Forms.Panel();
-            this.label1ModeMicrosoftApiKey = new System.Windows.Forms.Label();
-            this.textBoxModeMicrosoftApiKey = new System.Windows.Forms.TextBox();
-            this.labelModeMicrosoftApiUrl = new System.Windows.Forms.Label();
-            this.textBoxModeMicrosoftApiUrl = new System.Windows.Forms.TextBox();
             this.tabPageData = new System.Windows.Forms.TabPage();
-            this.dataGridViewData = new System.Windows.Forms.DataGridView();
+            this.textBoxDefaultLanguage = new System.Windows.Forms.TextBox();
+            this.labelDefaultLanguage = new System.Windows.Forms.Label();
             this.flowLayoutPanelActions = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonStop = new System.Windows.Forms.Button();
-            this.buttonTranslateAll = new System.Windows.Forms.Button();
-            this.buttonTranslateNext = new System.Windows.Forms.Button();
-            this.buttonSaveChanges = new System.Windows.Forms.Button();
             this.buttonReloadData = new System.Windows.Forms.Button();
-            this.labelLanguageFrom = new System.Windows.Forms.Label();
-            this.textBoxLanguageFrom = new System.Windows.Forms.TextBox();
+            this.buttonSaveChanges = new System.Windows.Forms.Button();
+            this.buttonTranslateNext = new System.Windows.Forms.Button();
+            this.buttonTranslateAll = new System.Windows.Forms.Button();
+            this.buttonStop = new System.Windows.Forms.Button();
+            this.dataGridViewData = new System.Windows.Forms.DataGridView();
+            this.tabPageConfiguration = new System.Windows.Forms.TabPage();
+            this.panelModeMicrosoftApi = new System.Windows.Forms.Panel();
+            this.textBoxModeMicrosoftApiUrl = new System.Windows.Forms.TextBox();
+            this.labelModeMicrosoftApiUrl = new System.Windows.Forms.Label();
+            this.textBoxModeMicrosoftApiKey = new System.Windows.Forms.TextBox();
+            this.label1ModeMicrosoftApiKey = new System.Windows.Forms.Label();
+            this.radioButtonModeMicrosoftApi = new System.Windows.Forms.RadioButton();
+            this.panelModeGoogleApi = new System.Windows.Forms.Panel();
+            this.textBoxModeGoogleApiUrl = new System.Windows.Forms.TextBox();
+            this.labelModeGoogleApiUrl = new System.Windows.Forms.Label();
+            this.textBoxModeGoogleApiKey = new System.Windows.Forms.TextBox();
+            this.labelModeGoogleApiKey = new System.Windows.Forms.Label();
+            this.radioButtonModeGoogleApi = new System.Windows.Forms.RadioButton();
+            this.panelModeGoogleTranslate = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBoxModeGoogleTranslateUrl = new System.Windows.Forms.TextBox();
+            this.labelModeGoogleTranslateUrl = new System.Windows.Forms.Label();
+            this.numericUpDownModeGoogleTranslateAfterBlock = new System.Windows.Forms.NumericUpDown();
+            this.labelModeGoogleTranslateAfterBlock = new System.Windows.Forms.Label();
+            this.numericUpDownModeGoogleTranslateBetweenRequests = new System.Windows.Forms.NumericUpDown();
+            this.labelModeGoogleTranslateBetweenRequests = new System.Windows.Forms.Label();
+            this.radioButtonModeGoogleTranslate = new System.Windows.Forms.RadioButton();
             this.panelOperations = new System.Windows.Forms.Panel();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.panelStatus.SuspendLayout();
             this.panelSelect.SuspendLayout();
             this.panelControls.SuspendLayout();
             this.tabControlControls.SuspendLayout();
-            this.tabPageConfiguration.SuspendLayout();
-            this.panelModeGoogleTranslate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownModeGoogleTranslateBetweenRequests)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownModeGoogleTranslateAfterBlock)).BeginInit();
-            this.panelModeGoogleApi.SuspendLayout();
-            this.panelModeMicrosoftApi.SuspendLayout();
             this.tabPageData.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewData)).BeginInit();
             this.flowLayoutPanelActions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewData)).BeginInit();
+            this.tabPageConfiguration.SuspendLayout();
+            this.panelModeMicrosoftApi.SuspendLayout();
+            this.panelModeGoogleApi.SuspendLayout();
+            this.panelModeGoogleTranslate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownModeGoogleTranslateAfterBlock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownModeGoogleTranslateBetweenRequests)).BeginInit();
             this.panelOperations.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,32 +150,16 @@
             this.panelSelect.Size = new System.Drawing.Size(200, 448);
             this.panelSelect.TabIndex = 0;
             // 
-            // labelSelectFolder
+            // buttonSelectFolder
             // 
-            this.labelSelectFolder.AutoSize = true;
-            this.labelSelectFolder.Location = new System.Drawing.Point(12, 9);
-            this.labelSelectFolder.Name = "labelSelectFolder";
-            this.labelSelectFolder.Size = new System.Drawing.Size(69, 13);
-            this.labelSelectFolder.TabIndex = 0;
-            this.labelSelectFolder.Text = "Select folder:";
-            // 
-            // textBoxSelectFolder
-            // 
-            this.textBoxSelectFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSelectFolder.Location = new System.Drawing.Point(12, 25);
-            this.textBoxSelectFolder.Name = "textBoxSelectFolder";
-            this.textBoxSelectFolder.Size = new System.Drawing.Size(143, 20);
-            this.textBoxSelectFolder.TabIndex = 1;
-            // 
-            // labelSelectResource
-            // 
-            this.labelSelectResource.AutoSize = true;
-            this.labelSelectResource.Location = new System.Drawing.Point(12, 58);
-            this.labelSelectResource.Name = "labelSelectResource";
-            this.labelSelectResource.Size = new System.Drawing.Size(84, 13);
-            this.labelSelectResource.TabIndex = 2;
-            this.labelSelectResource.Text = "Select resource:";
+            this.buttonSelectFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSelectFolder.Location = new System.Drawing.Point(161, 25);
+            this.buttonSelectFolder.Name = "buttonSelectFolder";
+            this.buttonSelectFolder.Size = new System.Drawing.Size(28, 20);
+            this.buttonSelectFolder.TabIndex = 4;
+            this.buttonSelectFolder.Text = "...";
+            this.buttonSelectFolder.UseVisualStyleBackColor = true;
+            this.buttonSelectFolder.Click += new System.EventHandler(this.buttonSelectFolder_Click);
             // 
             // listViewSelectResource
             // 
@@ -190,15 +175,33 @@
             this.listViewSelectResource.UseCompatibleStateImageBehavior = false;
             this.listViewSelectResource.View = System.Windows.Forms.View.List;
             // 
-            // buttonSelectFolder
+            // labelSelectResource
             // 
-            this.buttonSelectFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSelectFolder.Location = new System.Drawing.Point(161, 25);
-            this.buttonSelectFolder.Name = "buttonSelectFolder";
-            this.buttonSelectFolder.Size = new System.Drawing.Size(28, 20);
-            this.buttonSelectFolder.TabIndex = 4;
-            this.buttonSelectFolder.Text = "...";
-            this.buttonSelectFolder.UseVisualStyleBackColor = true;
+            this.labelSelectResource.AutoSize = true;
+            this.labelSelectResource.Location = new System.Drawing.Point(12, 58);
+            this.labelSelectResource.Name = "labelSelectResource";
+            this.labelSelectResource.Size = new System.Drawing.Size(84, 13);
+            this.labelSelectResource.TabIndex = 2;
+            this.labelSelectResource.Text = "Select resource:";
+            // 
+            // textBoxSelectFolder
+            // 
+            this.textBoxSelectFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxSelectFolder.Location = new System.Drawing.Point(12, 25);
+            this.textBoxSelectFolder.Name = "textBoxSelectFolder";
+            this.textBoxSelectFolder.Size = new System.Drawing.Size(143, 20);
+            this.textBoxSelectFolder.TabIndex = 1;
+            this.textBoxSelectFolder.TextChanged += new System.EventHandler(this.textBoxSelectFolder_TextChanged);
+            // 
+            // labelSelectFolder
+            // 
+            this.labelSelectFolder.AutoSize = true;
+            this.labelSelectFolder.Location = new System.Drawing.Point(12, 9);
+            this.labelSelectFolder.Name = "labelSelectFolder";
+            this.labelSelectFolder.Size = new System.Drawing.Size(69, 13);
+            this.labelSelectFolder.TabIndex = 0;
+            this.labelSelectFolder.Text = "Select folder:";
             // 
             // splitterSelect
             // 
@@ -233,6 +236,114 @@
             this.tabControlControls.Size = new System.Drawing.Size(559, 429);
             this.tabControlControls.TabIndex = 20;
             // 
+            // tabPageData
+            // 
+            this.tabPageData.Controls.Add(this.textBoxDefaultLanguage);
+            this.tabPageData.Controls.Add(this.labelDefaultLanguage);
+            this.tabPageData.Controls.Add(this.flowLayoutPanelActions);
+            this.tabPageData.Controls.Add(this.dataGridViewData);
+            this.tabPageData.Location = new System.Drawing.Point(4, 22);
+            this.tabPageData.Name = "tabPageData";
+            this.tabPageData.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageData.Size = new System.Drawing.Size(551, 403);
+            this.tabPageData.TabIndex = 0;
+            this.tabPageData.Text = "Translate";
+            this.tabPageData.UseVisualStyleBackColor = true;
+            // 
+            // textBoxDefaultLanguage
+            // 
+            this.textBoxDefaultLanguage.Location = new System.Drawing.Point(6, 19);
+            this.textBoxDefaultLanguage.Name = "textBoxDefaultLanguage";
+            this.textBoxDefaultLanguage.Size = new System.Drawing.Size(153, 20);
+            this.textBoxDefaultLanguage.TabIndex = 22;
+            this.textBoxDefaultLanguage.Text = "en";
+            // 
+            // labelDefaultLanguage
+            // 
+            this.labelDefaultLanguage.AutoSize = true;
+            this.labelDefaultLanguage.Location = new System.Drawing.Point(3, 3);
+            this.labelDefaultLanguage.Name = "labelDefaultLanguage";
+            this.labelDefaultLanguage.Size = new System.Drawing.Size(156, 13);
+            this.labelDefaultLanguage.TabIndex = 21;
+            this.labelDefaultLanguage.Text = "Default Language of Resource:";
+            // 
+            // flowLayoutPanelActions
+            // 
+            this.flowLayoutPanelActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanelActions.AutoScroll = true;
+            this.flowLayoutPanelActions.Controls.Add(this.buttonReloadData);
+            this.flowLayoutPanelActions.Controls.Add(this.buttonSaveChanges);
+            this.flowLayoutPanelActions.Controls.Add(this.buttonTranslateNext);
+            this.flowLayoutPanelActions.Controls.Add(this.buttonTranslateAll);
+            this.flowLayoutPanelActions.Controls.Add(this.buttonStop);
+            this.flowLayoutPanelActions.Location = new System.Drawing.Point(2, 371);
+            this.flowLayoutPanelActions.Name = "flowLayoutPanelActions";
+            this.flowLayoutPanelActions.Size = new System.Drawing.Size(543, 31);
+            this.flowLayoutPanelActions.TabIndex = 20;
+            // 
+            // buttonReloadData
+            // 
+            this.buttonReloadData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonReloadData.Location = new System.Drawing.Point(3, 3);
+            this.buttonReloadData.Name = "buttonReloadData";
+            this.buttonReloadData.Size = new System.Drawing.Size(90, 25);
+            this.buttonReloadData.TabIndex = 13;
+            this.buttonReloadData.Text = "Reload Data";
+            this.buttonReloadData.UseVisualStyleBackColor = true;
+            // 
+            // buttonSaveChanges
+            // 
+            this.buttonSaveChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSaveChanges.Location = new System.Drawing.Point(99, 3);
+            this.buttonSaveChanges.Name = "buttonSaveChanges";
+            this.buttonSaveChanges.Size = new System.Drawing.Size(90, 25);
+            this.buttonSaveChanges.TabIndex = 12;
+            this.buttonSaveChanges.Text = "Save Changes";
+            this.buttonSaveChanges.UseVisualStyleBackColor = true;
+            // 
+            // buttonTranslateNext
+            // 
+            this.buttonTranslateNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonTranslateNext.Location = new System.Drawing.Point(195, 3);
+            this.buttonTranslateNext.Name = "buttonTranslateNext";
+            this.buttonTranslateNext.Size = new System.Drawing.Size(90, 25);
+            this.buttonTranslateNext.TabIndex = 17;
+            this.buttonTranslateNext.Text = "Translate Next";
+            this.buttonTranslateNext.UseVisualStyleBackColor = true;
+            // 
+            // buttonTranslateAll
+            // 
+            this.buttonTranslateAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonTranslateAll.Location = new System.Drawing.Point(291, 3);
+            this.buttonTranslateAll.Name = "buttonTranslateAll";
+            this.buttonTranslateAll.Size = new System.Drawing.Size(90, 25);
+            this.buttonTranslateAll.TabIndex = 16;
+            this.buttonTranslateAll.Text = "Translate All";
+            this.buttonTranslateAll.UseVisualStyleBackColor = true;
+            // 
+            // buttonStop
+            // 
+            this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonStop.Location = new System.Drawing.Point(387, 3);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(90, 25);
+            this.buttonStop.TabIndex = 15;
+            this.buttonStop.Text = "Stop";
+            this.buttonStop.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewData
+            // 
+            this.dataGridViewData.AllowUserToOrderColumns = true;
+            this.dataGridViewData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewData.Location = new System.Drawing.Point(6, 43);
+            this.dataGridViewData.Name = "dataGridViewData";
+            this.dataGridViewData.Size = new System.Drawing.Size(539, 325);
+            this.dataGridViewData.TabIndex = 9;
+            // 
             // tabPageConfiguration
             // 
             this.tabPageConfiguration.Controls.Add(this.panelModeMicrosoftApi);
@@ -249,17 +360,125 @@
             this.tabPageConfiguration.Text = "Configuration";
             this.tabPageConfiguration.UseVisualStyleBackColor = true;
             // 
-            // radioButtonModeGoogleTranslate
+            // panelModeMicrosoftApi
             // 
-            this.radioButtonModeGoogleTranslate.AutoSize = true;
-            this.radioButtonModeGoogleTranslate.Checked = true;
-            this.radioButtonModeGoogleTranslate.Location = new System.Drawing.Point(6, 6);
-            this.radioButtonModeGoogleTranslate.Name = "radioButtonModeGoogleTranslate";
-            this.radioButtonModeGoogleTranslate.Size = new System.Drawing.Size(128, 17);
-            this.radioButtonModeGoogleTranslate.TabIndex = 0;
-            this.radioButtonModeGoogleTranslate.TabStop = true;
-            this.radioButtonModeGoogleTranslate.Text = "Use Google Translate";
-            this.radioButtonModeGoogleTranslate.UseVisualStyleBackColor = true;
+            this.panelModeMicrosoftApi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelModeMicrosoftApi.Controls.Add(this.textBoxModeMicrosoftApiUrl);
+            this.panelModeMicrosoftApi.Controls.Add(this.labelModeMicrosoftApiUrl);
+            this.panelModeMicrosoftApi.Controls.Add(this.textBoxModeMicrosoftApiKey);
+            this.panelModeMicrosoftApi.Controls.Add(this.label1ModeMicrosoftApiKey);
+            this.panelModeMicrosoftApi.Location = new System.Drawing.Point(6, 239);
+            this.panelModeMicrosoftApi.Name = "panelModeMicrosoftApi";
+            this.panelModeMicrosoftApi.Size = new System.Drawing.Size(539, 52);
+            this.panelModeMicrosoftApi.TabIndex = 10;
+            // 
+            // textBoxModeMicrosoftApiUrl
+            // 
+            this.textBoxModeMicrosoftApiUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxModeMicrosoftApiUrl.Location = new System.Drawing.Point(180, 3);
+            this.textBoxModeMicrosoftApiUrl.Name = "textBoxModeMicrosoftApiUrl";
+            this.textBoxModeMicrosoftApiUrl.Size = new System.Drawing.Size(356, 20);
+            this.textBoxModeMicrosoftApiUrl.TabIndex = 7;
+            // 
+            // labelModeMicrosoftApiUrl
+            // 
+            this.labelModeMicrosoftApiUrl.AutoSize = true;
+            this.labelModeMicrosoftApiUrl.Location = new System.Drawing.Point(66, 6);
+            this.labelModeMicrosoftApiUrl.Name = "labelModeMicrosoftApiUrl";
+            this.labelModeMicrosoftApiUrl.Size = new System.Drawing.Size(108, 13);
+            this.labelModeMicrosoftApiUrl.TabIndex = 6;
+            this.labelModeMicrosoftApiUrl.Text = "URL of API endpoint:";
+            // 
+            // textBoxModeMicrosoftApiKey
+            // 
+            this.textBoxModeMicrosoftApiKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxModeMicrosoftApiKey.Location = new System.Drawing.Point(180, 29);
+            this.textBoxModeMicrosoftApiKey.Name = "textBoxModeMicrosoftApiKey";
+            this.textBoxModeMicrosoftApiKey.Size = new System.Drawing.Size(356, 20);
+            this.textBoxModeMicrosoftApiKey.TabIndex = 5;
+            // 
+            // label1ModeMicrosoftApiKey
+            // 
+            this.label1ModeMicrosoftApiKey.AutoSize = true;
+            this.label1ModeMicrosoftApiKey.Location = new System.Drawing.Point(42, 32);
+            this.label1ModeMicrosoftApiKey.Name = "label1ModeMicrosoftApiKey";
+            this.label1ModeMicrosoftApiKey.Size = new System.Drawing.Size(132, 13);
+            this.label1ModeMicrosoftApiKey.TabIndex = 4;
+            this.label1ModeMicrosoftApiKey.Text = "API key for authentication:";
+            // 
+            // radioButtonModeMicrosoftApi
+            // 
+            this.radioButtonModeMicrosoftApi.AutoSize = true;
+            this.radioButtonModeMicrosoftApi.Location = new System.Drawing.Point(6, 216);
+            this.radioButtonModeMicrosoftApi.Name = "radioButtonModeMicrosoftApi";
+            this.radioButtonModeMicrosoftApi.Size = new System.Drawing.Size(155, 17);
+            this.radioButtonModeMicrosoftApi.TabIndex = 9;
+            this.radioButtonModeMicrosoftApi.TabStop = true;
+            this.radioButtonModeMicrosoftApi.Text = "Use API of Microsoft Azure:";
+            this.radioButtonModeMicrosoftApi.UseVisualStyleBackColor = true;
+            // 
+            // panelModeGoogleApi
+            // 
+            this.panelModeGoogleApi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelModeGoogleApi.Controls.Add(this.textBoxModeGoogleApiUrl);
+            this.panelModeGoogleApi.Controls.Add(this.labelModeGoogleApiUrl);
+            this.panelModeGoogleApi.Controls.Add(this.textBoxModeGoogleApiKey);
+            this.panelModeGoogleApi.Controls.Add(this.labelModeGoogleApiKey);
+            this.panelModeGoogleApi.Location = new System.Drawing.Point(6, 147);
+            this.panelModeGoogleApi.Name = "panelModeGoogleApi";
+            this.panelModeGoogleApi.Size = new System.Drawing.Size(539, 52);
+            this.panelModeGoogleApi.TabIndex = 8;
+            // 
+            // textBoxModeGoogleApiUrl
+            // 
+            this.textBoxModeGoogleApiUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxModeGoogleApiUrl.Location = new System.Drawing.Point(180, 3);
+            this.textBoxModeGoogleApiUrl.Name = "textBoxModeGoogleApiUrl";
+            this.textBoxModeGoogleApiUrl.Size = new System.Drawing.Size(356, 20);
+            this.textBoxModeGoogleApiUrl.TabIndex = 7;
+            // 
+            // labelModeGoogleApiUrl
+            // 
+            this.labelModeGoogleApiUrl.AutoSize = true;
+            this.labelModeGoogleApiUrl.Location = new System.Drawing.Point(66, 6);
+            this.labelModeGoogleApiUrl.Name = "labelModeGoogleApiUrl";
+            this.labelModeGoogleApiUrl.Size = new System.Drawing.Size(108, 13);
+            this.labelModeGoogleApiUrl.TabIndex = 6;
+            this.labelModeGoogleApiUrl.Text = "URL of API endpoint:";
+            // 
+            // textBoxModeGoogleApiKey
+            // 
+            this.textBoxModeGoogleApiKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxModeGoogleApiKey.Location = new System.Drawing.Point(180, 29);
+            this.textBoxModeGoogleApiKey.Name = "textBoxModeGoogleApiKey";
+            this.textBoxModeGoogleApiKey.Size = new System.Drawing.Size(356, 20);
+            this.textBoxModeGoogleApiKey.TabIndex = 5;
+            // 
+            // labelModeGoogleApiKey
+            // 
+            this.labelModeGoogleApiKey.AutoSize = true;
+            this.labelModeGoogleApiKey.Location = new System.Drawing.Point(42, 32);
+            this.labelModeGoogleApiKey.Name = "labelModeGoogleApiKey";
+            this.labelModeGoogleApiKey.Size = new System.Drawing.Size(132, 13);
+            this.labelModeGoogleApiKey.TabIndex = 4;
+            this.labelModeGoogleApiKey.Text = "API key for authentication:";
+            // 
+            // radioButtonModeGoogleApi
+            // 
+            this.radioButtonModeGoogleApi.AutoSize = true;
+            this.radioButtonModeGoogleApi.Location = new System.Drawing.Point(6, 124);
+            this.radioButtonModeGoogleApi.Name = "radioButtonModeGoogleApi";
+            this.radioButtonModeGoogleApi.Size = new System.Drawing.Size(160, 17);
+            this.radioButtonModeGoogleApi.TabIndex = 2;
+            this.radioButtonModeGoogleApi.TabStop = true;
+            this.radioButtonModeGoogleApi.Text = "Use API of Google Translate";
+            this.radioButtonModeGoogleApi.UseVisualStyleBackColor = true;
             // 
             // panelModeGoogleTranslate
             // 
@@ -278,45 +497,43 @@
             this.panelModeGoogleTranslate.Size = new System.Drawing.Size(539, 78);
             this.panelModeGoogleTranslate.TabIndex = 1;
             // 
-            // labelModeGoogleTranslateBetweenRequests
+            // label7
             // 
-            this.labelModeGoogleTranslateBetweenRequests.AutoSize = true;
-            this.labelModeGoogleTranslateBetweenRequests.Location = new System.Drawing.Point(6, 5);
-            this.labelModeGoogleTranslateBetweenRequests.Name = "labelModeGoogleTranslateBetweenRequests";
-            this.labelModeGoogleTranslateBetweenRequests.Size = new System.Drawing.Size(168, 13);
-            this.labelModeGoogleTranslateBetweenRequests.TabIndex = 0;
-            this.labelModeGoogleTranslateBetweenRequests.Text = "Seconds between HTTP requests";
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.Color.IndianRed;
+            this.label7.Location = new System.Drawing.Point(250, 31);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(250, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Blocks occurs because this service is for real users.";
             // 
-            // numericUpDownModeGoogleTranslateBetweenRequests
+            // label6
             // 
-            this.numericUpDownModeGoogleTranslateBetweenRequests.Location = new System.Drawing.Point(180, 3);
-            this.numericUpDownModeGoogleTranslateBetweenRequests.Maximum = new decimal(new int[] {
-            86400,
-            0,
-            0,
-            0});
-            this.numericUpDownModeGoogleTranslateBetweenRequests.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownModeGoogleTranslateBetweenRequests.Name = "numericUpDownModeGoogleTranslateBetweenRequests";
-            this.numericUpDownModeGoogleTranslateBetweenRequests.Size = new System.Drawing.Size(64, 20);
-            this.numericUpDownModeGoogleTranslateBetweenRequests.TabIndex = 1;
-            this.numericUpDownModeGoogleTranslateBetweenRequests.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.IndianRed;
+            this.label6.Location = new System.Drawing.Point(250, 5);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(256, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Multiples and faster requests will block your machine.";
             // 
-            // labelModeGoogleTranslateAfterBlock
+            // textBoxModeGoogleTranslateUrl
             // 
-            this.labelModeGoogleTranslateAfterBlock.AutoSize = true;
-            this.labelModeGoogleTranslateAfterBlock.Location = new System.Drawing.Point(3, 31);
-            this.labelModeGoogleTranslateAfterBlock.Name = "labelModeGoogleTranslateAfterBlock";
-            this.labelModeGoogleTranslateAfterBlock.Size = new System.Drawing.Size(171, 13);
-            this.labelModeGoogleTranslateAfterBlock.TabIndex = 2;
-            this.labelModeGoogleTranslateAfterBlock.Text = "Wait seconds after block response";
+            this.textBoxModeGoogleTranslateUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxModeGoogleTranslateUrl.Location = new System.Drawing.Point(180, 55);
+            this.textBoxModeGoogleTranslateUrl.Name = "textBoxModeGoogleTranslateUrl";
+            this.textBoxModeGoogleTranslateUrl.Size = new System.Drawing.Size(356, 20);
+            this.textBoxModeGoogleTranslateUrl.TabIndex = 5;
+            // 
+            // labelModeGoogleTranslateUrl
+            // 
+            this.labelModeGoogleTranslateUrl.AutoSize = true;
+            this.labelModeGoogleTranslateUrl.Location = new System.Drawing.Point(66, 58);
+            this.labelModeGoogleTranslateUrl.Name = "labelModeGoogleTranslateUrl";
+            this.labelModeGoogleTranslateUrl.Size = new System.Drawing.Size(108, 13);
+            this.labelModeGoogleTranslateUrl.TabIndex = 4;
+            this.labelModeGoogleTranslateUrl.Text = "URL of API endpoint:";
             // 
             // numericUpDownModeGoogleTranslateAfterBlock
             // 
@@ -340,271 +557,57 @@
             0,
             0});
             // 
-            // labelModeGoogleTranslateUrl
+            // labelModeGoogleTranslateAfterBlock
             // 
-            this.labelModeGoogleTranslateUrl.AutoSize = true;
-            this.labelModeGoogleTranslateUrl.Location = new System.Drawing.Point(66, 58);
-            this.labelModeGoogleTranslateUrl.Name = "labelModeGoogleTranslateUrl";
-            this.labelModeGoogleTranslateUrl.Size = new System.Drawing.Size(108, 13);
-            this.labelModeGoogleTranslateUrl.TabIndex = 4;
-            this.labelModeGoogleTranslateUrl.Text = "URL of API endpoint:";
+            this.labelModeGoogleTranslateAfterBlock.AutoSize = true;
+            this.labelModeGoogleTranslateAfterBlock.Location = new System.Drawing.Point(3, 31);
+            this.labelModeGoogleTranslateAfterBlock.Name = "labelModeGoogleTranslateAfterBlock";
+            this.labelModeGoogleTranslateAfterBlock.Size = new System.Drawing.Size(171, 13);
+            this.labelModeGoogleTranslateAfterBlock.TabIndex = 2;
+            this.labelModeGoogleTranslateAfterBlock.Text = "Wait seconds after block response";
             // 
-            // textBoxModeGoogleTranslateUrl
+            // numericUpDownModeGoogleTranslateBetweenRequests
             // 
-            this.textBoxModeGoogleTranslateUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxModeGoogleTranslateUrl.Location = new System.Drawing.Point(180, 55);
-            this.textBoxModeGoogleTranslateUrl.Name = "textBoxModeGoogleTranslateUrl";
-            this.textBoxModeGoogleTranslateUrl.Size = new System.Drawing.Size(356, 20);
-            this.textBoxModeGoogleTranslateUrl.TabIndex = 5;
+            this.numericUpDownModeGoogleTranslateBetweenRequests.Location = new System.Drawing.Point(180, 3);
+            this.numericUpDownModeGoogleTranslateBetweenRequests.Maximum = new decimal(new int[] {
+            86400,
+            0,
+            0,
+            0});
+            this.numericUpDownModeGoogleTranslateBetweenRequests.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownModeGoogleTranslateBetweenRequests.Name = "numericUpDownModeGoogleTranslateBetweenRequests";
+            this.numericUpDownModeGoogleTranslateBetweenRequests.Size = new System.Drawing.Size(64, 20);
+            this.numericUpDownModeGoogleTranslateBetweenRequests.TabIndex = 1;
+            this.numericUpDownModeGoogleTranslateBetweenRequests.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
             // 
-            // label6
+            // labelModeGoogleTranslateBetweenRequests
             // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.IndianRed;
-            this.label6.Location = new System.Drawing.Point(250, 5);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(256, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Multiples and faster requests will block your machine.";
+            this.labelModeGoogleTranslateBetweenRequests.AutoSize = true;
+            this.labelModeGoogleTranslateBetweenRequests.Location = new System.Drawing.Point(6, 5);
+            this.labelModeGoogleTranslateBetweenRequests.Name = "labelModeGoogleTranslateBetweenRequests";
+            this.labelModeGoogleTranslateBetweenRequests.Size = new System.Drawing.Size(168, 13);
+            this.labelModeGoogleTranslateBetweenRequests.TabIndex = 0;
+            this.labelModeGoogleTranslateBetweenRequests.Text = "Seconds between HTTP requests";
             // 
-            // label7
+            // radioButtonModeGoogleTranslate
             // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.IndianRed;
-            this.label7.Location = new System.Drawing.Point(250, 31);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(250, 13);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Blocks occurs because this service is for real users.";
-            // 
-            // radioButtonModeGoogleApi
-            // 
-            this.radioButtonModeGoogleApi.AutoSize = true;
-            this.radioButtonModeGoogleApi.Location = new System.Drawing.Point(6, 124);
-            this.radioButtonModeGoogleApi.Name = "radioButtonModeGoogleApi";
-            this.radioButtonModeGoogleApi.Size = new System.Drawing.Size(160, 17);
-            this.radioButtonModeGoogleApi.TabIndex = 2;
-            this.radioButtonModeGoogleApi.TabStop = true;
-            this.radioButtonModeGoogleApi.Text = "Use API of Google Translate";
-            this.radioButtonModeGoogleApi.UseVisualStyleBackColor = true;
-            // 
-            // panelModeGoogleApi
-            // 
-            this.panelModeGoogleApi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelModeGoogleApi.Controls.Add(this.textBoxModeGoogleApiUrl);
-            this.panelModeGoogleApi.Controls.Add(this.labelModeGoogleApiUrl);
-            this.panelModeGoogleApi.Controls.Add(this.textBoxModeGoogleApiKey);
-            this.panelModeGoogleApi.Controls.Add(this.labelModeGoogleApiKey);
-            this.panelModeGoogleApi.Location = new System.Drawing.Point(6, 147);
-            this.panelModeGoogleApi.Name = "panelModeGoogleApi";
-            this.panelModeGoogleApi.Size = new System.Drawing.Size(539, 52);
-            this.panelModeGoogleApi.TabIndex = 8;
-            // 
-            // labelModeGoogleApiKey
-            // 
-            this.labelModeGoogleApiKey.AutoSize = true;
-            this.labelModeGoogleApiKey.Location = new System.Drawing.Point(42, 32);
-            this.labelModeGoogleApiKey.Name = "labelModeGoogleApiKey";
-            this.labelModeGoogleApiKey.Size = new System.Drawing.Size(132, 13);
-            this.labelModeGoogleApiKey.TabIndex = 4;
-            this.labelModeGoogleApiKey.Text = "API key for authentication:";
-            // 
-            // textBoxModeGoogleApiKey
-            // 
-            this.textBoxModeGoogleApiKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxModeGoogleApiKey.Location = new System.Drawing.Point(180, 29);
-            this.textBoxModeGoogleApiKey.Name = "textBoxModeGoogleApiKey";
-            this.textBoxModeGoogleApiKey.Size = new System.Drawing.Size(356, 20);
-            this.textBoxModeGoogleApiKey.TabIndex = 5;
-            // 
-            // labelModeGoogleApiUrl
-            // 
-            this.labelModeGoogleApiUrl.AutoSize = true;
-            this.labelModeGoogleApiUrl.Location = new System.Drawing.Point(66, 6);
-            this.labelModeGoogleApiUrl.Name = "labelModeGoogleApiUrl";
-            this.labelModeGoogleApiUrl.Size = new System.Drawing.Size(108, 13);
-            this.labelModeGoogleApiUrl.TabIndex = 6;
-            this.labelModeGoogleApiUrl.Text = "URL of API endpoint:";
-            // 
-            // textBoxModeGoogleApiUrl
-            // 
-            this.textBoxModeGoogleApiUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxModeGoogleApiUrl.Location = new System.Drawing.Point(180, 3);
-            this.textBoxModeGoogleApiUrl.Name = "textBoxModeGoogleApiUrl";
-            this.textBoxModeGoogleApiUrl.Size = new System.Drawing.Size(356, 20);
-            this.textBoxModeGoogleApiUrl.TabIndex = 7;
-            // 
-            // radioButtonModeMicrosoftApi
-            // 
-            this.radioButtonModeMicrosoftApi.AutoSize = true;
-            this.radioButtonModeMicrosoftApi.Location = new System.Drawing.Point(6, 216);
-            this.radioButtonModeMicrosoftApi.Name = "radioButtonModeMicrosoftApi";
-            this.radioButtonModeMicrosoftApi.Size = new System.Drawing.Size(155, 17);
-            this.radioButtonModeMicrosoftApi.TabIndex = 9;
-            this.radioButtonModeMicrosoftApi.TabStop = true;
-            this.radioButtonModeMicrosoftApi.Text = "Use API of Microsoft Azure:";
-            this.radioButtonModeMicrosoftApi.UseVisualStyleBackColor = true;
-            // 
-            // panelModeMicrosoftApi
-            // 
-            this.panelModeMicrosoftApi.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelModeMicrosoftApi.Controls.Add(this.textBoxModeMicrosoftApiUrl);
-            this.panelModeMicrosoftApi.Controls.Add(this.labelModeMicrosoftApiUrl);
-            this.panelModeMicrosoftApi.Controls.Add(this.textBoxModeMicrosoftApiKey);
-            this.panelModeMicrosoftApi.Controls.Add(this.label1ModeMicrosoftApiKey);
-            this.panelModeMicrosoftApi.Location = new System.Drawing.Point(6, 239);
-            this.panelModeMicrosoftApi.Name = "panelModeMicrosoftApi";
-            this.panelModeMicrosoftApi.Size = new System.Drawing.Size(539, 52);
-            this.panelModeMicrosoftApi.TabIndex = 10;
-            // 
-            // label1ModeMicrosoftApiKey
-            // 
-            this.label1ModeMicrosoftApiKey.AutoSize = true;
-            this.label1ModeMicrosoftApiKey.Location = new System.Drawing.Point(42, 32);
-            this.label1ModeMicrosoftApiKey.Name = "label1ModeMicrosoftApiKey";
-            this.label1ModeMicrosoftApiKey.Size = new System.Drawing.Size(132, 13);
-            this.label1ModeMicrosoftApiKey.TabIndex = 4;
-            this.label1ModeMicrosoftApiKey.Text = "API key for authentication:";
-            // 
-            // textBoxModeMicrosoftApiKey
-            // 
-            this.textBoxModeMicrosoftApiKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxModeMicrosoftApiKey.Location = new System.Drawing.Point(180, 29);
-            this.textBoxModeMicrosoftApiKey.Name = "textBoxModeMicrosoftApiKey";
-            this.textBoxModeMicrosoftApiKey.Size = new System.Drawing.Size(356, 20);
-            this.textBoxModeMicrosoftApiKey.TabIndex = 5;
-            // 
-            // labelModeMicrosoftApiUrl
-            // 
-            this.labelModeMicrosoftApiUrl.AutoSize = true;
-            this.labelModeMicrosoftApiUrl.Location = new System.Drawing.Point(66, 6);
-            this.labelModeMicrosoftApiUrl.Name = "labelModeMicrosoftApiUrl";
-            this.labelModeMicrosoftApiUrl.Size = new System.Drawing.Size(108, 13);
-            this.labelModeMicrosoftApiUrl.TabIndex = 6;
-            this.labelModeMicrosoftApiUrl.Text = "URL of API endpoint:";
-            // 
-            // textBoxModeMicrosoftApiUrl
-            // 
-            this.textBoxModeMicrosoftApiUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxModeMicrosoftApiUrl.Location = new System.Drawing.Point(180, 3);
-            this.textBoxModeMicrosoftApiUrl.Name = "textBoxModeMicrosoftApiUrl";
-            this.textBoxModeMicrosoftApiUrl.Size = new System.Drawing.Size(356, 20);
-            this.textBoxModeMicrosoftApiUrl.TabIndex = 7;
-            // 
-            // tabPageData
-            // 
-            this.tabPageData.Controls.Add(this.textBoxLanguageFrom);
-            this.tabPageData.Controls.Add(this.labelLanguageFrom);
-            this.tabPageData.Controls.Add(this.flowLayoutPanelActions);
-            this.tabPageData.Controls.Add(this.dataGridViewData);
-            this.tabPageData.Location = new System.Drawing.Point(4, 22);
-            this.tabPageData.Name = "tabPageData";
-            this.tabPageData.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageData.Size = new System.Drawing.Size(551, 403);
-            this.tabPageData.TabIndex = 0;
-            this.tabPageData.Text = "Translate";
-            this.tabPageData.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewData
-            // 
-            this.dataGridViewData.AllowUserToOrderColumns = true;
-            this.dataGridViewData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewData.Location = new System.Drawing.Point(6, 43);
-            this.dataGridViewData.Name = "dataGridViewData";
-            this.dataGridViewData.Size = new System.Drawing.Size(539, 325);
-            this.dataGridViewData.TabIndex = 9;
-            // 
-            // flowLayoutPanelActions
-            // 
-            this.flowLayoutPanelActions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanelActions.AutoScroll = true;
-            this.flowLayoutPanelActions.Controls.Add(this.buttonReloadData);
-            this.flowLayoutPanelActions.Controls.Add(this.buttonSaveChanges);
-            this.flowLayoutPanelActions.Controls.Add(this.buttonTranslateNext);
-            this.flowLayoutPanelActions.Controls.Add(this.buttonTranslateAll);
-            this.flowLayoutPanelActions.Controls.Add(this.buttonStop);
-            this.flowLayoutPanelActions.Location = new System.Drawing.Point(2, 371);
-            this.flowLayoutPanelActions.Name = "flowLayoutPanelActions";
-            this.flowLayoutPanelActions.Size = new System.Drawing.Size(543, 31);
-            this.flowLayoutPanelActions.TabIndex = 20;
-            // 
-            // buttonStop
-            // 
-            this.buttonStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonStop.Location = new System.Drawing.Point(387, 3);
-            this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(90, 25);
-            this.buttonStop.TabIndex = 15;
-            this.buttonStop.Text = "Stop";
-            this.buttonStop.UseVisualStyleBackColor = true;
-            // 
-            // buttonTranslateAll
-            // 
-            this.buttonTranslateAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonTranslateAll.Location = new System.Drawing.Point(291, 3);
-            this.buttonTranslateAll.Name = "buttonTranslateAll";
-            this.buttonTranslateAll.Size = new System.Drawing.Size(90, 25);
-            this.buttonTranslateAll.TabIndex = 16;
-            this.buttonTranslateAll.Text = "Translate All";
-            this.buttonTranslateAll.UseVisualStyleBackColor = true;
-            // 
-            // buttonTranslateNext
-            // 
-            this.buttonTranslateNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonTranslateNext.Location = new System.Drawing.Point(195, 3);
-            this.buttonTranslateNext.Name = "buttonTranslateNext";
-            this.buttonTranslateNext.Size = new System.Drawing.Size(90, 25);
-            this.buttonTranslateNext.TabIndex = 17;
-            this.buttonTranslateNext.Text = "Translate Next";
-            this.buttonTranslateNext.UseVisualStyleBackColor = true;
-            // 
-            // buttonSaveChanges
-            // 
-            this.buttonSaveChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSaveChanges.Location = new System.Drawing.Point(99, 3);
-            this.buttonSaveChanges.Name = "buttonSaveChanges";
-            this.buttonSaveChanges.Size = new System.Drawing.Size(90, 25);
-            this.buttonSaveChanges.TabIndex = 12;
-            this.buttonSaveChanges.Text = "Save Changes";
-            this.buttonSaveChanges.UseVisualStyleBackColor = true;
-            // 
-            // buttonReloadData
-            // 
-            this.buttonReloadData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonReloadData.Location = new System.Drawing.Point(3, 3);
-            this.buttonReloadData.Name = "buttonReloadData";
-            this.buttonReloadData.Size = new System.Drawing.Size(90, 25);
-            this.buttonReloadData.TabIndex = 13;
-            this.buttonReloadData.Text = "Reload Data";
-            this.buttonReloadData.UseVisualStyleBackColor = true;
-            // 
-            // labelLanguageFrom
-            // 
-            this.labelLanguageFrom.AutoSize = true;
-            this.labelLanguageFrom.Location = new System.Drawing.Point(3, 3);
-            this.labelLanguageFrom.Name = "labelLanguageFrom";
-            this.labelLanguageFrom.Size = new System.Drawing.Size(121, 13);
-            this.labelLanguageFrom.TabIndex = 21;
-            this.labelLanguageFrom.Text = "Default Language From:";
-            // 
-            // textBoxLanguageFrom
-            // 
-            this.textBoxLanguageFrom.Location = new System.Drawing.Point(6, 19);
-            this.textBoxLanguageFrom.Name = "textBoxLanguageFrom";
-            this.textBoxLanguageFrom.Size = new System.Drawing.Size(118, 20);
-            this.textBoxLanguageFrom.TabIndex = 22;
-            this.textBoxLanguageFrom.Text = "en";
+            this.radioButtonModeGoogleTranslate.AutoSize = true;
+            this.radioButtonModeGoogleTranslate.Checked = true;
+            this.radioButtonModeGoogleTranslate.Location = new System.Drawing.Point(6, 6);
+            this.radioButtonModeGoogleTranslate.Name = "radioButtonModeGoogleTranslate";
+            this.radioButtonModeGoogleTranslate.Size = new System.Drawing.Size(128, 17);
+            this.radioButtonModeGoogleTranslate.TabIndex = 0;
+            this.radioButtonModeGoogleTranslate.TabStop = true;
+            this.radioButtonModeGoogleTranslate.Text = "Use Google Translate";
+            this.radioButtonModeGoogleTranslate.UseVisualStyleBackColor = true;
             // 
             // panelOperations
             // 
@@ -616,6 +619,10 @@
             this.panelOperations.Name = "panelOperations";
             this.panelOperations.Size = new System.Drawing.Size(784, 448);
             this.panelOperations.TabIndex = 4;
+            // 
+            // folderBrowserDialog
+            // 
+            this.folderBrowserDialog.Description = "Select folder of resource string files:";
             // 
             // FormMain
             // 
@@ -635,20 +642,20 @@
             this.panelSelect.PerformLayout();
             this.panelControls.ResumeLayout(false);
             this.tabControlControls.ResumeLayout(false);
-            this.tabPageConfiguration.ResumeLayout(false);
-            this.tabPageConfiguration.PerformLayout();
-            this.panelModeGoogleTranslate.ResumeLayout(false);
-            this.panelModeGoogleTranslate.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownModeGoogleTranslateBetweenRequests)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownModeGoogleTranslateAfterBlock)).EndInit();
-            this.panelModeGoogleApi.ResumeLayout(false);
-            this.panelModeGoogleApi.PerformLayout();
-            this.panelModeMicrosoftApi.ResumeLayout(false);
-            this.panelModeMicrosoftApi.PerformLayout();
             this.tabPageData.ResumeLayout(false);
             this.tabPageData.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewData)).EndInit();
             this.flowLayoutPanelActions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewData)).EndInit();
+            this.tabPageConfiguration.ResumeLayout(false);
+            this.tabPageConfiguration.PerformLayout();
+            this.panelModeMicrosoftApi.ResumeLayout(false);
+            this.panelModeMicrosoftApi.PerformLayout();
+            this.panelModeGoogleApi.ResumeLayout(false);
+            this.panelModeGoogleApi.PerformLayout();
+            this.panelModeGoogleTranslate.ResumeLayout(false);
+            this.panelModeGoogleTranslate.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownModeGoogleTranslateAfterBlock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownModeGoogleTranslateBetweenRequests)).EndInit();
             this.panelOperations.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -670,8 +677,8 @@
         private System.Windows.Forms.Panel panelControls;
         private System.Windows.Forms.TabControl tabControlControls;
         private System.Windows.Forms.TabPage tabPageData;
-        private System.Windows.Forms.TextBox textBoxLanguageFrom;
-        private System.Windows.Forms.Label labelLanguageFrom;
+        private System.Windows.Forms.TextBox textBoxDefaultLanguage;
+        private System.Windows.Forms.Label labelDefaultLanguage;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelActions;
         private System.Windows.Forms.Button buttonReloadData;
         private System.Windows.Forms.Button buttonSaveChanges;
@@ -703,6 +710,7 @@
         private System.Windows.Forms.Label labelModeGoogleTranslateBetweenRequests;
         private System.Windows.Forms.RadioButton radioButtonModeGoogleTranslate;
         private System.Windows.Forms.Panel panelOperations;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
     }
 }
 
