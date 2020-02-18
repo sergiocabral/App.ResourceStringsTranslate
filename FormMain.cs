@@ -21,7 +21,11 @@ namespace ResourceStringsTranslate
 
             textBoxSelectFolder.Text =
                 folderBrowserDialog.SelectedPath =
+#if DEBUG
+                    @"C:\Git\Drake\Drake.Resources";
+#else
                     new FileInfo(Environment.GetCommandLineArgs()[0]).Directory?.FullName;
+#endif
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -52,6 +56,11 @@ namespace ResourceStringsTranslate
 
         private void buttonSelectFolder_Click(object sender, EventArgs e)
         {
+            if (Directory.Exists(textBoxSelectFolder.Text))
+            {
+                folderBrowserDialog.SelectedPath = textBoxSelectFolder.Text;
+            }
+            
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 textBoxSelectFolder.Text = folderBrowserDialog.SelectedPath;
@@ -65,6 +74,15 @@ namespace ResourceStringsTranslate
                     ? SystemColors.Window
                     : Color.LightSalmon;
 
+            (sender as Control).Debounce(() =>
+            {
+                progressBarStatus.Value = 0;
+                _engine.QueueLoadResourceFiles(textBoxSelectFolder.Text);
+            });
+        }
+
+        private void listViewSelectResource_SelectedIndexChanged(object sender, EventArgs e)
+        {
             (sender as Control).Debounce(() =>
             {
                 progressBarStatus.Value = 0;
