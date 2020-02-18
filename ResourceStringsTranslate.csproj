@@ -52,6 +52,8 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormMainData.cs" />
+    <Compile Include="FormMainDataResourceFile.cs" />
     <Compile Include="FormMainEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

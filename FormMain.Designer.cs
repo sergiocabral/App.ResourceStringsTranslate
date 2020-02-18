@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.progressBarStatus = new System.Windows.Forms.ProgressBar();
             this.textBoxStatus = new System.Windows.Forms.TextBox();
             this.panelStatus = new System.Windows.Forms.Panel();
@@ -76,6 +77,9 @@
             this.radioButtonModeGoogleTranslate = new System.Windows.Forms.RadioButton();
             this.panelOperations = new System.Windows.Forms.Panel();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.columnHeaderFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderLanguage = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panelStatus.SuspendLayout();
             this.panelSelect.SuspendLayout();
             this.panelControls.SuspendLayout();
@@ -100,6 +104,7 @@
             this.progressBarStatus.Name = "progressBarStatus";
             this.progressBarStatus.Size = new System.Drawing.Size(760, 23);
             this.progressBarStatus.TabIndex = 0;
+            this.progressBarStatus.Value = 100;
             // 
             // textBoxStatus
             // 
@@ -166,6 +171,9 @@
             this.listViewSelectResource.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewSelectResource.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeaderFilename,
+            this.columnHeaderLanguage});
             this.listViewSelectResource.HideSelection = false;
             this.listViewSelectResource.Location = new System.Drawing.Point(12, 74);
             this.listViewSelectResource.MultiSelect = false;
@@ -173,7 +181,7 @@
             this.listViewSelectResource.Size = new System.Drawing.Size(177, 363);
             this.listViewSelectResource.TabIndex = 3;
             this.listViewSelectResource.UseCompatibleStateImageBehavior = false;
-            this.listViewSelectResource.View = System.Windows.Forms.View.List;
+            this.listViewSelectResource.View = System.Windows.Forms.View.Details;
             // 
             // labelSelectResource
             // 
@@ -624,6 +632,20 @@
             // 
             this.folderBrowserDialog.Description = "Select folder of resource string files:";
             // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // columnHeaderFilename
+            // 
+            this.columnHeaderFilename.Text = "Filename";
+            this.columnHeaderFilename.Width = 113;
+            // 
+            // columnHeaderLanguage
+            // 
+            this.columnHeaderLanguage.Text = "Language";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -711,6 +733,9 @@
         private System.Windows.Forms.RadioButton radioButtonModeGoogleTranslate;
         private System.Windows.Forms.Panel panelOperations;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.ColumnHeader columnHeaderFilename;
+        private System.Windows.Forms.ColumnHeader columnHeaderLanguage;
     }
 }
 
