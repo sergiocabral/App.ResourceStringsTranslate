@@ -116,9 +116,9 @@
             this.textBoxStatus.Multiline = true;
             this.textBoxStatus.Name = "textBoxStatus";
             this.textBoxStatus.ReadOnly = true;
+            this.textBoxStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxStatus.Size = new System.Drawing.Size(760, 94);
             this.textBoxStatus.TabIndex = 1;
-            this.textBoxStatus.WordWrap = false;
             // 
             // panelStatus
             // 

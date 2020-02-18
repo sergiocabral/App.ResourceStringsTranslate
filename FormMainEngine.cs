@@ -57,17 +57,38 @@ namespace ResourceStringsTranslate
                 try
                 {
                     Thread.Sleep(1000);
+
+                    if (string.IsNullOrWhiteSpace(path))
+                    {
+                        Data.Status.Add("Error loading resources files. Path is empty.");
+                        return;
+                    }
+
                     var directory = new DirectoryInfo(path);
-                    if (!directory.Exists) return;
+                    if (!directory.Exists)
+                    {
+                        Data.Status.Add($"Error loading resources files. Path \"{path}\" not exists.");
+                        return;
+                    }
+
                     Data.ResourceFiles = directory
                         .GetFiles("*.resx")
                         .OrderBy(a => a.Name)
                         .Select(a => new FormMainDataResourceFile(a))
                         .ToList();
+
+                    if (Data.ResourceFiles.Count > 0)
+                    {
+                        Data.Status.Add($"Resources files loaded from path \"{path}\".");
+                    }
+                    else
+                    {
+                        Data.Status.Add($"No resources files found in path \"{path}\".");
+                    }
                 }
                 catch (Exception ex)
                 {
-                    Data.Status.Add($"Error when loading resources files from path \"{path}\". Error: {ex.GetType().Name}, {ex.Message}");
+                    Data.Status.Add($"Error loading resources files from path \"{path}\". {ex.GetType().Name}: {ex.Message}");
                 }
             });
         }

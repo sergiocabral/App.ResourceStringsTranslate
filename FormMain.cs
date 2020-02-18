@@ -27,7 +27,7 @@ namespace ResourceStringsTranslate
         private void timer_Tick(object sender, EventArgs e)
         {
             progressBarStatus.Value = _engine.Data.Progress;
-            
+
             if (listViewSelectResource.Tag != _engine.Data.ResourceFiles)
             {
                 listViewSelectResource.Tag = _engine.Data.ResourceFiles;
@@ -36,6 +36,17 @@ namespace ResourceStringsTranslate
                     _engine.Data.ResourceFiles
                         .Select(a => new ListViewItem(a.Details))
                         .ToArray());
+            }
+
+            if (_engine.Data.Status.Count > 0)
+            {
+                var status = textBoxStatus.Lines.ToList();
+                status.AddRange(_engine.Data.Status);
+                status.Add(Environment.NewLine);
+                _engine.Data.Status.Clear();
+                textBoxStatus.Lines = status.ToArray();
+                textBoxStatus.SelectionStart = textBoxStatus.Text.Length;
+                textBoxStatus.ScrollToCaret();
             }
         }
 
