@@ -65,7 +65,11 @@ namespace ResourceStringsTranslate
                     ? SystemColors.Window
                     : Color.LightSalmon;
 
-            _engine.QueueLoadResouceFiles(textBoxSelectFolder.Text);
+            (sender as Control).Debounce(() =>
+            {
+                progressBarStatus.Value = 0;
+                _engine.QueueLoadResourceFiles(textBoxSelectFolder.Text);
+            });
         }
     }
 }

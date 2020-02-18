@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using Timer = System.Windows.Forms.Timer;
 
 namespace ResourceStringsTranslate
 {
@@ -15,6 +17,8 @@ namespace ResourceStringsTranslate
         {
             _queueWorker.DoWork += _queueWorker_DoWork;
         }
+
+        private const int Debounce = 1000;
 
         public FormMainData Data { get; set; } = new FormMainData();
 
@@ -45,7 +49,7 @@ namespace ResourceStringsTranslate
             _queueWorker.RunWorkerAsync();
         }
 
-        public void QueueLoadResouceFiles(string path)
+        public void QueueLoadResourceFiles(string path)
         {
             if (Data.ResourceFiles.Count > 0)
             {
@@ -56,8 +60,6 @@ namespace ResourceStringsTranslate
             {
                 try
                 {
-                    Thread.Sleep(1000);
-
                     if (string.IsNullOrWhiteSpace(path))
                     {
                         Data.Status.Add("Error loading resources files. Path is empty.");
@@ -88,9 +90,11 @@ namespace ResourceStringsTranslate
                 }
                 catch (Exception ex)
                 {
-                    Data.Status.Add($"Error loading resources files from path \"{path}\". {ex.GetType().Name}: {ex.Message}");
+                    Data.Status.Add(
+                        $"Error loading resources files from path \"{path}\". {ex.GetType().Name}: {ex.Message}");
                 }
             });
         }
+
     }
 }
