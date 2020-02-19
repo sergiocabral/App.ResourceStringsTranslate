@@ -22,7 +22,7 @@ namespace ResourceStringsTranslate
         private void Log(string text, bool success = true, Exception ex = null) =>
             Data.Status.Add($"{(success ? "   OK" : "ERROR")} [{DateTime.Now:g}] {text}{(ex == null ? string.Empty : $"{ex.GetType().Name}: {ex.Message}")}");
 
-        public FormMainData Data { get; set; } = new FormMainData();
+        public DataForFormMain Data { get; set; } = new DataForFormMain();
 
         private readonly IList<Action> _queueActions = new List<Action>();
 
@@ -134,18 +134,6 @@ namespace ResourceStringsTranslate
                     Log($"Error loading data of resource file from path \"{path}\".", false, ex);
                 }
             });
-        }
-
-        public string SetDefaultLanguage(string language)
-        {
-            Data.DefaultLanguage =
-                !string.IsNullOrWhiteSpace(language)
-                    ? language
-                    : "en";
-            
-            Log($"Setted default language as \"{Data.DefaultLanguage}\".");
-
-            return Data.DefaultLanguage;
         }
     }
 }

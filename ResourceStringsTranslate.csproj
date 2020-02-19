@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataForTranslationMicrosoftApi.cs" />
+    <Compile Include="DataForTranslationGoogleApi.cs" />
+    <Compile Include="DataForTranslationGoogleTranslate.cs" />
     <Compile Include="ExtensionForControls.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -53,7 +56,7 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMainData.cs" />
+    <Compile Include="DataForFormMain.cs" />
     <Compile Include="FormMainDataResourceFile.cs" />
     <Compile Include="FormMainEngine.cs" />
     <Compile Include="Program.cs" />
@@ -79,9 +82,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

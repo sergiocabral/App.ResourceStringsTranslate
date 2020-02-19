@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Git\ResourceStringsTranslate" t="IncludeRecursive">
-      <e p="App.config" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
+      <e p="DataForFormMain.cs" t="Include" />
+      <e p="DataForTranslationGoogleApi.cs" t="Include" />
+      <e p="DataForTranslationGoogleTranslate.cs" t="Include" />
+      <e p="DataForTranslationMicrosoftApi.cs" t="Include" />
       <e p="ExtensionForControls.cs" t="Include" />
       <e p="FormMain.cs" t="Include" />
       <e p="FormMain.Designer.cs" t="Include" />
       <e p="FormMain.resx" t="Include" />
-      <e p="FormMainData.cs" t="Include" />
       <e p="FormMainDataResourceFile.cs" t="Include" />
       <e p="FormMainEngine.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive" />
