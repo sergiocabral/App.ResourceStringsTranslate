@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace ResourceStringsTranslate
 {
-    public static class ExtensionForControls
+    public static class ExtensionForControl
     {
         private static readonly IDictionary<Control, DebounceControl> DebounceData =
             new Dictionary<Control, DebounceControl>();

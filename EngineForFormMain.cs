@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Xml;
 
 namespace ResourceStringsTranslate
 {
     public class EngineForFormMain
     {
-        private readonly IList<Action> _queueActions = new List<Action>();
+        private readonly IList<DataForQueue> _queueActions = new List<DataForQueue>();
 
         private readonly BackgroundWorker _queueWorker = new BackgroundWorker();
 
@@ -32,7 +34,7 @@ namespace ResourceStringsTranslate
         {
             while (_queueActions.Count > 0)
             {
-                _queueActions[0]();
+                _queueActions[0].Action(_queueActions[0]);
                 _queueActions.RemoveAt(0);
                 QueueProgressCalculate();
             }
@@ -40,12 +42,14 @@ namespace ResourceStringsTranslate
 
         private void QueueProgressCalculate()
         {
-            Data.Progress = (int) (100 * (_queueActions.Count == 0 ? 1 : 1 / (double) (_queueActions.Count + 1)));
+            Data.Progress = (int) (100 * (1 / (double) (_queueActions.Sum(a => a.ProgressCount) + 1)));
         }
 
-        private void Queue(Action action)
+        private void Queue(Action<DataForQueue> action)
         {
-            _queueActions.Add(action);
+            var data = new DataForQueue {Action = action};
+            data.ProgressCountChanged += QueueProgressCalculate;
+            _queueActions.Add(data);
             QueueProgressCalculate();
             if (_queueWorker.IsBusy) return;
             _queueWorker.RunWorkerAsync();
@@ -55,7 +59,7 @@ namespace ResourceStringsTranslate
         {
             if (Data.ResourceFiles.Count > 0) Data.ResourceFiles = new List<DataForResourceFile>();
 
-            Queue(() =>
+            Queue(data =>
             {
                 try
                 {
@@ -92,7 +96,7 @@ namespace ResourceStringsTranslate
 
         public void QueueLoadResourceFile(string path)
         {
-            Queue(() =>
+            Queue(data =>
             {
                 try
                 {
@@ -102,9 +106,8 @@ namespace ResourceStringsTranslate
                         return;
                     }
 
-                    var fileSelected = new FileInfo(path);
-                    var directory = fileSelected.Directory;
-                    if (!fileSelected.Exists || directory == null)
+                    var fileSelected = new DataForResourceFile(new FileInfo(path));
+                    if (!fileSelected.File.Exists || fileSelected.File.Directory == null)
                     {
                         Log($"Error loading data of resource file. Path \"{path}\" not exists.", false);
                         return;
@@ -112,12 +115,13 @@ namespace ResourceStringsTranslate
 
                     var selectedResourceFileGroupRegex =
                         $@"^{Regex.Replace(fileSelected.Name, @"(\.[a-z]{2}(-[a-z]{2}|)|)\.resx", string.Empty, RegexOptions.IgnoreCase)}\.";
-                    var selectedResourceFileGroup = directory
+                    var selectedResourceFileGroup = fileSelected.File.Directory
                         .GetFiles("*.resx")
                         .Where(file => file.Name != fileSelected.Name &&
                                        Regex.IsMatch(file.Name, selectedResourceFileGroupRegex,
                                            RegexOptions.IgnoreCase))
                         .OrderBy(file => file.Name)
+                        .Select(file => new DataForResourceFile(file))
                         .ToList();
                     selectedResourceFileGroup.Insert(0, fileSelected);
                     Data.SelectedResourceFileGroup = selectedResourceFileGroup;
@@ -128,6 +132,77 @@ namespace ResourceStringsTranslate
                 catch (Exception ex)
                 {
                     Log($"Error loading data of resource file from path \"{path}\".", false, ex);
+                }
+            });
+        }
+
+        public void QueueReloadData()
+        {
+            Queue(data =>
+            {
+                try
+                {
+                    if (Data.SelectedResourceFileGroup.Count == 0)
+                    {
+                        Log("No resources selected.", false);
+                        return;
+                    }
+                    
+                    Data.Table.Clear();
+                    Data.Table.Columns.Clear();
+                    Data.Table.Columns.Add("KEY");
+
+                    data.ProgressCount = Data.SelectedResourceFileGroup.Count;
+                    foreach (var resourceFile in Data.SelectedResourceFileGroup)
+                    {
+                        var columnId = Data.Table.Columns.IndexOf(resourceFile.Language);
+                        if (columnId < 0)
+                        {
+                            Data.Table.Columns.Add(resourceFile.Language);
+                            columnId = Data.Table.Columns.Count - 1;
+                        }
+                        
+                        try
+                        {
+                            var resourceFileData = resourceFile.LoadData(out var errors);
+                            
+                            if (!string.IsNullOrWhiteSpace(errors))
+                            {
+                                Log(errors, false);
+                            }
+                            
+                            Log($"Wait for loading of XML from resource file \"{resourceFile.Name}\". Count keys: {resourceFileData.Count}.");
+                            foreach (var text in resourceFileData)
+                            {
+                                var rows = Data.Table.Select($"KEY = '{text.Key}'");
+                                switch (rows.Length)
+                                {
+                                    case 0:
+                                        var row = Data.Table.NewRow();
+                                        row.SetField(0, text.Key);
+                                        row.SetField(columnId, text.Value);
+                                        Data.Table.Rows.Add(row);
+                                        break;
+                                    case 1:
+                                        rows[0].SetField(columnId, text.Value);
+                                        break;
+                                    default:
+                                        throw new NotImplementedException();
+                                }
+                            }
+                            Log($"Loaded XML from resource file \"{resourceFile.Name}\".");
+                        }
+                        catch (Exception ex)
+                        {
+                            Log($"Error reading XML from resource file \"{resourceFile.Name}\".", false, ex);
+                        }
+                        
+                        data.ProgressCount--;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Log($"Error on reloading data from resource files.", false, ex);
                 }
             });
         }

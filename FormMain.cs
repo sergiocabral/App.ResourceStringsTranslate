@@ -120,7 +120,7 @@ namespace ResourceStringsTranslate
             {
                 progressBarStatus.Value = 0;
                 _engine.QueueLoadResourceFile(filename);
-            });
+            }, 100);
         }
 
         private void controlMode_Changed(object sender, EventArgs e)
@@ -175,6 +175,11 @@ namespace ResourceStringsTranslate
 
                 control.Tag = null;
             });
+        }
+
+        private void buttonReloadData_Click(object sender, EventArgs e)
+        {
+            _engine.QueueReloadData();
         }
     }
 }

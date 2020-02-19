@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 
 namespace ResourceStringsTranslate
@@ -14,7 +15,7 @@ namespace ResourceStringsTranslate
 
         public List<DataForResourceFile> ResourceFiles { get; set; } = new List<DataForResourceFile>();
 
-        public List<FileInfo> SelectedResourceFileGroup { get; set; } = new List<FileInfo>();
+        public List<DataForResourceFile> SelectedResourceFileGroup { get; set; } = new List<DataForResourceFile>();
 
         public Type TranslationService { get; set; } = typeof(DataForTranslationGoogleTranslate);
 
@@ -25,5 +26,7 @@ namespace ResourceStringsTranslate
 
         public DataForTranslationMicrosoftApi TranslationMicrosoftApi { get; set; } =
             DataForTranslationMicrosoftApi.Default();
+        
+        public DataTable Table { get; set; } = new DataTable();
     }
 }
