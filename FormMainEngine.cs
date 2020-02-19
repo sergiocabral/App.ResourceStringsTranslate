@@ -135,5 +135,17 @@ namespace ResourceStringsTranslate
                 }
             });
         }
+
+        public string SetDefaultLanguage(string language)
+        {
+            Data.DefaultLanguage =
+                !string.IsNullOrWhiteSpace(language)
+                    ? language
+                    : "en";
+            
+            Log($"Setted default language as \"{Data.DefaultLanguage}\".");
+
+            return Data.DefaultLanguage;
+        }
     }
 }

@@ -10,13 +10,12 @@ namespace ResourceStringsTranslate
         private class DebounceData
         {
             public Timer Timer;
-            public Action<object> Action;
-            public object Data;
+            public Action Action;
         }
 
         private static readonly IDictionary<Control, DebounceData> _debounce = new Dictionary<Control, DebounceData>();
 
-        public static void Debounce(this Control control, Action<object> action, object data = null, int wait = 1000)
+        public static void Debounce(this Control control, Action action, int wait = 1000)
         {
             if (control == null) return;
 
@@ -26,8 +25,7 @@ namespace ResourceStringsTranslate
                 _debounce[control] = debounceData = new DebounceData
                 {
                     Timer = new Timer(),
-                    Action = action,
-                    Data = data
+                    Action = action
                 };
                 debounceData.Timer.Tick += DebounceTimerTick;
             }
@@ -35,7 +33,6 @@ namespace ResourceStringsTranslate
             {
                 debounceData = _debounce[control];
                 debounceData.Action = action;
-                debounceData.Data = data;
             }
 
             debounceData.Timer.Interval = wait;
@@ -47,7 +44,7 @@ namespace ResourceStringsTranslate
         {
             var data = _debounce.Single(a => a.Value.Timer == sender);
             data.Value.Timer.Enabled = false;
-            data.Value.Action(data.Value.Data);
+            data.Value.Action();
         }
     }
 }

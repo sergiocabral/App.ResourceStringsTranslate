@@ -26,6 +26,7 @@ namespace ResourceStringsTranslate
 #else
                     new FileInfo(Environment.GetCommandLineArgs()[0]).Directory?.FullName;
 #endif
+            textBoxDefaultLanguage.Text = "auto";
         }
 
         private void timer_Tick(object sender, EventArgs e)
@@ -66,6 +67,18 @@ namespace ResourceStringsTranslate
             }
         }
 
+        private void textBoxDefaultLanguage_TextChanged(object sender, EventArgs e)
+        {
+            if (textBoxDefaultLanguage.Tag != null) return;
+            var language = textBoxDefaultLanguage.Text;
+            textBoxDefaultLanguage.Debounce(() =>
+            {
+                textBoxDefaultLanguage.Tag = new object();
+                textBoxDefaultLanguage.Text = _engine.SetDefaultLanguage(language);
+                textBoxDefaultLanguage.Tag = null;
+            });
+        }
+
         private void textBoxSelectFolder_TextChanged(object sender, EventArgs e)
         {
             textBoxSelectFolder.BackColor =
@@ -73,30 +86,27 @@ namespace ResourceStringsTranslate
                     ? SystemColors.Window
                     : Color.LightSalmon;
 
-            textBoxSelectFolder.Debounce(data =>
+            var directory = textBoxSelectFolder.Text;
+            textBoxSelectFolder.Debounce(() =>
             {
                 progressBarStatus.Value = 0;
-                
-                var directory = (string) data;
                 _engine.QueueLoadResourceFiles(directory);
-            }, textBoxSelectFolder.Text);
+            });
         }
 
         private void listViewSelectResource_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selected = listViewSelectResource
+            var filename = listViewSelectResource
                 .SelectedItems.Cast<ListViewItem>().SingleOrDefault()?
-                .SubItems.Cast<ListViewItem.ListViewSubItem>().Last();
+                .SubItems.Cast<ListViewItem.ListViewSubItem>().Last().Text;
             
-            if (selected == null) return;
+            if (filename == null) return;
             
-            listViewSelectResource.Debounce(data =>
+            listViewSelectResource.Debounce(() =>
             {
                 progressBarStatus.Value = 0;
-
-                var filename = (string) data;
                 _engine.QueueLoadResourceFile(filename);
-            }, selected.Text);
+            });
         }
     }
 }
