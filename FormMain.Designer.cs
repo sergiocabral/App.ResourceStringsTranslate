@@ -521,7 +521,6 @@
             this.panelModeGoogleTranslate.Name = "panelModeGoogleTranslate";
             this.panelModeGoogleTranslate.Size = new System.Drawing.Size(546, 78);
             this.panelModeGoogleTranslate.TabIndex = 1;
-            this.panelModeGoogleTranslate.Paint += new System.Windows.Forms.PaintEventHandler(this.panelModeGoogleTranslate_Paint);
             // 
             // label7
             // 

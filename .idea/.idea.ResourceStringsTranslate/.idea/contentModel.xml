@@ -4,15 +4,15 @@
     <e p="C:\Git\ResourceStringsTranslate" t="IncludeRecursive">
       <e p="bin" t="ExcludeRecursive" />
       <e p="DataForFormMain.cs" t="Include" />
+      <e p="DataForResourceFile.cs" t="Include" />
       <e p="DataForTranslationGoogleApi.cs" t="Include" />
       <e p="DataForTranslationGoogleTranslate.cs" t="Include" />
       <e p="DataForTranslationMicrosoftApi.cs" t="Include" />
+      <e p="EngineForFormMain.cs" t="Include" />
       <e p="ExtensionForControls.cs" t="Include" />
       <e p="FormMain.cs" t="Include" />
       <e p="FormMain.Designer.cs" t="Include" />
       <e p="FormMain.resx" t="Include" />
-      <e p="FormMainDataResourceFile.cs" t="Include" />
-      <e p="FormMainEngine.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="Program.cs" t="Include" />

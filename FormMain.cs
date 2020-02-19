@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace ResourceStringsTranslate
 {
     public partial class FormMain : Form
     {
-        private FormMainEngine _engine = FormMainEngine.Instance;
+        private readonly EngineForFormMain _engine = EngineForFormMain.Instance;
 
         public FormMain()
         {
@@ -26,19 +21,22 @@ namespace ResourceStringsTranslate
 #else
                     new FileInfo(Environment.GetCommandLineArgs()[0]).Directory?.FullName;
 #endif
-            
+
             textBoxDefaultLanguage.Text = _engine.Data.DefaultLanguage;
-            
-            radioButtonModeGoogleTranslate.Checked = _engine.Data.TranslationService == typeof(DataForTranslationGoogleTranslate);
+
+            radioButtonModeGoogleTranslate.Checked =
+                _engine.Data.TranslationService == typeof(DataForTranslationGoogleTranslate);
             textBoxModeGoogleTranslateUrl.Text = _engine.Data.TranslationGoogleTranslate.Url;
-            numericUpDownModeGoogleTranslateBetweenRequests.Value = _engine.Data.TranslationGoogleTranslate.BetweenRequests;
+            numericUpDownModeGoogleTranslateBetweenRequests.Value =
+                _engine.Data.TranslationGoogleTranslate.BetweenRequests;
             numericUpDownModeGoogleTranslateAfterBlock.Value = _engine.Data.TranslationGoogleTranslate.AfterBlock;
 
             radioButtonModeGoogleApi.Checked = _engine.Data.TranslationService == typeof(DataForTranslationGoogleApi);
             textBoxModeGoogleApiUrl.Text = _engine.Data.TranslationGoogleApi.Url;
             textBoxModeGoogleApiKey.Text = _engine.Data.TranslationGoogleApi.Key;
-            
-            radioButtonModeMicrosoftApi.Checked = _engine.Data.TranslationService == typeof(DataForTranslationMicrosoftApi);
+
+            radioButtonModeMicrosoftApi.Checked =
+                _engine.Data.TranslationService == typeof(DataForTranslationMicrosoftApi);
             textBoxModeMicrosoftApiUrl.Text = _engine.Data.TranslationMicrosoftApi.Url;
             textBoxModeMicrosoftApiKey.Text = _engine.Data.TranslationMicrosoftApi.Key;
         }
@@ -70,23 +68,18 @@ namespace ResourceStringsTranslate
 
         private void buttonSelectFolder_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(textBoxSelectFolder.Text))
-            {
-                folderBrowserDialog.SelectedPath = textBoxSelectFolder.Text;
-            }
-            
+            if (Directory.Exists(textBoxSelectFolder.Text)) folderBrowserDialog.SelectedPath = textBoxSelectFolder.Text;
+
             if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
                 textBoxSelectFolder.Text = folderBrowserDialog.SelectedPath;
-            }
         }
 
         private void textBoxDefaultLanguage_TextChanged(object sender, EventArgs e)
         {
             if (textBoxDefaultLanguage.Tag != null) return;
-            
+
             var language = textBoxDefaultLanguage.Text;
-            
+
             textBoxDefaultLanguage.Debounce(() =>
             {
                 textBoxDefaultLanguage.Tag = new object();
@@ -120,73 +113,68 @@ namespace ResourceStringsTranslate
             var filename = listViewSelectResource
                 .SelectedItems.Cast<ListViewItem>().SingleOrDefault()?
                 .SubItems.Cast<ListViewItem.ListViewSubItem>().Last().Text;
-            
+
             if (filename == null) return;
-            
+
             listViewSelectResource.Debounce(() =>
             {
                 progressBarStatus.Value = 0;
                 _engine.QueueLoadResourceFile(filename);
             });
         }
-        
+
         private void controlMode_Changed(object sender, EventArgs e)
         {
-            var control = (Control)radioButtonModeGoogleTranslate;
+            var control = (Control) radioButtonModeGoogleTranslate;
             if (control.Tag != null) return;
-            
-            var translationService = 
+
+            var translationService =
                 radioButtonModeGoogleTranslate.Checked ? typeof(DataForTranslationGoogleTranslate) :
                 radioButtonModeGoogleApi.Checked ? typeof(DataForTranslationGoogleApi) :
                 radioButtonModeMicrosoftApi.Checked ? typeof(DataForTranslationMicrosoftApi) :
                 throw new NotImplementedException();
 
             var translationGoogleTranslateUrl = textBoxModeGoogleTranslateUrl.Text;
-            var translationGoogleTranslateBetweenRequests = (int)numericUpDownModeGoogleTranslateBetweenRequests.Value;
-            var translationGoogleTranslateAfterBlock = (int)numericUpDownModeGoogleTranslateAfterBlock.Value;
+            var translationGoogleTranslateBetweenRequests = (int) numericUpDownModeGoogleTranslateBetweenRequests.Value;
+            var translationGoogleTranslateAfterBlock = (int) numericUpDownModeGoogleTranslateAfterBlock.Value;
 
             var translationGoogleApiUrl = textBoxModeGoogleApiUrl.Text;
             var translationGoogleApiKey = textBoxModeGoogleApiKey.Text;
-            
+
             var translationMicrosoftApiUrl = textBoxModeMicrosoftApiUrl.Text;
             var translationMicrosoftApiKey = textBoxModeMicrosoftApiKey.Text;
-            
+
             control.Debounce(() =>
             {
                 control.Tag = new object();
-                
+
                 _engine.Data.TranslationService = translationService;
-                
-                _engine.Data.TranslationGoogleTranslate.Url = 
+
+                _engine.Data.TranslationGoogleTranslate.Url =
                     !string.IsNullOrWhiteSpace(translationGoogleTranslateUrl)
-                    ? translationGoogleTranslateUrl
-                    : textBoxModeGoogleTranslateUrl.Text = DataForTranslationGoogleTranslate.UrlValue;
-                
+                        ? translationGoogleTranslateUrl
+                        : textBoxModeGoogleTranslateUrl.Text = DataForTranslationGoogleTranslate.UrlValue;
+
                 _engine.Data.TranslationGoogleTranslate.BetweenRequests = translationGoogleTranslateBetweenRequests;
-                
+
                 _engine.Data.TranslationGoogleTranslate.AfterBlock = translationGoogleTranslateAfterBlock;
-                
-                _engine.Data.TranslationGoogleApi.Url =  
+
+                _engine.Data.TranslationGoogleApi.Url =
                     !string.IsNullOrWhiteSpace(translationGoogleApiUrl)
                         ? translationGoogleApiUrl
                         : textBoxModeGoogleApiUrl.Text = DataForTranslationGoogleApi.UrlValue;
-                
+
                 _engine.Data.TranslationGoogleApi.Key = translationGoogleApiKey;
-                
-                _engine.Data.TranslationMicrosoftApi.Url =  
+
+                _engine.Data.TranslationMicrosoftApi.Url =
                     !string.IsNullOrWhiteSpace(translationMicrosoftApiUrl)
                         ? translationMicrosoftApiUrl
                         : textBoxModeMicrosoftApiUrl.Text = DataForTranslationMicrosoftApi.UrlValue;
-                
+
                 _engine.Data.TranslationMicrosoftApi.Key = translationMicrosoftApiKey;
 
                 control.Tag = null;
             });
-        }
-
-        private void panelModeGoogleTranslate_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

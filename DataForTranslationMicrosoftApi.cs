@@ -5,17 +5,21 @@
         private const string UrlMarkText = "{text}";
         private const string UrlMarkLanguageFrom = "{languageFrom}";
         private const string UrlMarkLanguageTo = "{languageTo}";
-        public const string UrlValue = "https://azure.microsoft.com/?from=" + UrlMarkLanguageFrom + "&to=" + UrlMarkLanguageTo + "&text=" + UrlMarkText;
+
+        public const string UrlValue = "https://azure.microsoft.com/?from=" + UrlMarkLanguageFrom + "&to=" +
+                                       UrlMarkLanguageTo + "&text=" + UrlMarkText;
 
         public string Url { get; set; }
 
         public string Key { get; set; }
-        
-        public static DataForTranslationMicrosoftApi Default() =>
-            new DataForTranslationMicrosoftApi
+
+        public static DataForTranslationMicrosoftApi Default()
+        {
+            return new DataForTranslationMicrosoftApi
             {
                 Url = UrlValue,
                 Key = string.Empty
             };
+        }
     }
 }

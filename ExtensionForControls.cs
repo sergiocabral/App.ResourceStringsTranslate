@@ -7,44 +7,45 @@ namespace ResourceStringsTranslate
 {
     public static class ExtensionForControls
     {
-        private class DebounceData
-        {
-            public Timer Timer;
-            public Action Action;
-        }
-
-        private static readonly IDictionary<Control, DebounceData> _debounce = new Dictionary<Control, DebounceData>();
+        private static readonly IDictionary<Control, DebounceControl> DebounceData =
+            new Dictionary<Control, DebounceControl>();
 
         public static void Debounce(this Control control, Action action, int wait = 1000)
         {
             if (control == null) return;
 
-            DebounceData debounceData;
-            if (!_debounce.ContainsKey(control))
+            DebounceControl debounceControl;
+            if (!DebounceData.ContainsKey(control))
             {
-                _debounce[control] = debounceData = new DebounceData
+                DebounceData[control] = debounceControl = new DebounceControl
                 {
                     Timer = new Timer(),
                     Action = action
                 };
-                debounceData.Timer.Tick += DebounceTimerTick;
+                debounceControl.Timer.Tick += DebounceTimerTick;
             }
             else
             {
-                debounceData = _debounce[control];
-                debounceData.Action = action;
+                debounceControl = DebounceData[control];
+                debounceControl.Action = action;
             }
 
-            debounceData.Timer.Interval = wait;
-            debounceData.Timer.Enabled = false;
-            debounceData.Timer.Enabled = true;
+            debounceControl.Timer.Interval = wait;
+            debounceControl.Timer.Enabled = false;
+            debounceControl.Timer.Enabled = true;
         }
 
         private static void DebounceTimerTick(object sender, EventArgs e)
         {
-            var data = _debounce.Single(a => a.Value.Timer == sender);
+            var data = DebounceData.Single(a => a.Value.Timer == sender);
             data.Value.Timer.Enabled = false;
             data.Value.Action();
+        }
+
+        private class DebounceControl
+        {
+            public Action Action;
+            public Timer Timer;
         }
     }
 }

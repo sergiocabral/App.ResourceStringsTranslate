@@ -1,12 +1,11 @@
 ﻿using System.IO;
 using System.Text.RegularExpressions;
-// ReSharper disable MemberCanBePrivate.Global
 
 namespace ResourceStringsTranslate
 {
-    public class FormMainDataResourceFile
+    public class DataForResourceFile
     {
-        public FormMainDataResourceFile(FileInfo file)
+        public DataForResourceFile(FileInfo file)
         {
             File = file;
             Name = file.Name;
