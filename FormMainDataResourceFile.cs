@@ -12,7 +12,7 @@ namespace ResourceStringsTranslate
             Name = file.Name;
             Language = Regex.Match(file.Name, @"(?<=\.)[a-z]{2}(?=(\-[a-z]*|)\.resx)").Value;
             Language = !string.IsNullOrWhiteSpace(Language) ? Language : "default";
-            Details = new[] {Name, Language};
+            Details = new[] {Name, Language, file.FullName};
         }
 
         public FileInfo File { get; }

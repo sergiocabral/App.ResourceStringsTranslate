@@ -46,7 +46,6 @@ namespace ResourceStringsTranslate
             {
                 var status = textBoxStatus.Lines.ToList();
                 status.AddRange(_engine.Data.Status);
-                status.Add(Environment.NewLine);
                 _engine.Data.Status.Clear();
                 textBoxStatus.Lines = status.ToArray();
                 textBoxStatus.SelectionStart = textBoxStatus.Text.Length;
@@ -74,20 +73,30 @@ namespace ResourceStringsTranslate
                     ? SystemColors.Window
                     : Color.LightSalmon;
 
-            (sender as Control).Debounce(() =>
+            textBoxSelectFolder.Debounce(data =>
             {
                 progressBarStatus.Value = 0;
-                _engine.QueueLoadResourceFiles(textBoxSelectFolder.Text);
-            });
+                
+                var directory = (string) data;
+                _engine.QueueLoadResourceFiles(directory);
+            }, textBoxSelectFolder.Text);
         }
 
         private void listViewSelectResource_SelectedIndexChanged(object sender, EventArgs e)
         {
-            (sender as Control).Debounce(() =>
+            var selected = listViewSelectResource
+                .SelectedItems.Cast<ListViewItem>().SingleOrDefault()?
+                .SubItems.Cast<ListViewItem.ListViewSubItem>().Last();
+            
+            if (selected == null) return;
+            
+            listViewSelectResource.Debounce(data =>
             {
                 progressBarStatus.Value = 0;
-                _engine.QueueLoadResourceFiles(textBoxSelectFolder.Text);
-            });
+
+                var filename = (string) data;
+                _engine.QueueLoadResourceFile(filename);
+            }, selected.Text);
         }
     }
 }

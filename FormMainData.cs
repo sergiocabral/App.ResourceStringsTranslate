@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 namespace ResourceStringsTranslate
 {
@@ -9,5 +10,7 @@ namespace ResourceStringsTranslate
         public int Progress { get; set; }
 
         public List<FormMainDataResourceFile> ResourceFiles { get; set; } = new List<FormMainDataResourceFile>();
+        
+        public List<FileInfo> SelectedResourceFileGroup { get; set; } = new List<FileInfo>();
     }
 }

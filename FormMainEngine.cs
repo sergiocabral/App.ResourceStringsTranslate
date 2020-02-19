@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Timer = System.Windows.Forms.Timer;
 
@@ -18,7 +19,8 @@ namespace ResourceStringsTranslate
             _queueWorker.DoWork += _queueWorker_DoWork;
         }
 
-        private const int Debounce = 1000;
+        private void Log(string text, bool success = true, Exception ex = null) =>
+            Data.Status.Add($"{(success ? "   OK" : "ERROR")} [{DateTime.Now:g}] {text}{(ex == null ? string.Empty : $"{ex.GetType().Name}: {ex.Message}")}");
 
         public FormMainData Data { get; set; } = new FormMainData();
 
@@ -62,14 +64,14 @@ namespace ResourceStringsTranslate
                 {
                     if (string.IsNullOrWhiteSpace(path))
                     {
-                        Data.Status.Add("Error loading resources files. Path is empty.");
+                        Log("Error loading resources files. Path is empty.", false);
                         return;
                     }
 
                     var directory = new DirectoryInfo(path);
                     if (!directory.Exists)
                     {
-                        Data.Status.Add($"Error loading resources files. Path \"{path}\" not exists.");
+                        Log($"Error loading resources files. Path \"{path}\" not exists.", false);
                         return;
                     }
 
@@ -81,20 +83,57 @@ namespace ResourceStringsTranslate
 
                     if (Data.ResourceFiles.Count > 0)
                     {
-                        Data.Status.Add($"Resources files loaded from path \"{path}\".");
+                        Log($"Resources files loaded from path \"{path}\".");
                     }
                     else
                     {
-                        Data.Status.Add($"No resources files found in path \"{path}\".");
+                        Log($"No resources files found in path \"{path}\".", false);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Data.Status.Add(
-                        $"Error loading resources files from path \"{path}\". {ex.GetType().Name}: {ex.Message}");
+                    Log($"Error loading resources files from path \"{path}\".", false, ex);
                 }
             });
         }
 
+        public void QueueLoadResourceFile(string path)
+        {
+            Queue(() =>
+            {
+                try
+                {
+                    if (string.IsNullOrWhiteSpace(path))
+                    {
+                        Log("Error loading data of resource file. Path is empty.", false);
+                        return;
+                    }
+
+                    var fileSelected = new FileInfo(path);
+                    var directory = fileSelected.Directory;
+                    if (!fileSelected.Exists || directory == null)
+                    {
+                        Log($"Error loading data of resource file. Path \"{path}\" not exists.", false);
+                        return;
+                    }
+
+                    var selectedResourceFileGroupRegex = $@"^{Regex.Replace(fileSelected.Name, @"(\.[a-z]{2}(-[a-z]{2}|)|)\.resx", string.Empty, RegexOptions.IgnoreCase)}\.";
+                    var selectedResourceFileGroup = directory
+                        .GetFiles("*.resx")
+                        .Where(file => file.Name != fileSelected.Name &&
+                                       Regex.IsMatch(file.Name, selectedResourceFileGroupRegex, RegexOptions.IgnoreCase))
+                        .OrderBy(file => file.Name)
+                        .ToList();
+                    selectedResourceFileGroup.Insert(0, fileSelected);
+                    Data.SelectedResourceFileGroup = selectedResourceFileGroup;
+                    
+                    Log($"Selected group of resource files: {Data.SelectedResourceFileGroup.Aggregate(string.Empty, (acc, file) => $"{acc}, {file.Name}").Substring(2)}");
+                }
+                catch (Exception ex)
+                {
+                    Log($"Error loading data of resource file from path \"{path}\".", false, ex);
+                }
+            });
+        }
     }
 }
