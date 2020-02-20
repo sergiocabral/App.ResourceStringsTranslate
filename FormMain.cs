@@ -70,9 +70,14 @@ namespace ResourceStringsTranslate
             {
                 dataGridViewData.DataSource = null;
                 dataGridViewData.DataSource = _engine.Data.Table.Translations;
-            }
 
-            ;
+                textBoxManageLanguage.Enabled =
+                    buttonManageLanguageAdd.Enabled =
+                        buttonManageLanguageRemove.Enabled =
+                            dataGridViewData.ColumnCount > 0;
+
+                if (!textBoxManageLanguage.Enabled) textBoxManageLanguage.Clear();
+            }
         }
 
         private void buttonSelectFolder_Click(object sender, EventArgs e)
@@ -199,6 +204,32 @@ namespace ResourceStringsTranslate
         private void buttonSaveChanges_Click(object sender, EventArgs e)
         {
             _engine.QueueSaveData(dataGridViewData.ToDataTable());
+        }
+
+        private void buttonManageLanguage_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewData.RowCount == 0) return;
+
+            var add = sender == buttonManageLanguageAdd;
+            var columnName = textBoxManageLanguage.Text.Trim();
+            var column = dataGridViewData.Columns[columnName];
+
+            if (column != null && column.Index == 0) return;
+
+            if (add && column == null)
+            {
+                dataGridViewData.Columns.Add(columnName, columnName);
+            }
+            else if (!add && column != null)
+            {
+                dataGridViewData.Columns.Remove(column);
+            }
+            else
+            {
+                return;
+            }
+            
+            textBoxManageLanguage.Clear();
         }
     }
 }
