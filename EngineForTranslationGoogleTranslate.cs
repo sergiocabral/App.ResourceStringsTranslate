@@ -1,4 +1,11 @@
-﻿namespace ResourceStringsTranslate
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Text;
+using Newtonsoft.Json;
+
+namespace ResourceStringsTranslate
 {
     public class EngineForTranslationGoogleTranslate : ITranslation
     {
@@ -17,9 +24,52 @@
 
         public int AfterBlock { get; set; }
 
+        private static WebClient _webClient;
+        
         public string Translate(string languageFrom, string languageTo, string text)
         {
-            return text;
+            if (_webClient == null)
+            {
+                _webClient = new WebClient();
+                _webClient.Encoding = Encoding.UTF8;
+            }
+            
+            var url = Url
+                .Replace(UrlMarkLanguageFrom, languageFrom)
+                .Replace(UrlMarkLanguageTo, languageTo)
+                .Replace(UrlMarkText, text);
+
+            try
+            {
+                var response = _webClient.DownloadString(url);
+                try
+                {
+                    var json = JsonConvert.DeserializeObject(response);
+                    var translated = new StringBuilder();
+                    var i = 0;
+                    try
+                    {
+                        do
+                        {
+                            translated.Append(((dynamic) json)[0][i][0].ToString());
+                        } while (((dynamic) json)[0][++i] != null);
+                    }
+                    catch
+                    {
+                        // Se não conseguir capturar o texto segue em frente com o que conseguiu.
+                    }
+
+                    return translated.ToString().Trim();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Response error.", ex);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Request error.", ex);
+            }
         }
 
         public static EngineForTranslationGoogleTranslate Default()
