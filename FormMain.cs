@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -84,6 +83,8 @@ namespace ResourceStringsTranslate
             }
 
             if (_engine.Data.CheckNewFiles) textBoxSelectFolder.Text += " ";
+
+            DataGridReadOnly(_engine.Data.TranslatingRunning);
         }
 
         private void buttonSelectFolder_Click(object sender, EventArgs e)
@@ -241,7 +242,7 @@ namespace ResourceStringsTranslate
                 !Regex.IsMatch(textBoxManageLanguage.Text, @"[^a-z]", RegexOptions.IgnoreCase)) return;
 
             var selectionStart = textBoxManageLanguage.SelectionStart;
-            
+
             textBoxManageLanguage.Text = Regex.Replace(textBoxManageLanguage.Text, @"[^a-z]", string.Empty,
                 RegexOptions.IgnoreCase).ToLower();
 
@@ -255,7 +256,7 @@ namespace ResourceStringsTranslate
 
             var row = dataGridViewData.Rows
                 .Cast<DataGridViewRow>()
-                .FirstOrDefault(a => 
+                .FirstOrDefault(a =>
                     a.Cells
                         .Cast<DataGridViewCell>()
                         .Any(b => string.IsNullOrWhiteSpace($"{b.Value}")));
@@ -264,7 +265,7 @@ namespace ResourceStringsTranslate
             if (firstColumn.Index == 0)
                 firstColumn = dataGridViewData.Columns.GetNextColumn(firstColumn, DataGridViewElementStates.Displayed,
                     DataGridViewElementStates.None);
-            
+
             var data = new Dictionary<string, string>();
             data.Add(dataGridViewData.Columns[0].Name, $"{row.Cells[0].Value}");
             data.Add(dataGridViewData.Columns[firstColumn.Index].Name, $"{row.Cells[firstColumn.Index].Value}");
@@ -275,6 +276,20 @@ namespace ResourceStringsTranslate
             }
 
             _engine.QueueTranslate(data, textBoxDefaultLanguage.Text);
+
+            DataGridReadOnly(true);
+        }
+
+        private void DataGridReadOnly(bool mode)
+        {
+            if ((!mode || dataGridViewData.ReadOnly) && (mode || !dataGridViewData.ReadOnly)) return;
+
+            dataGridViewData.ReadOnly = mode;
+            dataGridViewData.AllowUserToOrderColumns = !mode;
+            foreach (DataGridViewColumn column in dataGridViewData.Columns)
+                column.SortMode = mode
+                    ? DataGridViewColumnSortMode.NotSortable
+                    : DataGridViewColumnSortMode.Automatic;
         }
     }
 }

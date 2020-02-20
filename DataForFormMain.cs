@@ -44,5 +44,7 @@ namespace ResourceStringsTranslate
             }
             set => _checkNewFiles = value;
         }
+
+        public bool TranslatingRunning { get; set; }
     }
 }

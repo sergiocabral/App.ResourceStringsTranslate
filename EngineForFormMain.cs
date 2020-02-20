@@ -253,7 +253,7 @@ namespace ResourceStringsTranslate
                         selectedResourceFileGroup.First();
 
                     var log = new List<string>();
-                    Data.Progress += dataTable.Columns.Count;
+                    data.ProgressCount += dataTable.Columns.Count;
                     for (var i = 1; i < dataTable.Columns.Count; i++)
                     {
                         var translations = new Dictionary<string, string>();
@@ -293,7 +293,7 @@ namespace ResourceStringsTranslate
                             $"{resourceFile.FileXml.Name}: {resourceFile.FileXml.Length} bytes. {translations.Count} key(s).");
                         log.Add($"{resourceFile.FileCSharp.Name}: {resourceFile.FileCSharp.Length} bytes.");
 
-                        Data.Progress--;
+                        data.ProgressCount--;
                     }
 
                     Log("All data was saved to resource files:" + Environment.NewLine +
@@ -308,6 +308,8 @@ namespace ResourceStringsTranslate
 
         public void QueueTranslate(IDictionary<string, string> data, string languageDefault)
         {
+            Data.TranslatingRunning = true;
+            Queue(data => { Data.TranslatingRunning = false; });
         }
     }
 }
