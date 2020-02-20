@@ -17,6 +17,12 @@
       <e p="IEngineForTranslation.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive">
+        <e p="Grpc.Core.2.27.0\runtimes\linux\native\libgrpc_csharp_ext.x64.so" t="Include" />
+        <e p="Grpc.Core.2.27.0\runtimes\linux\native\libgrpc_csharp_ext.x86.so" t="Include" />
+        <e p="Grpc.Core.2.27.0\runtimes\osx\native\libgrpc_csharp_ext.x64.dylib" t="Include" />
+        <e p="Grpc.Core.2.27.0\runtimes\osx\native\libgrpc_csharp_ext.x86.dylib" t="Include" />
+        <e p="Grpc.Core.2.27.0\runtimes\win\native\grpc_csharp_ext.x64.dll" t="Include" />
+        <e p="Grpc.Core.2.27.0\runtimes\win\native\grpc_csharp_ext.x86.dll" t="Include" />
         <e p="SQLitePCLRaw.lib.e_sqlite3.2.0.2\runtimes" t="Include">
           <e p="win-arm" t="Include">
             <e p="native" t="Include">

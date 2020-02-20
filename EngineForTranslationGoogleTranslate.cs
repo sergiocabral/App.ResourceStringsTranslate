@@ -8,14 +8,14 @@ namespace ResourceStringsTranslate
 {
     public class EngineForTranslationGoogleTranslate : ITranslation
     {
-        private const string UrlMarkText = "{text}";
-        private const string UrlMarkLanguageFrom = "{languageFrom}";
-        private const string UrlMarkLanguageTo = "{languageTo}";
+        private const string MarkText = "{text}";
+        private const string MarkLanguageFrom = "{languageFrom}";
+        private const string MarkLanguageTo = "{languageTo}";
 
         public const string UrlValue = "https://translate.google.com.br/translate_a/single?client=gtx&sl=" +
-                                       UrlMarkLanguageFrom + "&tl=" + UrlMarkLanguageTo + "&hl=" + UrlMarkLanguageFrom +
+                                       MarkLanguageFrom + "&tl=" + MarkLanguageTo + "&hl=" + MarkLanguageFrom +
                                        "&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=1&ssel=0&tsel=0&kc=7&q=" +
-                                       UrlMarkText;
+                                       MarkText;
 
         private readonly Stopwatch Stopwatch = new Stopwatch();
 
@@ -29,9 +29,9 @@ namespace ResourceStringsTranslate
                    Stopwatch.ElapsedMilliseconds < BetweenRequests * 1000) Thread.Sleep(500);
 
             var url = Url
-                .Replace(UrlMarkLanguageFrom, languageFrom)
-                .Replace(UrlMarkLanguageTo, languageTo)
-                .Replace(UrlMarkText, text);
+                .Replace(MarkLanguageFrom, languageFrom)
+                .Replace(MarkLanguageTo, languageTo)
+                .Replace(MarkText, text);
 
             Stopwatch.Stop();
             try

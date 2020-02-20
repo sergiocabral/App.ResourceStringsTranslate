@@ -21,11 +21,11 @@ namespace ResourceStringsTranslate
             InitializeComponent();
 
             textBoxSelectFolder.Text =
-                folderBrowserDialog.SelectedPath =
+                openFileDialog.InitialDirectory =
+                    folderBrowserDialog.SelectedPath =
+                        new FileInfo(Environment.GetCommandLineArgs()[0]).Directory?.FullName;
 #if DEBUG
-                    @"C:\Git\Drake\Drake.Resources";
-#else
-                    new FileInfo(Environment.GetCommandLineArgs()[0]).Directory?.FullName;
+            textBoxSelectFolder.Text = @"C:\Git\Drake\Drake.Resources";
 #endif
 
             textBoxDefaultLanguage.Text = _engine.Data.DefaultLanguage;
@@ -37,8 +37,8 @@ namespace ResourceStringsTranslate
                 _engine.Data.TranslationGoogleTranslate.BetweenRequests;
 
             radioButtonModeGoogleApi.Checked = _engine.Data.TranslationService == _engine.Data.TranslationGoogleApi;
-            textBoxModeGoogleApiUrl.Text = _engine.Data.TranslationGoogleApi.Url;
-            textBoxModeGoogleApiKey.Text = _engine.Data.TranslationGoogleApi.Key;
+            textBoxModeGoogleApiJson.Text = _engine.Data.TranslationGoogleApi.JsonPath;
+            textBoxModeGoogleApiProjectId.Text = _engine.Data.TranslationGoogleApi.ProjectId;
 
             radioButtonModeMicrosoftApi.Checked =
                 _engine.Data.TranslationService == _engine.Data.TranslationMicrosoftApi;
@@ -148,6 +148,16 @@ namespace ResourceStringsTranslate
                 textBoxSelectFolder.Text = folderBrowserDialog.SelectedPath;
         }
 
+        private void buttonModeGoogleApiJson_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(textBoxModeGoogleApiJson.Text))
+                openFileDialog.InitialDirectory = new FileInfo(textBoxModeGoogleApiJson.Text).Directory?.FullName;
+
+            openFileDialog.Filter = @"JSON files (*.json)|*.json|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+                textBoxModeGoogleApiJson.Text = openFileDialog.FileName;
+        }
+
         private void textBoxDefaultLanguage_TextChanged(object sender, EventArgs e)
         {
             if (textBoxDefaultLanguage.Tag != null) return;
@@ -211,8 +221,8 @@ namespace ResourceStringsTranslate
             var translationGoogleTranslateUrl = textBoxModeGoogleTranslateUrl.Text;
             var translationGoogleTranslateBetweenRequests = (int) numericUpDownModeGoogleTranslateBetweenRequests.Value;
 
-            var translationGoogleApiUrl = textBoxModeGoogleApiUrl.Text;
-            var translationGoogleApiKey = textBoxModeGoogleApiKey.Text;
+            var translationGoogleApiJson = textBoxModeGoogleApiJson.Text;
+            var translationGoogleApiProjectId = textBoxModeGoogleApiProjectId.Text;
 
             var translationMicrosoftApiUrl = textBoxModeMicrosoftApiUrl.Text;
             var translationMicrosoftApiKey = textBoxModeMicrosoftApiKey.Text;
@@ -230,12 +240,8 @@ namespace ResourceStringsTranslate
 
                 _engine.Data.TranslationGoogleTranslate.BetweenRequests = translationGoogleTranslateBetweenRequests;
 
-                _engine.Data.TranslationGoogleApi.Url =
-                    !string.IsNullOrWhiteSpace(translationGoogleApiUrl)
-                        ? translationGoogleApiUrl
-                        : textBoxModeGoogleApiUrl.Text = EngineForTranslationGoogleApi.UrlValue;
-
-                _engine.Data.TranslationGoogleApi.Key = translationGoogleApiKey;
+                _engine.Data.TranslationGoogleApi.JsonPath = translationGoogleApiJson;
+                _engine.Data.TranslationGoogleApi.ProjectId = translationGoogleApiProjectId;
 
                 _engine.Data.TranslationMicrosoftApi.Url =
                     !string.IsNullOrWhiteSpace(translationMicrosoftApiUrl)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Web;
 using Newtonsoft.Json;
 
 namespace ResourceStringsTranslate
@@ -10,10 +11,9 @@ namespace ResourceStringsTranslate
         private const string MarkLanguageFrom = "{languageFrom}";
         private const string MarkLanguageTo = "{languageTo}";
 
-        public const string UrlValue = "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=" +
-                                       MarkLanguageTo;
+        public const string UrlValue = "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0";
 
-        public const string DataValue = "[{\"From\":'" + MarkLanguageFrom + "', \"Text\":'" + MarkText + "'}]";
+        private const string DataValue = "[{\"From\":'" + MarkLanguageFrom + "', \"Text\":'" + MarkText + "'}]";
 
         private readonly WebClientEx _webClient = new WebClientEx();
 
@@ -25,23 +25,23 @@ namespace ResourceStringsTranslate
         {
             try
             {
-                var url = Url
+                var url = $"{Url}&to={MarkLanguageTo}"
                     .Replace(MarkLanguageTo, languageTo);
-                
+
                 var data = DataValue
                     .Replace(MarkLanguageFrom, languageFrom)
                     .Replace(MarkText, text
                         .Replace("'", "\\'")
                         .Replace("\n", "\\n"));
                 var dataBytes = Encoding.UTF8.GetBytes(data);
-                
+
                 _webClient.Headers.Clear();
                 _webClient.Headers.Add("Ocp-Apim-Subscription-Key", Key);
                 _webClient.Headers.Add("Content-Type", "application/json; charset=UTF-8");
 
                 var responseBytes = _webClient.UploadData(url, "POST", dataBytes);
                 var response = Encoding.UTF8.GetString(responseBytes);
-                
+
                 try
                 {
                     var json = (dynamic) JsonConvert.DeserializeObject(response);
@@ -49,7 +49,7 @@ namespace ResourceStringsTranslate
                     try
                     {
                         for (var i = 0; i < json[0]["translations"].Count; i++)
-                            translated.Append(json[0]["translations"][i]["text"].ToString());
+                            translated.Append(HttpUtility.HtmlDecode(json[0]["translations"][i]["text"].ToString()));
                     }
                     catch
                     {
