@@ -64,6 +64,14 @@ namespace ResourceStringsTranslate
                 textBoxStatus.SelectionStart = textBoxStatus.Text.Length;
                 textBoxStatus.ScrollToCaret();
             }
+
+            if (dataGridViewData.DataSource != _engine.Data.Table.Translations)
+            {
+                dataGridViewData.DataSource = null;
+                dataGridViewData.DataSource = _engine.Data.Table.Translations;
+            }
+
+            ;
         }
 
         private void buttonSelectFolder_Click(object sender, EventArgs e)

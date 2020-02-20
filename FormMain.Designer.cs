@@ -287,7 +287,7 @@
             // 
             this.textBoxDefaultLanguage.Location = new System.Drawing.Point(7, 21);
             this.textBoxDefaultLanguage.Name = "textBoxDefaultLanguage";
-            this.textBoxDefaultLanguage.Size = new System.Drawing.Size(194, 23);
+            this.textBoxDefaultLanguage.Size = new System.Drawing.Size(99, 23);
             this.textBoxDefaultLanguage.TabIndex = 1;
             this.textBoxDefaultLanguage.Text = "??";
             this.textBoxDefaultLanguage.TextChanged += new System.EventHandler(this.textBoxDefaultLanguage_TextChanged);
@@ -297,9 +297,9 @@
             this.labelDefaultLanguage.AutoSize = true;
             this.labelDefaultLanguage.Location = new System.Drawing.Point(3, 3);
             this.labelDefaultLanguage.Name = "labelDefaultLanguage";
-            this.labelDefaultLanguage.Size = new System.Drawing.Size(198, 15);
+            this.labelDefaultLanguage.Size = new System.Drawing.Size(103, 15);
             this.labelDefaultLanguage.TabIndex = 0;
-            this.labelDefaultLanguage.Text = "Default Language of Main Resource:";
+            this.labelDefaultLanguage.Text = "Default Language:";
             // 
             // flowLayoutPanelActions
             // 

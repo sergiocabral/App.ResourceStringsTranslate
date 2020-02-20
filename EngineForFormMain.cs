@@ -13,6 +13,8 @@ namespace ResourceStringsTranslate
 
         private readonly BackgroundWorker _queueWorker = new BackgroundWorker();
 
+        private bool _queueReloadDataStop;
+
         private EngineForFormMain()
         {
             _queueWorker.DoWork += _queueWorker_DoWork;
@@ -101,6 +103,7 @@ namespace ResourceStringsTranslate
 
         public void QueueLoadResourceFile(string path)
         {
+            _queueReloadDataStop = true;
             Queue(data =>
             {
                 try
@@ -143,6 +146,7 @@ namespace ResourceStringsTranslate
 
         public void QueueReloadData()
         {
+            _queueReloadDataStop = false;
             Queue(data =>
             {
                 try
@@ -158,7 +162,7 @@ namespace ResourceStringsTranslate
                     Data.Table.Clear();
 
                     data.ProgressCount = Data.SelectedResourceFileGroup.Count;
-                    foreach (var resourceFile in Data.SelectedResourceFileGroup)
+                    foreach (var resourceFile in Data.SelectedResourceFileGroup.TakeWhile(a => !_queueReloadDataStop))
                     {
                         Data.Table.AddLanguage(resourceFile.Language);
 
@@ -171,7 +175,11 @@ namespace ResourceStringsTranslate
                             if (!string.IsNullOrWhiteSpace(errors)) Log(errors, false);
 
                             foreach (var text in resourceFileData)
+                            {
+                                if (_queueReloadDataStop) break;
+
                                 Data.Table.InsertTranslate(resourceFile.Language, text.Key, text.Value);
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -181,11 +189,20 @@ namespace ResourceStringsTranslate
                         data.ProgressCount--;
                     }
 
-                    Log("All resource files loaded.");
+                    if (!_queueReloadDataStop)
+                    {
+                        Log("All resource files loaded.");
+                    }
+                    else
+                    {
+                        Data.Table.Clear();
+
+                        Log("Canceled loading data of resource files.", false);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    Log("Error on reloading data from resource files.", false, ex);
+                    Log("Error on loading data from resource files.", false, ex);
                 }
             });
         }

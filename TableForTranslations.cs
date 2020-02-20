@@ -1,19 +1,72 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using System.Data;
+using System.Timers;
+using Microsoft.Data.Sqlite;
 
 namespace ResourceStringsTranslate
 {
     public class TableForTranslations
     {
         private const string TableName = "Translation";
-        private const string ColumnKeyName = "Key";
+        private const string ColumnKeyName = "KEY";
 
         private readonly SqliteConnection _sqLite;
+
+        private Timer _resetDataTablesTimer;
+
+        private DataTable _translations;
 
         public TableForTranslations()
         {
             _sqLite = new SqliteConnection("Data Source=:memory:");
             _sqLite.Open();
             Clear();
+        }
+
+        public DataTable Translations
+        {
+            get
+            {
+                if (_translations != null) return _translations;
+
+                _translations = new DataTable();
+
+                using var command = _sqLite.CreateCommand();
+                command.CommandText = @$"
+SELECT * FROM `{TableName}`;
+";
+
+                using var reader = command.ExecuteReader();
+                object[] values = null;
+                while (reader.Read())
+                {
+                    if (values == null)
+                    {
+                        for (var i = 0; i < reader.FieldCount; i++) _translations.Columns.Add(reader.GetName(i));
+                        values = new object[reader.FieldCount];
+                    }
+
+                    reader.GetValues(values);
+                    _translations.Rows.Add(values);
+                }
+
+                return _translations;
+            }
+        }
+
+        private void ResetDataTables()
+        {
+            if (_resetDataTablesTimer == null)
+            {
+                _resetDataTablesTimer = new Timer {Interval = 500};
+                _resetDataTablesTimer.Elapsed += (sender, args) =>
+                {
+                    _resetDataTablesTimer.Enabled = false;
+                    _translations = null;
+                };
+            }
+
+            _resetDataTablesTimer.Enabled = false;
+            _resetDataTablesTimer.Enabled = true;
         }
 
         public void Clear()
@@ -29,6 +82,8 @@ CREATE TABLE `{TableName}` (
 ";
                 command.ExecuteNonQuery();
             }
+
+            ResetDataTables();
         }
 
         public void AddLanguage(string language)
@@ -41,6 +96,8 @@ ADD COLUMN `{language}` TEXT;
 ";
                 command.ExecuteNonQuery();
             }
+
+            ResetDataTables();
         }
 
         public void InsertTranslate(string language, string key, string text)
@@ -51,7 +108,7 @@ ADD COLUMN `{language}` TEXT;
                 command.Parameters.Add(new SqliteParameter("text", text));
 
                 command.CommandText = @$"
-SELECT COUNT(Key) 
+SELECT COUNT(*) 
   FROM `{TableName}` 
  WHERE `{ColumnKeyName}` = @key;
 ";
@@ -74,6 +131,8 @@ UPDATE `{TableName}`
 
                 command.ExecuteNonQuery();
             }
+
+            ResetDataTables();
         }
     }
 }
