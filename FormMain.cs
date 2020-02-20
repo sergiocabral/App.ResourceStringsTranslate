@@ -102,7 +102,18 @@ namespace ResourceStringsTranslate
             }
 
             if (!_engine.Data.TranslatingRunning &&
-                _continuousTranslation) buttonTranslateNext.PerformClick();
+                _continuousTranslation)
+            {
+                if (buttonTranslateNext.Tag == null)
+                {
+                    buttonTranslateNext.Tag = new object();
+                }
+                else
+                {
+                    buttonTranslateNext.Tag = null;
+                    buttonTranslateNext.PerformClick();
+                }
+            }
 
             if (_continuousTranslation && buttonTranslateAll.BackColor != Color.SteelBlue)
             {
@@ -303,6 +314,7 @@ namespace ResourceStringsTranslate
 
             var row = dataGridViewData.Rows
                 .Cast<DataGridViewRow>()
+                .OrderBy(row => row.Index)
                 .FirstOrDefault(a =>
                     a.Cells
                         .Cast<DataGridViewCell>()

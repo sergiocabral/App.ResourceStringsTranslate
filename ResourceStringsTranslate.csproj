@@ -90,6 +90,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataForQueue.cs" />
+    <Compile Include="WebClientEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="EngineForTranslationMicrosoftApi.cs" />
     <Compile Include="EngineForTranslationGoogleApi.cs" />
     <Compile Include="EngineForTranslationGoogleTranslate.cs" />

@@ -24,14 +24,15 @@ namespace ResourceStringsTranslate
 
         public int AfterBlock { get; set; }
 
-        private static WebClient _webClient;
+        private static WebClientEx _webClient;
         
         public string Translate(string languageFrom, string languageTo, string text)
         {
             if (_webClient == null)
             {
-                _webClient = new WebClient();
+                _webClient = new WebClientEx();
                 _webClient.Encoding = Encoding.UTF8;
+                _webClient.Timeout = 10000;
             }
             
             var url = Url
@@ -44,15 +45,14 @@ namespace ResourceStringsTranslate
                 var response = _webClient.DownloadString(url);
                 try
                 {
-                    var json = JsonConvert.DeserializeObject(response);
+                    var json = (dynamic) JsonConvert.DeserializeObject(response);
                     var translated = new StringBuilder();
-                    var i = 0;
                     try
                     {
-                        do
+                        for (var i = 0; i < json[0].Count; i++)
                         {
-                            translated.Append(((dynamic) json)[0][i][0].ToString());
-                        } while (((dynamic) json)[0][++i] != null);
+                            translated.Append(json[0][i][0].ToString());
+                        }
                     }
                     catch
                     {

@@ -297,9 +297,6 @@
             // 
             // buttonManageLanguageRemove
             // 
-            this.buttonManageLanguageRemove.Anchor =
-                ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top |
-                                                       System.Windows.Forms.AnchorStyles.Right)));
             this.buttonManageLanguageRemove.Font = new System.Drawing.Font("Wingdings", 9.75F,
                 System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (2)));
             this.buttonManageLanguageRemove.Location = new System.Drawing.Point(346, 21);
@@ -312,9 +309,6 @@
             // 
             // buttonManageLanguageAdd
             // 
-            this.buttonManageLanguageAdd.Anchor =
-                ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top |
-                                                       System.Windows.Forms.AnchorStyles.Right)));
             this.buttonManageLanguageAdd.Font = new System.Drawing.Font("Wingdings", 9.75F);
             this.buttonManageLanguageAdd.Location = new System.Drawing.Point(304, 21);
             this.buttonManageLanguageAdd.Name = "buttonManageLanguageAdd";
