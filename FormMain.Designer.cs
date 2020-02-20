@@ -345,6 +345,7 @@
             this.buttonSaveChanges.TabIndex = 5;
             this.buttonSaveChanges.Text = "Save Changes";
             this.buttonSaveChanges.UseVisualStyleBackColor = true;
+            this.buttonSaveChanges.Click += new System.EventHandler(this.buttonSaveChanges_Click);
             // 
             // buttonTranslateNext
             // 

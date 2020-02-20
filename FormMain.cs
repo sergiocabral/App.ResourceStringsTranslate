@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -193,6 +194,11 @@ namespace ResourceStringsTranslate
         private void textBoxStatus_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete) textBoxStatus.Clear();
+        }
+
+        private void buttonSaveChanges_Click(object sender, EventArgs e)
+        {
+            _engine.QueueSaveData(dataGridViewData.ToDataTable());
         }
     }
 }

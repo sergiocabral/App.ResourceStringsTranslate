@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -164,7 +165,7 @@ namespace ResourceStringsTranslate
 
                     Data.Table.Clear();
 
-                    data.ProgressCount = Data.SelectedResourceFileGroup.Count;
+                    data.ProgressCount += Data.SelectedResourceFileGroup.Count;
                     foreach (var resourceFile in Data.SelectedResourceFileGroup.TakeWhile(a => !_queueReloadDataStop))
                     {
                         Data.Table.AddLanguage(resourceFile.Language);
@@ -206,6 +207,43 @@ namespace ResourceStringsTranslate
                 catch (Exception ex)
                 {
                     Log("Error on loading data from resource files.", false, ex);
+                }
+            });
+        }
+
+        public void QueueSaveData(DataTable dataTable)
+        {
+            
+            Queue(data =>
+            {
+                try
+                {
+                    if (dataTable == null)
+                    {
+                        Log("No data to save.", false);
+                        return;
+                    }
+
+                    if (dataTable.Columns.Count == 1)
+                    {
+                        Log("No language to save.", false);
+                        return;
+                    }
+
+                    Log("Saving data to resource files.");
+
+                    Data.Progress += dataTable.Columns.Count;
+                    for (var i = 1; i < dataTable.Columns.Count; i++)
+                    {
+                        Data.Progress--;
+                    }
+
+                    Log("All data was saved to resource files.");
+
+                }
+                catch (Exception ex)
+                {
+                    Log("Error on saving data to resource files.", false, ex);
                 }
             });
         }
