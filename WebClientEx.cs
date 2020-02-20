@@ -4,10 +4,8 @@ using System.Text;
 
 namespace ResourceStringsTranslate
 {
-    public class WebClientEx: WebClient
+    public class WebClientEx : WebClient
     {
-        public static WebClientEx Default { get; }
-
         static WebClientEx()
         {
             Default = new WebClientEx();
@@ -15,13 +13,17 @@ namespace ResourceStringsTranslate
             Default.Timeout = 10000;
         }
 
+        public static WebClientEx Default { get; }
+
         public int Timeout { get; set; } = 60000;
+
+        public WebRequest LastWebRequest { get; private set; }
 
         protected override WebRequest GetWebRequest(Uri address)
         {
-            var objWebRequest= base.GetWebRequest(address);
-            objWebRequest.Timeout = Timeout;
-            return objWebRequest;
+            LastWebRequest = base.GetWebRequest(address);
+            LastWebRequest.Timeout = Timeout;
+            return LastWebRequest;
         }
     }
 }

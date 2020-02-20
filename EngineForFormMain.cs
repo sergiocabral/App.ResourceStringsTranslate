@@ -36,7 +36,7 @@ namespace ResourceStringsTranslate
                 exceptionMessage += $"{innerException.Message} ";
                 innerException = innerException.InnerException;
             }
-            
+
             text =
                 $"{(success ? "   OK" : "ERROR")} [{DateTime.Now:G}] {text}{(ex == null ? string.Empty : $". {ex.GetType().Name}: {exceptionMessage}")}";
             if (text.Contains(Environment.NewLine))
@@ -405,7 +405,6 @@ namespace ResourceStringsTranslate
                                 {
                                     Log("  Text translated = ERROR", false, ex);
                                 }
-                                texts[FlagForTranslated] = "OK";
                             }
                         }
 

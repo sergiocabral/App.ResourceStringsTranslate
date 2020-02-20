@@ -115,13 +115,9 @@ namespace ResourceStringsTranslate
             }
 
             if (_continuousTranslation && buttonTranslateAll.BackColor != Color.SteelBlue)
-            {
                 buttonTranslateAll.BackColor = Color.SteelBlue;
-            }
             else if (!_continuousTranslation && buttonTranslateAll.BackColor == Color.SteelBlue)
-            {
                 buttonTranslateAll.BackColor = buttonTranslateNext.BackColor;
-            }
 
             DataGridReadOnly(_engine.Data.TranslatingRunning);
 

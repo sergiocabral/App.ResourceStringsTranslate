@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
@@ -20,17 +17,17 @@ namespace ResourceStringsTranslate
                                        "&dt=at&dt=bd&dt=ex&dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=ss&dt=t&otf=1&ssel=0&tsel=0&kc=7&q=" +
                                        UrlMarkText;
 
+        private readonly Stopwatch Stopwatch = new Stopwatch();
+
         public string Url { get; set; }
 
         public int BetweenRequests { get; set; }
-        
-        private Stopwatch Stopwatch = new Stopwatch();
 
         public string Translate(string languageFrom, string languageTo, string text)
         {
             while (Stopwatch.IsRunning &&
                    Stopwatch.ElapsedMilliseconds < BetweenRequests * 1000) Thread.Sleep(500);
-            
+
             var url = Url
                 .Replace(UrlMarkLanguageFrom, languageFrom)
                 .Replace(UrlMarkLanguageTo, languageTo)
@@ -46,10 +43,7 @@ namespace ResourceStringsTranslate
                     var translated = new StringBuilder();
                     try
                     {
-                        for (var i = 0; i < json[0].Count; i++)
-                        {
-                            translated.Append(json[0][i][0].ToString());
-                        }
+                        for (var i = 0; i < json[0].Count; i++) translated.Append(json[0][i][0].ToString());
                     }
                     catch
                     {
@@ -65,7 +59,7 @@ namespace ResourceStringsTranslate
             }
             catch (Exception ex)
             {
-                throw new Exception($"Request error.", ex);
+                throw new Exception("Request error.", ex);
             }
             finally
             {
