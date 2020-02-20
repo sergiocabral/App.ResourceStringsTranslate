@@ -187,7 +187,7 @@ namespace ResourceStringsTranslate
 
         private void buttonReloadData_Click(object sender, EventArgs e)
         {
-            _engine.QueueReloadData();
+            _engine.QueueLoadData();
         }
 
         private void textBoxStatus_KeyUp(object sender, KeyEventArgs e)

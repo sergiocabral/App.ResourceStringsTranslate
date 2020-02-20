@@ -101,7 +101,7 @@ namespace ResourceStringsTranslate
             });
         }
 
-        public void QueueLoadResourceFile(string path)
+        public void QueueLoadResourceFile(string path, bool automaticQueueLoadData = true)
         {
             _queueReloadDataStop = true;
             Queue(data =>
@@ -140,11 +140,14 @@ namespace ResourceStringsTranslate
                 catch (Exception ex)
                 {
                     Log($"Error loading data of resource file from path \"{path}\".", false, ex);
+                    return;
                 }
+                
+                if (automaticQueueLoadData) QueueLoadData();
             });
         }
 
-        public void QueueReloadData()
+        public void QueueLoadData()
         {
             _queueReloadDataStop = false;
             Queue(data =>
