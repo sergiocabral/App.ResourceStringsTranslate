@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -217,18 +216,12 @@ namespace ResourceStringsTranslate
             if (column != null && column.Index == 0) return;
 
             if (add && column == null)
-            {
                 dataGridViewData.Columns.Add(columnName, columnName);
-            }
             else if (!add && column != null)
-            {
                 dataGridViewData.Columns.Remove(column);
-            }
             else
-            {
                 return;
-            }
-            
+
             textBoxManageLanguage.Clear();
         }
     }

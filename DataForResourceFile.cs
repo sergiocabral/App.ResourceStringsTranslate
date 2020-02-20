@@ -17,11 +17,10 @@ namespace ResourceStringsTranslate
             Language = Regex.Match(file.Name, @"(?<=\.)[a-z]{2}(\-[a-z]*|)(?=\.resx)", RegexOptions.IgnoreCase).Value;
             IsDefaultLanguage = string.IsNullOrWhiteSpace(Language);
             Language = !IsDefaultLanguage ? Language : LanguageDefaultName;
-            FileCSharp = new FileInfo(Regex.Replace(File.FullName, @"\.resx$", ".Designer.cs", RegexOptions.IgnoreCase));
-            HasCSharpCode = FileCSharp.Exists && FileCSharp.Length > 0 && !string.IsNullOrWhiteSpace(System.IO.File.ReadAllText(FileCSharp.FullName).Trim());
-
-            var (_, _) = GetHeaderFooterCSharp();
-            var (_, _) = GetHeaderFooterXml();
+            FileCSharp =
+                new FileInfo(Regex.Replace(File.FullName, @"\.resx$", ".Designer.cs", RegexOptions.IgnoreCase));
+            HasCSharpCode = FileCSharp.Exists && FileCSharp.Length > 0 &&
+                            !string.IsNullOrWhiteSpace(System.IO.File.ReadAllText(FileCSharp.FullName).Trim());
         }
 
         public FileInfo File { get; }
@@ -78,13 +77,35 @@ namespace ResourceStringsTranslate
 
         public (string[], string[]) GetHeaderFooterXml()
         {
-            return (new string[0], new string[0]);
+            var header = new List<string>();
+            var footer = new List<string>();
+
+            var lines = System.IO.File.ReadAllLines(File.FullName);
+            var commentOpened = false;
+            for (var i = 0; i < lines.Length; i++)
+            {
+                if (lines[i].Contains("<!--")) commentOpened = true;
+                if (lines[i].Contains("-->")) commentOpened = false;
+                if (commentOpened || !Regex.IsMatch(lines[i], @"^\s*<data\s+name=""[^""]+""",
+                        RegexOptions.IgnoreCase)) continue;
+                header.AddRange(lines.Take(i));
+                break;
+            }
+
+            for (var i = lines.Length - 1; i >= 0; i--)
+            {
+                if (!Regex.IsMatch(lines[i], @"^\s*<\s*/\s*data", RegexOptions.IgnoreCase)) continue;
+                footer.AddRange(lines.Skip(i + 1));
+                break;
+            }
+
+            return (header.ToArray(), footer.ToArray());
         }
 
         public (string[], string[]) GetHeaderFooterCSharp()
         {
             if (!HasCSharpCode) return (new string[0], new string[0]);
-            
+
             var header = new List<string>();
             var footer = new List<string>();
 
@@ -99,6 +120,7 @@ namespace ResourceStringsTranslate
                     header.AddRange(lines.Take(i + 1));
                     break;
                 }
+
                 break;
             }
 
@@ -110,7 +132,7 @@ namespace ResourceStringsTranslate
                 footer.AddRange(lines.Skip(i + 1));
                 break;
             }
-            
+
             return (header.ToArray(), footer.ToArray());
         }
     }

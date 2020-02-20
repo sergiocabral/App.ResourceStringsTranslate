@@ -143,7 +143,7 @@ namespace ResourceStringsTranslate
                     Log($"Error loading data of resource file from path \"{path}\".", false, ex);
                     return;
                 }
-                
+
                 if (automaticQueueLoadData) QueueLoadData();
             });
         }
@@ -213,7 +213,6 @@ namespace ResourceStringsTranslate
 
         public void QueueSaveData(DataTable dataTable)
         {
-            
             Queue(data =>
             {
                 try
@@ -233,13 +232,9 @@ namespace ResourceStringsTranslate
                     Log("Saving data to resource files.");
 
                     Data.Progress += dataTable.Columns.Count;
-                    for (var i = 1; i < dataTable.Columns.Count; i++)
-                    {
-                        Data.Progress--;
-                    }
+                    for (var i = 1; i < dataTable.Columns.Count; i++) Data.Progress--;
 
                     Log("All data was saved to resource files.");
-
                 }
                 catch (Exception ex)
                 {

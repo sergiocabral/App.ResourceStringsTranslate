@@ -43,26 +43,20 @@ namespace ResourceStringsTranslate
             data.Value.Action();
         }
 
-        private class DebounceControl
-        {
-            public Action Action;
-            public Timer Timer;
-        }
-
         public static DataTable ToDataTable(this DataGridView dataGridView)
         {
             try
             {
                 if (dataGridView.ColumnCount == 0) return null;
-                
+
                 var dataTable = new DataTable();
 
                 foreach (DataGridViewColumn column in dataGridView.Columns)
                 {
                     dataTable.Columns.Add(
-                        column.Name, 
-                        column.ValueType == null 
-                            ? typeof(string) 
+                        column.Name,
+                        column.ValueType == null
+                            ? typeof(string)
                             : column.ValueType);
                     dataTable.Columns[column.Name].Caption = column.HeaderText;
                 }
@@ -71,9 +65,7 @@ namespace ResourceStringsTranslate
                 {
                     var newRow = dataTable.NewRow();
                     foreach (DataColumn column in dataTable.Columns)
-                    {
                         newRow[column.ColumnName] = row.Cells[column.ColumnName].Value;
-                    }
 
                     dataTable.Rows.Add(newRow);
                 }
@@ -84,6 +76,12 @@ namespace ResourceStringsTranslate
             {
                 return null;
             }
+        }
+
+        private class DebounceControl
+        {
+            public Action Action;
+            public Timer Timer;
         }
     }
 }
