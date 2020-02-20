@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -10,12 +9,12 @@ namespace ResourceStringsTranslate
 {
     public class DataForResourceFile
     {
-        public const string LanguageDefaultName = "(default)";
-        
+        public const string LanguageDefaultName = "default";
+
         public DataForResourceFile(FileInfo file)
         {
             File = file;
-            Language = Regex.Match(file.Name, @"(?<=\.)[a-z]{2}(?=(\-[a-z]*|)\.resx)").Value;
+            Language = Regex.Match(file.Name, @"(?<=\.)[a-z]{2}(\-[a-z]*|)(?=\.resx)", RegexOptions.IgnoreCase).Value;
             Language = !string.IsNullOrWhiteSpace(Language) ? Language : LanguageDefaultName;
         }
 
@@ -53,15 +52,12 @@ namespace ResourceStringsTranslate
             {
                 list.Reverse();
                 foreach (var duplicate in duplicates)
-                {
                     for (var i = 0; i < duplicate.Value - 1; i++)
-                    {
                         list.Remove(list.First(a => a.Key == duplicate.Key));
-                    }
-                }
                 list.Reverse();
-                
-                errors = $"Resource file \"{File.Name}\" has duplicate keys:{Environment.NewLine}{string.Join(Environment.NewLine, duplicates)}";   
+
+                errors =
+                    $"Resource file \"{File.Name}\" has duplicate keys:{Environment.NewLine}{string.Join(Environment.NewLine, duplicates)}";
             }
             else
             {

@@ -4,9 +4,8 @@ namespace ResourceStringsTranslate
 {
     public class DataForQueue
     {
-        public Action<DataForQueue> Action { get; set; }
-
         private int _progressCount = 1;
+        public Action<DataForQueue> Action { get; set; }
 
         public int ProgressCount
         {

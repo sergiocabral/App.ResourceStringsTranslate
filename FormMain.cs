@@ -181,5 +181,10 @@ namespace ResourceStringsTranslate
         {
             _engine.QueueReloadData();
         }
+
+        private void textBoxStatus_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete) textBoxStatus.Clear();
+        }
     }
 }

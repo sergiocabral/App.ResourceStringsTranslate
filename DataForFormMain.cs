@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.IO;
 
 namespace ResourceStringsTranslate
 {
@@ -26,7 +24,7 @@ namespace ResourceStringsTranslate
 
         public DataForTranslationMicrosoftApi TranslationMicrosoftApi { get; set; } =
             DataForTranslationMicrosoftApi.Default();
-        
-        public DataTable Table { get; set; } = new DataTable();
+
+        public TableForTranslations Table { get; set; } = new TableForTranslations();
     }
 }

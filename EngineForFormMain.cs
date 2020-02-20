@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Xml;
 
 namespace ResourceStringsTranslate
 {
@@ -26,8 +24,15 @@ namespace ResourceStringsTranslate
 
         private void Log(string text, bool success = true, Exception ex = null)
         {
-            Data.Status.Add(
-                $"{(success ? "   OK" : "ERROR")} [{DateTime.Now:g}] {text}{(ex == null ? string.Empty : $"{ex.GetType().Name}: {ex.Message}")}");
+            text =
+                $"{(success ? "   OK" : "ERROR")} [{DateTime.Now:g}] {text}{(ex == null ? string.Empty : $"{ex.GetType().Name}: {ex.Message}")}";
+            if (text.Contains(Environment.NewLine))
+            {
+                var tab = text.IndexOf("]") + 2;
+                text = text.Replace(Environment.NewLine, Environment.NewLine + new string(' ', tab));
+            }
+
+            Data.Status.Add(text);
         }
 
         private void _queueWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -147,62 +152,40 @@ namespace ResourceStringsTranslate
                         Log("No resources selected.", false);
                         return;
                     }
-                    
+
+                    Log("Loading data of resource files.");
+
                     Data.Table.Clear();
-                    Data.Table.Columns.Clear();
-                    Data.Table.Columns.Add("KEY");
 
                     data.ProgressCount = Data.SelectedResourceFileGroup.Count;
                     foreach (var resourceFile in Data.SelectedResourceFileGroup)
                     {
-                        var columnId = Data.Table.Columns.IndexOf(resourceFile.Language);
-                        if (columnId < 0)
-                        {
-                            Data.Table.Columns.Add(resourceFile.Language);
-                            columnId = Data.Table.Columns.Count - 1;
-                        }
-                        
+                        Data.Table.AddLanguage(resourceFile.Language);
+
                         try
                         {
                             var resourceFileData = resourceFile.LoadData(out var errors);
-                            
-                            if (!string.IsNullOrWhiteSpace(errors))
-                            {
-                                Log(errors, false);
-                            }
-                            
-                            Log($"Wait for loading of XML from resource file \"{resourceFile.Name}\". Count keys: {resourceFileData.Count}.");
+
+                            Log(
+                                $"Reading XML from \"{resourceFile.Name}\". Total translation keys: {resourceFileData.Count}.");
+                            if (!string.IsNullOrWhiteSpace(errors)) Log(errors, false);
+
                             foreach (var text in resourceFileData)
-                            {
-                                var rows = Data.Table.Select($"KEY = '{text.Key}'");
-                                switch (rows.Length)
-                                {
-                                    case 0:
-                                        var row = Data.Table.NewRow();
-                                        row.SetField(0, text.Key);
-                                        row.SetField(columnId, text.Value);
-                                        Data.Table.Rows.Add(row);
-                                        break;
-                                    case 1:
-                                        rows[0].SetField(columnId, text.Value);
-                                        break;
-                                    default:
-                                        throw new NotImplementedException();
-                                }
-                            }
-                            Log($"Loaded XML from resource file \"{resourceFile.Name}\".");
+                                Data.Table.InsertTranslate(resourceFile.Language, text.Key, text.Value);
                         }
                         catch (Exception ex)
                         {
-                            Log($"Error reading XML from resource file \"{resourceFile.Name}\".", false, ex);
+                            Log($"Error reading XML from \"{resourceFile.Name}\".", false, ex);
                         }
-                        
+
                         data.ProgressCount--;
                     }
+
+                    Log("All resource files loaded.");
                 }
                 catch (Exception ex)
                 {
-                    Log($"Error on reloading data from resource files.", false, ex);
+                    Log("Error on reloading data from resource files.", false, ex);
                 }
             });
         }

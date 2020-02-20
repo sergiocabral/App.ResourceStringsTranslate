@@ -125,6 +125,7 @@
             this.textBoxStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxStatus.Size = new System.Drawing.Size(886, 108);
             this.textBoxStatus.TabIndex = 0;
+            this.textBoxStatus.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBoxStatus_KeyUp);
             // 
             // panelStatus
             // 
@@ -401,10 +402,10 @@
             this.tabPageConfiguration.Controls.Add(this.radioButtonModeGoogleApi);
             this.tabPageConfiguration.Controls.Add(this.panelModeGoogleTranslate);
             this.tabPageConfiguration.Controls.Add(this.radioButtonModeGoogleTranslate);
-            this.tabPageConfiguration.Location = new System.Drawing.Point(4, 24);
+            this.tabPageConfiguration.Location = new System.Drawing.Point(4, 22);
             this.tabPageConfiguration.Name = "tabPageConfiguration";
             this.tabPageConfiguration.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageConfiguration.Size = new System.Drawing.Size(646, 468);
+            this.tabPageConfiguration.Size = new System.Drawing.Size(644, 469);
             this.tabPageConfiguration.TabIndex = 1;
             this.tabPageConfiguration.Text = "Configuration";
             this.tabPageConfiguration.UseVisualStyleBackColor = true;
