@@ -11,30 +11,30 @@ namespace ResourceStringsTranslate
     {
         public const string LanguageDefaultName = "default";
 
-        public DataForResourceFile(FileInfo file)
+        public DataForResourceFile(FileInfo fileXml)
         {
-            File = file;
-            Language = Regex.Match(file.Name, @"(?<=\.)[a-z]{2}(\-[a-z]*|)(?=\.resx)", RegexOptions.IgnoreCase).Value;
+            FileXml = fileXml;
+            Language = Regex.Match(fileXml.Name, @"(?<=\.)[a-z]{2}(\-[a-z]*|)(?=\.resx)", RegexOptions.IgnoreCase).Value;
             IsDefaultLanguage = string.IsNullOrWhiteSpace(Language);
             Language = !IsDefaultLanguage ? Language : LanguageDefaultName;
             FileCSharp =
-                new FileInfo(Regex.Replace(File.FullName, @"\.resx$", ".Designer.cs", RegexOptions.IgnoreCase));
+                new FileInfo(Regex.Replace(FileXml.FullName, @"\.resx$", ".Designer.cs", RegexOptions.IgnoreCase));
             HasCSharpCode = FileCSharp.Exists && FileCSharp.Length > 0 &&
                             !string.IsNullOrWhiteSpace(System.IO.File.ReadAllText(FileCSharp.FullName).Trim());
         }
 
-        public FileInfo File { get; }
+        public FileInfo FileXml { get; }
         public FileInfo FileCSharp { get; }
         public string Language { get; }
-        public string Name => File.Name;
-        public string[] Details => new[] {Name, Language, File.FullName};
+        public string Name => FileXml.Name;
+        public string[] Details => new[] {Name, Language, FileXml.FullName};
         public bool IsDefaultLanguage { get; }
         public bool HasCSharpCode { get; }
 
         private XmlDocument LoadXml()
         {
             var xml = new XmlDocument();
-            xml.LoadXml(System.IO.File.ReadAllText(File.FullName));
+            xml.LoadXml(System.IO.File.ReadAllText(FileXml.FullName));
             return xml;
         }
 
@@ -65,7 +65,7 @@ namespace ResourceStringsTranslate
                 list.Reverse();
 
                 errors =
-                    $"Resource file \"{File.Name}\" has duplicate keys:{Environment.NewLine}{string.Join(Environment.NewLine, duplicates)}";
+                    $"Resource file \"{FileXml.Name}\" has duplicate keys:{Environment.NewLine}{string.Join(Environment.NewLine, duplicates)}";
             }
             else
             {
@@ -75,12 +75,71 @@ namespace ResourceStringsTranslate
             return list.ToDictionary(key => key.Key, value => value.Value);
         }
 
+        public void SaveData(IDictionary<string, string> translations)
+        {
+            SaveDataXml(translations);
+            SaveDataCSharp(translations);
+        }
+
+        private static string FormatKeyCSharp(string key) =>
+            key.Replace("-", "_");
+
+        private void SaveDataCSharp(IDictionary<string, string> translations)
+        {
+            var lines = new List<string>();
+
+            var file = FileCSharp;
+
+            if (HasCSharpCode)
+            {
+                var (header, footer) = GetHeaderFooterCSharp();
+
+                lines.AddRange(header);
+                lines.AddRange(
+                    from translate in translations
+                    let keyCSharp = FormatKeyCSharp(translate.Key)
+                    select $@"        
+        /// <summary>
+        ///   Looks up a localized string similar to {translate.Value}.
+        /// </summary>
+        public static string {keyCSharp} {{
+            get {{
+                return ResourceManager.GetString(""{translate.Key}"", resourceCulture);
+            }}
+        }}");
+                lines.AddRange(footer);
+            }
+            
+            File.WriteAllLines(file.FullName, lines);
+        }
+
+        private void SaveDataXml(IDictionary<string, string> translations)
+        {
+            var lines = new List<string>();
+
+            var file = FileXml;
+            var (header, footer) = GetHeaderFooterXml();
+
+            lines.AddRange(header);
+            lines.AddRange(
+                from translate in translations
+                select $@"  <data name=""{translate.Key}"" xml:space=""preserve"">
+    <value>{translate.Value}</value>
+  </data>");
+            lines.AddRange(footer);
+
+            File.WriteAllLines(file.FullName, lines);
+        }
+
         public (string[], string[]) GetHeaderFooterXml()
         {
+            var file = FileXml;
+            if (!file.Exists) return (new string[0], new string[0]);
+            
             var header = new List<string>();
             var footer = new List<string>();
 
-            var lines = System.IO.File.ReadAllLines(File.FullName);
+            var lines = System.IO.File.ReadAllLines(file.FullName);
             var commentOpened = false;
             for (var i = 0; i < lines.Length; i++)
             {
@@ -104,12 +163,13 @@ namespace ResourceStringsTranslate
 
         public (string[], string[]) GetHeaderFooterCSharp()
         {
-            if (!HasCSharpCode) return (new string[0], new string[0]);
+            var file = FileCSharp;
+            if (!file.Exists) return (new string[0], new string[0]);
 
             var header = new List<string>();
             var footer = new List<string>();
 
-            var lines = System.IO.File.ReadAllLines(FileCSharp.FullName);
+            var lines = System.IO.File.ReadAllLines(file.FullName);
             for (var i = 0; i < lines.Length; i++)
             {
                 if (!Regex.IsMatch(lines[i], @"^\s*public\s*static\s*string\s*[a-zA-Z0-9_]+\s*{",

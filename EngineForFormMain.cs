@@ -91,9 +91,15 @@ namespace ResourceStringsTranslate
                         .ToList();
 
                     if (Data.ResourceFiles.Count > 0)
+                    {
+                        Data.SelectedResourceFilesDirectory = Data.ResourceFiles[0].FileXml.Directory;
                         Log($"Resources files loaded from path \"{path}\".");
+                    }
                     else
+                    {
+                        Data.SelectedResourceFilesDirectory = null;
                         Log($"No resources files found in path \"{path}\".", false);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -116,15 +122,17 @@ namespace ResourceStringsTranslate
                     }
 
                     var fileSelected = new DataForResourceFile(new FileInfo(path));
-                    if (!fileSelected.File.Exists || fileSelected.File.Directory == null)
+                    if (!fileSelected.FileXml.Exists || fileSelected.FileXml.Directory == null)
                     {
                         Log($"Error loading data of resource file. Path \"{path}\" not exists.", false);
                         return;
                     }
 
+                    var selectedResourceFilePrefix = Regex.Replace(fileSelected.Name,
+                        @"(\.[a-z]{2}(-[a-z]{2}|)|)\.resx", string.Empty, RegexOptions.IgnoreCase);
                     var selectedResourceFileGroupRegex =
-                        $@"^{Regex.Replace(fileSelected.Name, @"(\.[a-z]{2}(-[a-z]{2}|)|)\.resx", string.Empty, RegexOptions.IgnoreCase)}\.";
-                    var selectedResourceFileGroup = fileSelected.File.Directory
+                        $@"^{selectedResourceFilePrefix}\.";
+                    var selectedResourceFileGroup = fileSelected.FileXml.Directory
                         .GetFiles("*.resx")
                         .Where(file => file.Name != fileSelected.Name &&
                                        Regex.IsMatch(file.Name, selectedResourceFileGroupRegex,
@@ -133,6 +141,8 @@ namespace ResourceStringsTranslate
                         .Select(file => new DataForResourceFile(file))
                         .ToList();
                     selectedResourceFileGroup.Insert(0, fileSelected);
+
+                    Data.SelectedResourceFilePrefix = selectedResourceFilePrefix;
                     Data.SelectedResourceFileGroup = selectedResourceFileGroup;
 
                     Log(
@@ -217,7 +227,14 @@ namespace ResourceStringsTranslate
             {
                 try
                 {
-                    if (dataTable == null || Data.SelectedResourceFileGroup.Count == 0)
+                    var selectedResourceFileGroup = Data.SelectedResourceFileGroup;
+                    var directory = Data.SelectedResourceFilesDirectory;
+                    var selectedResourceFilePrefix = Data.SelectedResourceFilePrefix;
+
+                    if (dataTable == null || 
+                        selectedResourceFileGroup.Count == 0 ||
+                        directory == null ||
+                        string.IsNullOrWhiteSpace(selectedResourceFilePrefix))
                     {
                         Log("No data to save.", false);
                         return;
@@ -231,8 +248,47 @@ namespace ResourceStringsTranslate
 
                     Log("Saving data to resource files.");
 
-                    Data.Progress += dataTable.Columns.Count;
-                    for (var i = 1; i < dataTable.Columns.Count; i++) Data.Progress--;
+                    var defaultResourceFile =
+                        selectedResourceFileGroup.FirstOrDefault(a => a.IsDefaultLanguage) ??
+                        selectedResourceFileGroup.First();
+
+                        Data.Progress += dataTable.Columns.Count;
+                    for (var i = 1; i < dataTable.Columns.Count; i++)
+                    {
+                        var translations = new Dictionary<string, string>();
+                        foreach (DataRow row in dataTable.Rows)
+                        {
+                            var (key, text) = (row[0] as string, row[i] as string);
+                            if (string.IsNullOrWhiteSpace(key) || string.IsNullOrWhiteSpace(text)) continue;
+                            translations.Add(key, text);
+                        }
+
+                        var language = dataTable.Columns[i].ColumnName;
+                        var resourceFile =
+                            selectedResourceFileGroup.FirstOrDefault(a => a.Language == language) ??
+                            new DataForResourceFile(new FileInfo(Path.Combine(directory.FullName,
+                                selectedResourceFilePrefix +
+                                (language != DataForResourceFile.LanguageDefaultName
+                                    ? "." + language.Replace("_", "-")
+                                    : string.Empty) +
+                                ".resx")));
+
+                        if (!resourceFile.FileXml.Exists)
+                        {
+                            defaultResourceFile.FileXml.CopyTo(resourceFile.FileXml.FullName);
+                            resourceFile.FileXml.Refresh();
+                        }
+
+                        if (!defaultResourceFile.FileCSharp.Exists)
+                        {
+                            defaultResourceFile.FileCSharp.CopyTo(resourceFile.FileCSharp.FullName);
+                            resourceFile.FileCSharp.Refresh();
+                        }
+
+                        resourceFile.SaveData(translations);
+
+                        Data.Progress--;
+                    }
 
                     Log("All data was saved to resource files.");
                 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ResourceStringsTranslate
 {
@@ -13,7 +14,11 @@ namespace ResourceStringsTranslate
 
         public List<DataForResourceFile> ResourceFiles { get; set; } = new List<DataForResourceFile>();
 
+        public DirectoryInfo SelectedResourceFilesDirectory { get; set; }
+
         public List<DataForResourceFile> SelectedResourceFileGroup { get; set; } = new List<DataForResourceFile>();
+        
+        public string SelectedResourceFilePrefix { get; set; }
 
         public Type TranslationService { get; set; } = typeof(DataForTranslationGoogleTranslate);
 
