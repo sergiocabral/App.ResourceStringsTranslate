@@ -1,6 +1,6 @@
 ﻿namespace ResourceStringsTranslate
 {
-    public class DataForTranslationGoogleTranslate
+    public class EngineForTranslationGoogleTranslate: ITranslation
     {
         private const string UrlMarkText = "{text}";
         private const string UrlMarkLanguageFrom = "{languageFrom}";
@@ -17,14 +17,19 @@
 
         public int AfterBlock { get; set; }
 
-        public static DataForTranslationGoogleTranslate Default()
+        public static EngineForTranslationGoogleTranslate Default()
         {
-            return new DataForTranslationGoogleTranslate
+            return new EngineForTranslationGoogleTranslate
             {
                 Url = UrlValue,
                 BetweenRequests = 5,
                 AfterBlock = 3600
             };
+        }
+
+        public string Translate(string languageFrom, string languageTo, string text)
+        {
+            return text;
         }
     }
 }

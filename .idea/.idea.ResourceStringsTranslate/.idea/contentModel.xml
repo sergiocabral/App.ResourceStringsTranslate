@@ -6,14 +6,15 @@
       <e p="DataForFormMain.cs" t="Include" />
       <e p="DataForQueue.cs" t="Include" />
       <e p="DataForResourceFile.cs" t="Include" />
-      <e p="DataForTranslationGoogleApi.cs" t="Include" />
-      <e p="DataForTranslationGoogleTranslate.cs" t="Include" />
-      <e p="DataForTranslationMicrosoftApi.cs" t="Include" />
       <e p="EngineForFormMain.cs" t="Include" />
+      <e p="EngineForTranslationGoogleApi.cs" t="Include" />
+      <e p="EngineForTranslationGoogleTranslate.cs" t="Include" />
+      <e p="EngineForTranslationMicrosoftApi.cs" t="Include" />
       <e p="ExtensionForControl.cs" t="Include" />
       <e p="FormMain.cs" t="Include" />
       <e p="FormMain.Designer.cs" t="Include" />
       <e p="FormMain.resx" t="Include" />
+      <e p="IEngineForTranslation.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive">
         <e p="SQLitePCLRaw.lib.e_sqlite3.2.0.2\runtimes" t="Include">

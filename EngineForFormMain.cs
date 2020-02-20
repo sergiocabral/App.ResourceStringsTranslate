@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -306,10 +307,96 @@ namespace ResourceStringsTranslate
             });
         }
 
-        public void QueueTranslate(IDictionary<string, string> data, string languageDefault)
+        private static string GetLanguage(string language, string languageDefault)
+        {
+            language = language != DataForResourceFile.LanguageDefaultName
+                ? language
+                : languageDefault ?? DataForFormMain.DefaultLanguageValue;
+            return !string.IsNullOrWhiteSpace(language) ? language : "auto";
+        }
+
+        public void QueueTranslate(IDictionary<string, string> texts, string languageDefault)
         {
             Data.TranslatingRunning = true;
-            Queue(data => { Data.TranslatingRunning = false; });
+            Queue(data =>
+            {
+                try
+                {
+                    data.ProgressCount += texts.Count;
+                    
+                    var textToTranslate = string.Empty;
+                    var languageFrom = string.Empty;
+                    foreach (var text in texts
+                        .Where(text => text.Key != TableForTranslations.ColumnKeyName)
+                        .ToDictionary(key => key.Key, value => value.Value))
+                    {
+                        if (textToTranslate == string.Empty && languageFrom == string.Empty)
+                        {
+                            textToTranslate = text.Value;
+                            languageFrom = text.Key;
+
+                            if (string.IsNullOrWhiteSpace(languageFrom) && string.IsNullOrWhiteSpace(textToTranslate))
+                            {
+                                Log("Source text and language \"from\" is empty.", false);
+                                return;
+                            }
+                            else if (string.IsNullOrWhiteSpace(languageFrom))
+                            {
+                                Log($"Language \"from\" is empty. Cannot translate text:{Environment.NewLine}{textToTranslate}", false);
+                                return;
+                            }
+                            else if (string.IsNullOrWhiteSpace(textToTranslate))
+                            {
+                                Log($"Source text is empty. Cannot translate from language: {languageFrom}", false);
+                                return;
+                            }
+                        }
+                        else if (string.IsNullOrWhiteSpace(text.Value))
+                        {
+                            var languageTo = text.Key;
+                            if (string.IsNullOrWhiteSpace(languageTo))
+                            {
+                                Log($"Language \"to\" is empty. Cannot translate text:{Environment.NewLine}{textToTranslate}", false);
+                                return;
+                            }
+                            else
+                            {
+                                languageFrom = GetLanguage(languageFrom, languageDefault);
+                                languageTo = GetLanguage(languageTo, languageDefault);
+                                
+                                Log($"  Language \"from\" = {languageFrom}{Environment.NewLine}  Language   \"to\" = {languageTo}{Environment.NewLine}Text to translate = {textToTranslate}");
+
+                                try
+                                {
+                                    var textTranslated = Data.TranslationService.Translate(
+                                        languageFrom,
+                                        languageTo,
+                                        textToTranslate);
+
+                                    texts[text.Key] = textTranslated;
+
+                                    Log($"  Text translated = {textTranslated}");
+                                }
+                                catch (Exception ex)
+                                {
+                                    Log($"  Text translated = ERROR", false, ex);
+                                }
+                            }
+                        }
+
+                        data.ProgressCount--;
+                    }
+
+                    if (textToTranslate == string.Empty && languageFrom == string.Empty)
+                    {
+                        Log("Text source not found.", false);
+                    }
+                }
+                finally
+                {
+                    Data.TranslatingRunning = false;
+                }
+            });
         }
     }
 }

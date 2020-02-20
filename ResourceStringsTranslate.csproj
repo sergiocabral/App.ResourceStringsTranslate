@@ -86,9 +86,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataForQueue.cs" />
-    <Compile Include="DataForTranslationMicrosoftApi.cs" />
-    <Compile Include="DataForTranslationGoogleApi.cs" />
-    <Compile Include="DataForTranslationGoogleTranslate.cs" />
+    <Compile Include="EngineForTranslationMicrosoftApi.cs" />
+    <Compile Include="EngineForTranslationGoogleApi.cs" />
+    <Compile Include="EngineForTranslationGoogleTranslate.cs" />
     <Compile Include="ExtensionForControl.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -99,6 +99,7 @@
     <Compile Include="DataForFormMain.cs" />
     <Compile Include="DataForResourceFile.cs" />
     <Compile Include="EngineForFormMain.cs" />
+    <Compile Include="IEngineForTranslation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TableForTranslations.cs" />

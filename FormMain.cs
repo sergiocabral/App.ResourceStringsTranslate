@@ -27,18 +27,18 @@ namespace ResourceStringsTranslate
             textBoxDefaultLanguage.Text = _engine.Data.DefaultLanguage;
 
             radioButtonModeGoogleTranslate.Checked =
-                _engine.Data.TranslationService == typeof(DataForTranslationGoogleTranslate);
+                _engine.Data.TranslationService == _engine.Data.TranslationGoogleTranslate;
             textBoxModeGoogleTranslateUrl.Text = _engine.Data.TranslationGoogleTranslate.Url;
             numericUpDownModeGoogleTranslateBetweenRequests.Value =
                 _engine.Data.TranslationGoogleTranslate.BetweenRequests;
             numericUpDownModeGoogleTranslateAfterBlock.Value = _engine.Data.TranslationGoogleTranslate.AfterBlock;
 
-            radioButtonModeGoogleApi.Checked = _engine.Data.TranslationService == typeof(DataForTranslationGoogleApi);
+            radioButtonModeGoogleApi.Checked = _engine.Data.TranslationService == _engine.Data.TranslationGoogleApi;
             textBoxModeGoogleApiUrl.Text = _engine.Data.TranslationGoogleApi.Url;
             textBoxModeGoogleApiKey.Text = _engine.Data.TranslationGoogleApi.Key;
 
             radioButtonModeMicrosoftApi.Checked =
-                _engine.Data.TranslationService == typeof(DataForTranslationMicrosoftApi);
+                _engine.Data.TranslationService == _engine.Data.TranslationMicrosoftApi;
             textBoxModeMicrosoftApiUrl.Text = _engine.Data.TranslationMicrosoftApi.Url;
             textBoxModeMicrosoftApiKey.Text = _engine.Data.TranslationMicrosoftApi.Key;
         }
@@ -150,9 +150,9 @@ namespace ResourceStringsTranslate
             if (control.Tag != null) return;
 
             var translationService =
-                radioButtonModeGoogleTranslate.Checked ? typeof(DataForTranslationGoogleTranslate) :
-                radioButtonModeGoogleApi.Checked ? typeof(DataForTranslationGoogleApi) :
-                radioButtonModeMicrosoftApi.Checked ? typeof(DataForTranslationMicrosoftApi) :
+                radioButtonModeGoogleTranslate.Checked ? _engine.Data.TranslationGoogleTranslate :
+                radioButtonModeGoogleApi.Checked ? _engine.Data.TranslationGoogleApi :
+                radioButtonModeMicrosoftApi.Checked ? (ITranslation)_engine.Data.TranslationMicrosoftApi :
                 throw new NotImplementedException();
 
             var translationGoogleTranslateUrl = textBoxModeGoogleTranslateUrl.Text;
@@ -174,7 +174,7 @@ namespace ResourceStringsTranslate
                 _engine.Data.TranslationGoogleTranslate.Url =
                     !string.IsNullOrWhiteSpace(translationGoogleTranslateUrl)
                         ? translationGoogleTranslateUrl
-                        : textBoxModeGoogleTranslateUrl.Text = DataForTranslationGoogleTranslate.UrlValue;
+                        : textBoxModeGoogleTranslateUrl.Text = EngineForTranslationGoogleTranslate.UrlValue;
 
                 _engine.Data.TranslationGoogleTranslate.BetweenRequests = translationGoogleTranslateBetweenRequests;
 
@@ -183,14 +183,14 @@ namespace ResourceStringsTranslate
                 _engine.Data.TranslationGoogleApi.Url =
                     !string.IsNullOrWhiteSpace(translationGoogleApiUrl)
                         ? translationGoogleApiUrl
-                        : textBoxModeGoogleApiUrl.Text = DataForTranslationGoogleApi.UrlValue;
+                        : textBoxModeGoogleApiUrl.Text = EngineForTranslationGoogleApi.UrlValue;
 
                 _engine.Data.TranslationGoogleApi.Key = translationGoogleApiKey;
 
                 _engine.Data.TranslationMicrosoftApi.Url =
                     !string.IsNullOrWhiteSpace(translationMicrosoftApiUrl)
                         ? translationMicrosoftApiUrl
-                        : textBoxModeMicrosoftApiUrl.Text = DataForTranslationMicrosoftApi.UrlValue;
+                        : textBoxModeMicrosoftApiUrl.Text = EngineForTranslationMicrosoftApi.UrlValue;
 
                 _engine.Data.TranslationMicrosoftApi.Key = translationMicrosoftApiKey;
 

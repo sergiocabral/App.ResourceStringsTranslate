@@ -7,7 +7,7 @@ namespace ResourceStringsTranslate
     public class TableForTranslations
     {
         private const string TableName = "Translation";
-        private const string ColumnKeyName = "KEY";
+        public const string ColumnKeyName = "KEY";
 
         private readonly SqliteConnection _sqLite;
 

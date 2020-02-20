@@ -8,6 +8,11 @@ namespace ResourceStringsTranslate
     {
         public const string DefaultLanguageValue = "en";
 
+        public DataForFormMain()
+        {
+            TranslationService = TranslationGoogleTranslate;
+        }
+
         private bool _checkNewFiles;
         public List<string> Status { get; } = new List<string>();
 
@@ -22,15 +27,15 @@ namespace ResourceStringsTranslate
 
         public string SelectedResourceFilePrefix { get; set; }
 
-        public Type TranslationService { get; set; } = typeof(DataForTranslationGoogleTranslate);
+        public ITranslation TranslationService { get; set; }
 
-        public DataForTranslationGoogleTranslate TranslationGoogleTranslate { get; set; } =
-            DataForTranslationGoogleTranslate.Default();
+        public EngineForTranslationGoogleTranslate TranslationGoogleTranslate { get; set; } =
+            EngineForTranslationGoogleTranslate.Default();
 
-        public DataForTranslationGoogleApi TranslationGoogleApi { get; set; } = DataForTranslationGoogleApi.Default();
+        public EngineForTranslationGoogleApi TranslationGoogleApi { get; set; } = EngineForTranslationGoogleApi.Default();
 
-        public DataForTranslationMicrosoftApi TranslationMicrosoftApi { get; set; } =
-            DataForTranslationMicrosoftApi.Default();
+        public EngineForTranslationMicrosoftApi TranslationMicrosoftApi { get; set; } =
+            EngineForTranslationMicrosoftApi.Default();
 
         public TableForTranslations Table { get; set; } = new TableForTranslations();
 
