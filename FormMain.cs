@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -235,10 +237,44 @@ namespace ResourceStringsTranslate
 
         private void textBoxManageLanguage_TextChanged(object sender, EventArgs e)
         {
-            if (!Regex.IsMatch(textBoxManageLanguage.Text, @"[^a-z]", RegexOptions.IgnoreCase)) return;
+            if (textBoxManageLanguage.Text == textBoxManageLanguage.Text.ToLower() &&
+                !Regex.IsMatch(textBoxManageLanguage.Text, @"[^a-z]", RegexOptions.IgnoreCase)) return;
+
+            var selectionStart = textBoxManageLanguage.SelectionStart;
+            
             textBoxManageLanguage.Text = Regex.Replace(textBoxManageLanguage.Text, @"[^a-z]", string.Empty,
-                RegexOptions.IgnoreCase);
-            textBoxManageLanguage.SelectionStart = textBoxManageLanguage.Text.Length;
+                RegexOptions.IgnoreCase).ToLower();
+
+            textBoxManageLanguage.SelectionStart = selectionStart;
+            textBoxManageLanguage.SelectionLength = 0;
+        }
+
+        private void buttonTranslateNext_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewData.RowCount == 0) return;
+
+            var row = dataGridViewData.Rows
+                .Cast<DataGridViewRow>()
+                .FirstOrDefault(a => 
+                    a.Cells
+                        .Cast<DataGridViewCell>()
+                        .Any(b => string.IsNullOrWhiteSpace($"{b.Value}")));
+
+            var firstColumn = dataGridViewData.Columns.GetFirstColumn(DataGridViewElementStates.Displayed);
+            if (firstColumn.Index == 0)
+                firstColumn = dataGridViewData.Columns.GetNextColumn(firstColumn, DataGridViewElementStates.Displayed,
+                    DataGridViewElementStates.None);
+            
+            var data = new Dictionary<string, string>();
+            data.Add(dataGridViewData.Columns[0].Name, $"{row.Cells[0].Value}");
+            data.Add(dataGridViewData.Columns[firstColumn.Index].Name, $"{row.Cells[firstColumn.Index].Value}");
+            for (var i = 1; i < row.Cells.Count; i++)
+            {
+                if (i == firstColumn.Index) continue;
+                data.Add(dataGridViewData.Columns[i].Name, $"{row.Cells[i].Value}");
+            }
+
+            _engine.QueueTranslate(data, textBoxDefaultLanguage.Text);
         }
     }
 }

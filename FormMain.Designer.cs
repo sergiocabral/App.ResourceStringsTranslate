@@ -412,6 +412,7 @@
             this.buttonTranslateNext.TabIndex = 2;
             this.buttonTranslateNext.Text = "Translate Next";
             this.buttonTranslateNext.UseVisualStyleBackColor = true;
+            this.buttonTranslateNext.Click += new System.EventHandler(this.buttonTranslateNext_Click);
             // 
             // buttonTranslateAll
             // 

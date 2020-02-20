@@ -305,5 +305,9 @@ namespace ResourceStringsTranslate
                 }
             });
         }
+
+        public void QueueTranslate(IDictionary<string, string> data, string languageDefault)
+        {
+        }
     }
 }
