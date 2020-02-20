@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace ResourceStringsTranslate
@@ -68,6 +69,8 @@ namespace ResourceStringsTranslate
             if (dataGridViewData.DataSource != _engine.Data.Table.Translations)
             {
                 dataGridViewData.DataSource = null;
+                dataGridViewData.Columns.Clear();
+                dataGridViewData.Rows.Clear();
                 dataGridViewData.DataSource = _engine.Data.Table.Translations;
 
                 textBoxManageLanguage.Enabled =
@@ -77,6 +80,8 @@ namespace ResourceStringsTranslate
 
                 if (!textBoxManageLanguage.Enabled) textBoxManageLanguage.Clear();
             }
+
+            if (_engine.Data.CheckNewFiles) textBoxSelectFolder.Text += " ";
         }
 
         private void buttonSelectFolder_Click(object sender, EventArgs e)
@@ -113,7 +118,7 @@ namespace ResourceStringsTranslate
                     ? SystemColors.Window
                     : Color.LightSalmon;
 
-            var directory = textBoxSelectFolder.Text;
+            var directory = textBoxSelectFolder.Text.Trim();
             textBoxSelectFolder.Debounce(() =>
             {
                 progressBarStatus.Value = 0;
@@ -209,9 +214,12 @@ namespace ResourceStringsTranslate
         {
             if (dataGridViewData.RowCount == 0) return;
 
-            var add = sender == buttonManageLanguageAdd;
             var columnName = textBoxManageLanguage.Text.Trim();
+            if (string.IsNullOrWhiteSpace(columnName)) return;
+
+            var add = sender == buttonManageLanguageAdd;
             var column = dataGridViewData.Columns[columnName];
+
 
             if (column != null && column.Index == 0) return;
 
@@ -223,6 +231,14 @@ namespace ResourceStringsTranslate
                 return;
 
             textBoxManageLanguage.Clear();
+        }
+
+        private void textBoxManageLanguage_TextChanged(object sender, EventArgs e)
+        {
+            if (!Regex.IsMatch(textBoxManageLanguage.Text, @"[^a-z]", RegexOptions.IgnoreCase)) return;
+            textBoxManageLanguage.Text = Regex.Replace(textBoxManageLanguage.Text, @"[^a-z]", string.Empty,
+                RegexOptions.IgnoreCase);
+            textBoxManageLanguage.SelectionStart = textBoxManageLanguage.Text.Length;
         }
     }
 }

@@ -14,13 +14,14 @@ namespace ResourceStringsTranslate
         public DataForResourceFile(FileInfo fileXml)
         {
             FileXml = fileXml;
-            Language = Regex.Match(fileXml.Name, @"(?<=\.)[a-z]{2}(\-[a-z]*|)(?=\.resx)", RegexOptions.IgnoreCase).Value;
+            Language = Regex.Match(fileXml.Name, @"(?<=\.)[a-z]{2}(\-[a-z]*|)(?=\.resx)", RegexOptions.IgnoreCase)
+                .Value;
             IsDefaultLanguage = string.IsNullOrWhiteSpace(Language);
             Language = !IsDefaultLanguage ? Language : LanguageDefaultName;
             FileCSharp =
                 new FileInfo(Regex.Replace(FileXml.FullName, @"\.resx$", ".Designer.cs", RegexOptions.IgnoreCase));
             HasCSharpCode = FileCSharp.Exists && FileCSharp.Length > 0 &&
-                            !string.IsNullOrWhiteSpace(System.IO.File.ReadAllText(FileCSharp.FullName).Trim());
+                            !string.IsNullOrWhiteSpace(File.ReadAllText(FileCSharp.FullName).Trim());
         }
 
         public FileInfo FileXml { get; }
@@ -34,7 +35,7 @@ namespace ResourceStringsTranslate
         private XmlDocument LoadXml()
         {
             var xml = new XmlDocument();
-            xml.LoadXml(System.IO.File.ReadAllText(FileXml.FullName));
+            xml.LoadXml(File.ReadAllText(FileXml.FullName));
             return xml;
         }
 
@@ -81,8 +82,10 @@ namespace ResourceStringsTranslate
             SaveDataCSharp(translations);
         }
 
-        private static string FormatKeyCSharp(string key) =>
-            key.Replace("-", "_");
+        private static string FormatKeyCSharp(string key)
+        {
+            return key.Replace("-", "_");
+        }
 
         private void SaveDataCSharp(IDictionary<string, string> translations)
         {
@@ -108,9 +111,15 @@ namespace ResourceStringsTranslate
             }}
         }}");
                 lines.AddRange(footer);
+
+                File.WriteAllLines(file.FullName, lines);
             }
-            
-            File.WriteAllLines(file.FullName, lines);
+            else
+            {
+                File.WriteAllText(file.FullName, string.Empty);
+            }
+
+            file.Refresh();
         }
 
         private void SaveDataXml(IDictionary<string, string> translations)
@@ -129,17 +138,19 @@ namespace ResourceStringsTranslate
             lines.AddRange(footer);
 
             File.WriteAllLines(file.FullName, lines);
+
+            file.Refresh();
         }
 
         public (string[], string[]) GetHeaderFooterXml()
         {
             var file = FileXml;
             if (!file.Exists) return (new string[0], new string[0]);
-            
+
             var header = new List<string>();
             var footer = new List<string>();
 
-            var lines = System.IO.File.ReadAllLines(file.FullName);
+            var lines = File.ReadAllLines(file.FullName);
             var commentOpened = false;
             for (var i = 0; i < lines.Length; i++)
             {
@@ -169,7 +180,7 @@ namespace ResourceStringsTranslate
             var header = new List<string>();
             var footer = new List<string>();
 
-            var lines = System.IO.File.ReadAllLines(file.FullName);
+            var lines = File.ReadAllLines(file.FullName);
             for (var i = 0; i < lines.Length; i++)
             {
                 if (!Regex.IsMatch(lines[i], @"^\s*public\s*static\s*string\s*[a-zA-Z0-9_]+\s*{",

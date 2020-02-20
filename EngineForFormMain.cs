@@ -231,7 +231,7 @@ namespace ResourceStringsTranslate
                     var directory = Data.SelectedResourceFilesDirectory;
                     var selectedResourceFilePrefix = Data.SelectedResourceFilePrefix;
 
-                    if (dataTable == null || 
+                    if (dataTable == null ||
                         selectedResourceFileGroup.Count == 0 ||
                         directory == null ||
                         string.IsNullOrWhiteSpace(selectedResourceFilePrefix))
@@ -252,7 +252,8 @@ namespace ResourceStringsTranslate
                         selectedResourceFileGroup.FirstOrDefault(a => a.IsDefaultLanguage) ??
                         selectedResourceFileGroup.First();
 
-                        Data.Progress += dataTable.Columns.Count;
+                    var log = new List<string>();
+                    Data.Progress += dataTable.Columns.Count;
                     for (var i = 1; i < dataTable.Columns.Count; i++)
                     {
                         var translations = new Dictionary<string, string>();
@@ -277,9 +278,10 @@ namespace ResourceStringsTranslate
                         {
                             defaultResourceFile.FileXml.CopyTo(resourceFile.FileXml.FullName);
                             resourceFile.FileXml.Refresh();
+                            Data.CheckNewFiles = true;
                         }
 
-                        if (!defaultResourceFile.FileCSharp.Exists)
+                        if (!resourceFile.FileCSharp.Exists && resourceFile.IsDefaultLanguage)
                         {
                             defaultResourceFile.FileCSharp.CopyTo(resourceFile.FileCSharp.FullName);
                             resourceFile.FileCSharp.Refresh();
@@ -287,10 +289,15 @@ namespace ResourceStringsTranslate
 
                         resourceFile.SaveData(translations);
 
+                        log.Add(
+                            $"{resourceFile.FileXml.Name}: {resourceFile.FileXml.Length} bytes. {translations.Count} key(s).");
+                        log.Add($"{resourceFile.FileCSharp.Name}: {resourceFile.FileCSharp.Length} bytes.");
+
                         Data.Progress--;
                     }
 
-                    Log("All data was saved to resource files.");
+                    Log("All data was saved to resource files:" + Environment.NewLine +
+                        string.Join(Environment.NewLine, log));
                 }
                 catch (Exception ex)
                 {

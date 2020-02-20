@@ -315,7 +315,7 @@
                 ((System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top |
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.buttonManageLanguageAdd.Font = new System.Drawing.Font("Wingdings", 9.75F);
-            this.buttonManageLanguageAdd.Location = new System.Drawing.Point(306, 21);
+            this.buttonManageLanguageAdd.Location = new System.Drawing.Point(305, 21);
             this.buttonManageLanguageAdd.Name = "buttonManageLanguageAdd";
             this.buttonManageLanguageAdd.Size = new System.Drawing.Size(33, 23);
             this.buttonManageLanguageAdd.TabIndex = 4;
@@ -329,6 +329,7 @@
             this.textBoxManageLanguage.Name = "textBoxManageLanguage";
             this.textBoxManageLanguage.Size = new System.Drawing.Size(153, 23);
             this.textBoxManageLanguage.TabIndex = 3;
+            this.textBoxManageLanguage.TextChanged += new System.EventHandler(this.textBoxManageLanguage_TextChanged);
             // 
             // labelManageLanguage
             // 
@@ -369,7 +370,7 @@
             this.flowLayoutPanelActions.Controls.Add(this.buttonTranslateNext);
             this.flowLayoutPanelActions.Controls.Add(this.buttonTranslateAll);
             this.flowLayoutPanelActions.Controls.Add(this.buttonStop);
-            this.flowLayoutPanelActions.Location = new System.Drawing.Point(2, 422);
+            this.flowLayoutPanelActions.Location = new System.Drawing.Point(2, 421);
             this.flowLayoutPanelActions.Name = "flowLayoutPanelActions";
             this.flowLayoutPanelActions.Size = new System.Drawing.Size(633, 36);
             this.flowLayoutPanelActions.TabIndex = 7;
@@ -479,7 +480,7 @@
             this.panelModeMicrosoftApi.Controls.Add(this.label1ModeMicrosoftApiKey);
             this.panelModeMicrosoftApi.Location = new System.Drawing.Point(7, 276);
             this.panelModeMicrosoftApi.Name = "panelModeMicrosoftApi";
-            this.panelModeMicrosoftApi.Size = new System.Drawing.Size(640, 60);
+            this.panelModeMicrosoftApi.Size = new System.Drawing.Size(642, 60);
             this.panelModeMicrosoftApi.TabIndex = 5;
             // 
             // textBoxModeMicrosoftApiUrl
@@ -490,7 +491,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeMicrosoftApiUrl.Location = new System.Drawing.Point(210, 3);
             this.textBoxModeMicrosoftApiUrl.Name = "textBoxModeMicrosoftApiUrl";
-            this.textBoxModeMicrosoftApiUrl.Size = new System.Drawing.Size(426, 23);
+            this.textBoxModeMicrosoftApiUrl.Size = new System.Drawing.Size(427, 23);
             this.textBoxModeMicrosoftApiUrl.TabIndex = 1;
             this.textBoxModeMicrosoftApiUrl.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
@@ -511,7 +512,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeMicrosoftApiKey.Location = new System.Drawing.Point(210, 33);
             this.textBoxModeMicrosoftApiKey.Name = "textBoxModeMicrosoftApiKey";
-            this.textBoxModeMicrosoftApiKey.Size = new System.Drawing.Size(426, 23);
+            this.textBoxModeMicrosoftApiKey.Size = new System.Drawing.Size(427, 23);
             this.textBoxModeMicrosoftApiKey.TabIndex = 3;
             this.textBoxModeMicrosoftApiKey.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
@@ -548,7 +549,7 @@
             this.panelModeGoogleApi.Controls.Add(this.labelModeGoogleApiKey);
             this.panelModeGoogleApi.Location = new System.Drawing.Point(7, 170);
             this.panelModeGoogleApi.Name = "panelModeGoogleApi";
-            this.panelModeGoogleApi.Size = new System.Drawing.Size(640, 60);
+            this.panelModeGoogleApi.Size = new System.Drawing.Size(642, 60);
             this.panelModeGoogleApi.TabIndex = 3;
             // 
             // textBoxModeGoogleApiUrl
@@ -559,7 +560,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeGoogleApiUrl.Location = new System.Drawing.Point(210, 3);
             this.textBoxModeGoogleApiUrl.Name = "textBoxModeGoogleApiUrl";
-            this.textBoxModeGoogleApiUrl.Size = new System.Drawing.Size(426, 23);
+            this.textBoxModeGoogleApiUrl.Size = new System.Drawing.Size(427, 23);
             this.textBoxModeGoogleApiUrl.TabIndex = 1;
             this.textBoxModeGoogleApiUrl.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
@@ -580,7 +581,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeGoogleApiKey.Location = new System.Drawing.Point(210, 33);
             this.textBoxModeGoogleApiKey.Name = "textBoxModeGoogleApiKey";
-            this.textBoxModeGoogleApiKey.Size = new System.Drawing.Size(426, 23);
+            this.textBoxModeGoogleApiKey.Size = new System.Drawing.Size(427, 23);
             this.textBoxModeGoogleApiKey.TabIndex = 3;
             this.textBoxModeGoogleApiKey.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
@@ -621,7 +622,7 @@
             this.panelModeGoogleTranslate.Controls.Add(this.labelModeGoogleTranslateBetweenRequests);
             this.panelModeGoogleTranslate.Location = new System.Drawing.Point(7, 33);
             this.panelModeGoogleTranslate.Name = "panelModeGoogleTranslate";
-            this.panelModeGoogleTranslate.Size = new System.Drawing.Size(640, 90);
+            this.panelModeGoogleTranslate.Size = new System.Drawing.Size(642, 90);
             this.panelModeGoogleTranslate.TabIndex = 1;
             // 
             // label7
@@ -652,7 +653,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeGoogleTranslateUrl.Location = new System.Drawing.Point(210, 63);
             this.textBoxModeGoogleTranslateUrl.Name = "textBoxModeGoogleTranslateUrl";
-            this.textBoxModeGoogleTranslateUrl.Size = new System.Drawing.Size(426, 23);
+            this.textBoxModeGoogleTranslateUrl.Size = new System.Drawing.Size(427, 23);
             this.textBoxModeGoogleTranslateUrl.TabIndex = 9;
             this.textBoxModeGoogleTranslateUrl.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 

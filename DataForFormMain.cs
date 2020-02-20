@@ -7,6 +7,8 @@ namespace ResourceStringsTranslate
     public class DataForFormMain
     {
         public const string DefaultLanguageValue = "en";
+
+        private bool _checkNewFiles;
         public List<string> Status { get; } = new List<string>();
 
         public int Progress { get; set; }
@@ -17,7 +19,7 @@ namespace ResourceStringsTranslate
         public DirectoryInfo SelectedResourceFilesDirectory { get; set; }
 
         public List<DataForResourceFile> SelectedResourceFileGroup { get; set; } = new List<DataForResourceFile>();
-        
+
         public string SelectedResourceFilePrefix { get; set; }
 
         public Type TranslationService { get; set; } = typeof(DataForTranslationGoogleTranslate);
@@ -31,5 +33,16 @@ namespace ResourceStringsTranslate
             DataForTranslationMicrosoftApi.Default();
 
         public TableForTranslations Table { get; set; } = new TableForTranslations();
+
+        public bool CheckNewFiles
+        {
+            get
+            {
+                if (!_checkNewFiles) return false;
+                _checkNewFiles = false;
+                return true;
+            }
+            set => _checkNewFiles = value;
+        }
     }
 }
