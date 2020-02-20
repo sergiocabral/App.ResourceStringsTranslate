@@ -72,12 +72,9 @@
             this.labelModeGoogleApiKey = new System.Windows.Forms.Label();
             this.radioButtonModeGoogleApi = new System.Windows.Forms.RadioButton();
             this.panelModeGoogleTranslate = new System.Windows.Forms.Panel();
-            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxModeGoogleTranslateUrl = new System.Windows.Forms.TextBox();
             this.labelModeGoogleTranslateUrl = new System.Windows.Forms.Label();
-            this.numericUpDownModeGoogleTranslateAfterBlock = new System.Windows.Forms.NumericUpDown();
-            this.labelModeGoogleTranslateAfterBlock = new System.Windows.Forms.Label();
             this.numericUpDownModeGoogleTranslateBetweenRequests = new System.Windows.Forms.NumericUpDown();
             this.labelModeGoogleTranslateBetweenRequests = new System.Windows.Forms.Label();
             this.radioButtonModeGoogleTranslate = new System.Windows.Forms.RadioButton();
@@ -95,7 +92,6 @@
             this.panelModeMicrosoftApi.SuspendLayout();
             this.panelModeGoogleApi.SuspendLayout();
             this.panelModeGoogleTranslate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.numericUpDownModeGoogleTranslateAfterBlock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.numericUpDownModeGoogleTranslateBetweenRequests))
                 .BeginInit();
             this.panelOperations.SuspendLayout();
@@ -126,7 +122,7 @@
             this.textBoxStatus.Multiline = true;
             this.textBoxStatus.Name = "textBoxStatus";
             this.textBoxStatus.ReadOnly = true;
-            this.textBoxStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxStatus.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBoxStatus.Size = new System.Drawing.Size(886, 108);
             this.textBoxStatus.TabIndex = 0;
             this.textBoxStatus.Text = "(press Delete to clear)\r\n";
@@ -458,10 +454,10 @@
             this.tabPageConfiguration.Controls.Add(this.radioButtonModeGoogleApi);
             this.tabPageConfiguration.Controls.Add(this.panelModeGoogleTranslate);
             this.tabPageConfiguration.Controls.Add(this.radioButtonModeGoogleTranslate);
-            this.tabPageConfiguration.Location = new System.Drawing.Point(4, 22);
+            this.tabPageConfiguration.Location = new System.Drawing.Point(4, 24);
             this.tabPageConfiguration.Name = "tabPageConfiguration";
             this.tabPageConfiguration.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageConfiguration.Size = new System.Drawing.Size(644, 469);
+            this.tabPageConfiguration.Size = new System.Drawing.Size(646, 468);
             this.tabPageConfiguration.TabIndex = 1;
             this.tabPageConfiguration.Text = "Configuration";
             this.tabPageConfiguration.UseVisualStyleBackColor = true;
@@ -476,9 +472,9 @@
             this.panelModeMicrosoftApi.Controls.Add(this.labelModeMicrosoftApiUrl);
             this.panelModeMicrosoftApi.Controls.Add(this.textBoxModeMicrosoftApiKey);
             this.panelModeMicrosoftApi.Controls.Add(this.label1ModeMicrosoftApiKey);
-            this.panelModeMicrosoftApi.Location = new System.Drawing.Point(7, 276);
+            this.panelModeMicrosoftApi.Location = new System.Drawing.Point(6, 214);
             this.panelModeMicrosoftApi.Name = "panelModeMicrosoftApi";
-            this.panelModeMicrosoftApi.Size = new System.Drawing.Size(647, 60);
+            this.panelModeMicrosoftApi.Size = new System.Drawing.Size(649, 60);
             this.panelModeMicrosoftApi.TabIndex = 5;
             // 
             // textBoxModeMicrosoftApiUrl
@@ -489,7 +485,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeMicrosoftApiUrl.Location = new System.Drawing.Point(210, 3);
             this.textBoxModeMicrosoftApiUrl.Name = "textBoxModeMicrosoftApiUrl";
-            this.textBoxModeMicrosoftApiUrl.Size = new System.Drawing.Size(433, 23);
+            this.textBoxModeMicrosoftApiUrl.Size = new System.Drawing.Size(435, 23);
             this.textBoxModeMicrosoftApiUrl.TabIndex = 1;
             this.textBoxModeMicrosoftApiUrl.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
@@ -510,7 +506,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeMicrosoftApiKey.Location = new System.Drawing.Point(210, 33);
             this.textBoxModeMicrosoftApiKey.Name = "textBoxModeMicrosoftApiKey";
-            this.textBoxModeMicrosoftApiKey.Size = new System.Drawing.Size(433, 23);
+            this.textBoxModeMicrosoftApiKey.Size = new System.Drawing.Size(435, 23);
             this.textBoxModeMicrosoftApiKey.TabIndex = 3;
             this.textBoxModeMicrosoftApiKey.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
@@ -526,7 +522,7 @@
             // radioButtonModeMicrosoftApi
             // 
             this.radioButtonModeMicrosoftApi.AutoSize = true;
-            this.radioButtonModeMicrosoftApi.Location = new System.Drawing.Point(7, 249);
+            this.radioButtonModeMicrosoftApi.Location = new System.Drawing.Point(6, 189);
             this.radioButtonModeMicrosoftApi.Name = "radioButtonModeMicrosoftApi";
             this.radioButtonModeMicrosoftApi.Size = new System.Drawing.Size(169, 19);
             this.radioButtonModeMicrosoftApi.TabIndex = 4;
@@ -545,9 +541,9 @@
             this.panelModeGoogleApi.Controls.Add(this.labelModeGoogleApiUrl);
             this.panelModeGoogleApi.Controls.Add(this.textBoxModeGoogleApiKey);
             this.panelModeGoogleApi.Controls.Add(this.labelModeGoogleApiKey);
-            this.panelModeGoogleApi.Location = new System.Drawing.Point(7, 170);
+            this.panelModeGoogleApi.Location = new System.Drawing.Point(7, 123);
             this.panelModeGoogleApi.Name = "panelModeGoogleApi";
-            this.panelModeGoogleApi.Size = new System.Drawing.Size(647, 60);
+            this.panelModeGoogleApi.Size = new System.Drawing.Size(649, 60);
             this.panelModeGoogleApi.TabIndex = 3;
             // 
             // textBoxModeGoogleApiUrl
@@ -558,7 +554,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeGoogleApiUrl.Location = new System.Drawing.Point(210, 3);
             this.textBoxModeGoogleApiUrl.Name = "textBoxModeGoogleApiUrl";
-            this.textBoxModeGoogleApiUrl.Size = new System.Drawing.Size(433, 23);
+            this.textBoxModeGoogleApiUrl.Size = new System.Drawing.Size(435, 23);
             this.textBoxModeGoogleApiUrl.TabIndex = 1;
             this.textBoxModeGoogleApiUrl.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
@@ -579,7 +575,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeGoogleApiKey.Location = new System.Drawing.Point(210, 33);
             this.textBoxModeGoogleApiKey.Name = "textBoxModeGoogleApiKey";
-            this.textBoxModeGoogleApiKey.Size = new System.Drawing.Size(433, 23);
+            this.textBoxModeGoogleApiKey.Size = new System.Drawing.Size(435, 23);
             this.textBoxModeGoogleApiKey.TabIndex = 3;
             this.textBoxModeGoogleApiKey.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
@@ -595,7 +591,7 @@
             // radioButtonModeGoogleApi
             // 
             this.radioButtonModeGoogleApi.AutoSize = true;
-            this.radioButtonModeGoogleApi.Location = new System.Drawing.Point(7, 143);
+            this.radioButtonModeGoogleApi.Location = new System.Drawing.Point(7, 98);
             this.radioButtonModeGoogleApi.Name = "radioButtonModeGoogleApi";
             this.radioButtonModeGoogleApi.Size = new System.Drawing.Size(169, 19);
             this.radioButtonModeGoogleApi.TabIndex = 2;
@@ -610,28 +606,15 @@
                 ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top |
                                                         System.Windows.Forms.AnchorStyles.Left) |
                                                        System.Windows.Forms.AnchorStyles.Right)));
-            this.panelModeGoogleTranslate.Controls.Add(this.label7);
             this.panelModeGoogleTranslate.Controls.Add(this.label6);
             this.panelModeGoogleTranslate.Controls.Add(this.textBoxModeGoogleTranslateUrl);
             this.panelModeGoogleTranslate.Controls.Add(this.labelModeGoogleTranslateUrl);
-            this.panelModeGoogleTranslate.Controls.Add(this.numericUpDownModeGoogleTranslateAfterBlock);
-            this.panelModeGoogleTranslate.Controls.Add(this.labelModeGoogleTranslateAfterBlock);
             this.panelModeGoogleTranslate.Controls.Add(this.numericUpDownModeGoogleTranslateBetweenRequests);
             this.panelModeGoogleTranslate.Controls.Add(this.labelModeGoogleTranslateBetweenRequests);
             this.panelModeGoogleTranslate.Location = new System.Drawing.Point(7, 33);
             this.panelModeGoogleTranslate.Name = "panelModeGoogleTranslate";
-            this.panelModeGoogleTranslate.Size = new System.Drawing.Size(647, 90);
+            this.panelModeGoogleTranslate.Size = new System.Drawing.Size(649, 59);
             this.panelModeGoogleTranslate.TabIndex = 1;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.Color.IndianRed;
-            this.label7.Location = new System.Drawing.Point(292, 36);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(270, 15);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Blocks occurs because this service is for real users.";
             // 
             // label6
             // 
@@ -649,41 +632,20 @@
                 ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top |
                                                         System.Windows.Forms.AnchorStyles.Left) |
                                                        System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxModeGoogleTranslateUrl.Location = new System.Drawing.Point(210, 63);
+            this.textBoxModeGoogleTranslateUrl.Location = new System.Drawing.Point(208, 32);
             this.textBoxModeGoogleTranslateUrl.Name = "textBoxModeGoogleTranslateUrl";
-            this.textBoxModeGoogleTranslateUrl.Size = new System.Drawing.Size(433, 23);
+            this.textBoxModeGoogleTranslateUrl.Size = new System.Drawing.Size(435, 23);
             this.textBoxModeGoogleTranslateUrl.TabIndex = 9;
             this.textBoxModeGoogleTranslateUrl.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
             // labelModeGoogleTranslateUrl
             // 
             this.labelModeGoogleTranslateUrl.AutoSize = true;
-            this.labelModeGoogleTranslateUrl.Location = new System.Drawing.Point(77, 67);
+            this.labelModeGoogleTranslateUrl.Location = new System.Drawing.Point(77, 35);
             this.labelModeGoogleTranslateUrl.Name = "labelModeGoogleTranslateUrl";
             this.labelModeGoogleTranslateUrl.Size = new System.Drawing.Size(117, 15);
             this.labelModeGoogleTranslateUrl.TabIndex = 8;
             this.labelModeGoogleTranslateUrl.Text = "URL of API endpoint:";
-            // 
-            // numericUpDownModeGoogleTranslateAfterBlock
-            // 
-            this.numericUpDownModeGoogleTranslateAfterBlock.Location = new System.Drawing.Point(210, 33);
-            this.numericUpDownModeGoogleTranslateAfterBlock.Maximum = new decimal(new int[] {86400, 0, 0, 0});
-            this.numericUpDownModeGoogleTranslateAfterBlock.Minimum = new decimal(new int[] {1, 0, 0, 0});
-            this.numericUpDownModeGoogleTranslateAfterBlock.Name = "numericUpDownModeGoogleTranslateAfterBlock";
-            this.numericUpDownModeGoogleTranslateAfterBlock.Size = new System.Drawing.Size(75, 23);
-            this.numericUpDownModeGoogleTranslateAfterBlock.TabIndex = 6;
-            this.numericUpDownModeGoogleTranslateAfterBlock.Value = new decimal(new int[] {99, 0, 0, 0});
-            this.numericUpDownModeGoogleTranslateAfterBlock.ValueChanged +=
-                new System.EventHandler(this.controlMode_Changed);
-            // 
-            // labelModeGoogleTranslateAfterBlock
-            // 
-            this.labelModeGoogleTranslateAfterBlock.AutoSize = true;
-            this.labelModeGoogleTranslateAfterBlock.Location = new System.Drawing.Point(3, 36);
-            this.labelModeGoogleTranslateAfterBlock.Name = "labelModeGoogleTranslateAfterBlock";
-            this.labelModeGoogleTranslateAfterBlock.Size = new System.Drawing.Size(186, 15);
-            this.labelModeGoogleTranslateAfterBlock.TabIndex = 5;
-            this.labelModeGoogleTranslateAfterBlock.Text = "Wait seconds after block response";
             // 
             // numericUpDownModeGoogleTranslateBetweenRequests
             // 
@@ -770,7 +732,6 @@
             this.panelModeGoogleApi.PerformLayout();
             this.panelModeGoogleTranslate.ResumeLayout(false);
             this.panelModeGoogleTranslate.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.numericUpDownModeGoogleTranslateAfterBlock)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.numericUpDownModeGoogleTranslateBetweenRequests))
                 .EndInit();
             this.panelOperations.ResumeLayout(false);
@@ -816,12 +777,9 @@
         private System.Windows.Forms.Label labelModeGoogleApiKey;
         private System.Windows.Forms.RadioButton radioButtonModeGoogleApi;
         private System.Windows.Forms.Panel panelModeGoogleTranslate;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxModeGoogleTranslateUrl;
         private System.Windows.Forms.Label labelModeGoogleTranslateUrl;
-        private System.Windows.Forms.NumericUpDown numericUpDownModeGoogleTranslateAfterBlock;
-        private System.Windows.Forms.Label labelModeGoogleTranslateAfterBlock;
         private System.Windows.Forms.NumericUpDown numericUpDownModeGoogleTranslateBetweenRequests;
         private System.Windows.Forms.Label labelModeGoogleTranslateBetweenRequests;
         private System.Windows.Forms.RadioButton radioButtonModeGoogleTranslate;

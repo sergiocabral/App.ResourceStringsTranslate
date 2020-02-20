@@ -29,8 +29,16 @@ namespace ResourceStringsTranslate
 
         private void Log(string text, bool success = true, Exception ex = null)
         {
+            var innerException = ex;
+            var exceptionMessage = string.Empty;
+            while (innerException != null)
+            {
+                exceptionMessage += $"{innerException.Message} ";
+                innerException = innerException.InnerException;
+            }
+            
             text =
-                $"{(success ? "   OK" : "ERROR")} [{DateTime.Now:g}] {text}{(ex == null ? string.Empty : $"{ex.GetType().Name}: {ex.Message}")}";
+                $"{(success ? "   OK" : "ERROR")} [{DateTime.Now:G}] {text}{(ex == null ? string.Empty : $". {ex.GetType().Name}: {exceptionMessage}")}";
             if (text.Contains(Environment.NewLine))
             {
                 var tab = text.IndexOf("]") + 2;
@@ -397,6 +405,7 @@ namespace ResourceStringsTranslate
                                 {
                                     Log("  Text translated = ERROR", false, ex);
                                 }
+                                texts[FlagForTranslated] = "OK";
                             }
                         }
 

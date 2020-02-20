@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using Newtonsoft.Json;
 
 namespace ResourceStringsTranslate
@@ -21,28 +23,23 @@ namespace ResourceStringsTranslate
         public string Url { get; set; }
 
         public int BetweenRequests { get; set; }
-
-        public int AfterBlock { get; set; }
-
-        private static WebClientEx _webClient;
         
+        private Stopwatch Stopwatch = new Stopwatch();
+
         public string Translate(string languageFrom, string languageTo, string text)
         {
-            if (_webClient == null)
-            {
-                _webClient = new WebClientEx();
-                _webClient.Encoding = Encoding.UTF8;
-                _webClient.Timeout = 10000;
-            }
+            while (Stopwatch.IsRunning &&
+                   Stopwatch.ElapsedMilliseconds < BetweenRequests * 1000) Thread.Sleep(500);
             
             var url = Url
                 .Replace(UrlMarkLanguageFrom, languageFrom)
                 .Replace(UrlMarkLanguageTo, languageTo)
                 .Replace(UrlMarkText, text);
 
+            Stopwatch.Stop();
             try
             {
-                var response = _webClient.DownloadString(url);
+                var response = WebClientEx.Default.DownloadString(url);
                 try
                 {
                     var json = (dynamic) JsonConvert.DeserializeObject(response);
@@ -68,7 +65,11 @@ namespace ResourceStringsTranslate
             }
             catch (Exception ex)
             {
-                throw new Exception("Request error.", ex);
+                throw new Exception($"Request error.", ex);
+            }
+            finally
+            {
+                Stopwatch.Restart();
             }
         }
 
@@ -77,8 +78,7 @@ namespace ResourceStringsTranslate
             return new EngineForTranslationGoogleTranslate
             {
                 Url = UrlValue,
-                BetweenRequests = 5,
-                AfterBlock = 3600
+                BetweenRequests = 5
             };
         }
     }

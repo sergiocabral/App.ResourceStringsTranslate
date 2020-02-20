@@ -35,7 +35,6 @@ namespace ResourceStringsTranslate
             textBoxModeGoogleTranslateUrl.Text = _engine.Data.TranslationGoogleTranslate.Url;
             numericUpDownModeGoogleTranslateBetweenRequests.Value =
                 _engine.Data.TranslationGoogleTranslate.BetweenRequests;
-            numericUpDownModeGoogleTranslateAfterBlock.Value = _engine.Data.TranslationGoogleTranslate.AfterBlock;
 
             radioButtonModeGoogleApi.Checked = _engine.Data.TranslationService == _engine.Data.TranslationGoogleApi;
             textBoxModeGoogleApiUrl.Text = _engine.Data.TranslationGoogleApi.Url;
@@ -215,7 +214,6 @@ namespace ResourceStringsTranslate
 
             var translationGoogleTranslateUrl = textBoxModeGoogleTranslateUrl.Text;
             var translationGoogleTranslateBetweenRequests = (int) numericUpDownModeGoogleTranslateBetweenRequests.Value;
-            var translationGoogleTranslateAfterBlock = (int) numericUpDownModeGoogleTranslateAfterBlock.Value;
 
             var translationGoogleApiUrl = textBoxModeGoogleApiUrl.Text;
             var translationGoogleApiKey = textBoxModeGoogleApiKey.Text;
@@ -235,8 +233,6 @@ namespace ResourceStringsTranslate
                         : textBoxModeGoogleTranslateUrl.Text = EngineForTranslationGoogleTranslate.UrlValue;
 
                 _engine.Data.TranslationGoogleTranslate.BetweenRequests = translationGoogleTranslateBetweenRequests;
-
-                _engine.Data.TranslationGoogleTranslate.AfterBlock = translationGoogleTranslateAfterBlock;
 
                 _engine.Data.TranslationGoogleApi.Url =
                     !string.IsNullOrWhiteSpace(translationGoogleApiUrl)
