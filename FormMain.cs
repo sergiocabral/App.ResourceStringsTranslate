@@ -45,6 +45,8 @@ namespace ResourceStringsTranslate
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            timer.Enabled = false;
+            
             progressBarStatus.Value = _engine.Data.Progress;
 
             if (listViewSelectResource.Tag != _engine.Data.ResourceFiles)
@@ -84,7 +86,31 @@ namespace ResourceStringsTranslate
 
             if (_engine.Data.CheckNewFiles) textBoxSelectFolder.Text += " ";
 
+            while (!_engine.Data.TranslatingRunning && waitForTranslate.Count > 0)
+            {
+                var translated = waitForTranslate[0];
+                waitForTranslate.RemoveAt(0);
+                UpdateDataGrid(translated);
+            }
+
             DataGridReadOnly(_engine.Data.TranslatingRunning);
+            
+            timer.Enabled = true;
+        }
+
+        private void UpdateDataGrid(IDictionary<string, string> translated)
+        {
+            var row = dataGridViewData.Rows
+                .Cast<DataGridViewRow>()
+                .First(row => 
+                    row.Cells[TableForTranslations.ColumnKeyName].Value.ToString()
+                        .Equals(translated[TableForTranslations.ColumnKeyName]));
+
+            foreach (var column in translated)
+            {
+                if (column.Key == TableForTranslations.ColumnKeyName) continue;
+                row.Cells[column.Key].Value = column.Value;
+            }
         }
 
         private void buttonSelectFolder_Click(object sender, EventArgs e)
@@ -249,6 +275,8 @@ namespace ResourceStringsTranslate
             textBoxManageLanguage.SelectionStart = selectionStart;
             textBoxManageLanguage.SelectionLength = 0;
         }
+        
+        private IList<IDictionary<string, string>> waitForTranslate = new List<IDictionary<string, string>>();
 
         private void buttonTranslateNext_Click(object sender, EventArgs e)
         {
@@ -275,6 +303,7 @@ namespace ResourceStringsTranslate
                 data.Add(dataGridViewData.Columns[i].Name, $"{row.Cells[i].Value}");
             }
 
+            waitForTranslate.Add(data);
             _engine.QueueTranslate(data, textBoxDefaultLanguage.Text);
 
             DataGridReadOnly(true);

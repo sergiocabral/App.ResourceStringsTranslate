@@ -324,6 +324,15 @@ namespace ResourceStringsTranslate
                 {
                     data.ProgressCount += texts.Count;
                     
+                    if (!texts.ContainsKey(TableForTranslations.ColumnKeyName) || 
+                        string.IsNullOrWhiteSpace(texts[TableForTranslations.ColumnKeyName]))
+                    {
+                        Log("Key of Translation not informed.", false);
+                        return;
+                    }
+                    
+                    Log($"  Translation KEY = {texts[TableForTranslations.ColumnKeyName]}");
+                    
                     var textToTranslate = string.Empty;
                     var languageFrom = string.Empty;
                     foreach (var text in texts
