@@ -12,6 +12,10 @@ namespace ResourceStringsTranslate
     {
         private readonly EngineForFormMain _engine = EngineForFormMain.Instance;
 
+        private readonly IList<IDictionary<string, string>> _waitForTranslate = new List<IDictionary<string, string>>();
+
+        private bool _continuousTranslation;
+
         public FormMain()
         {
             InitializeComponent();
@@ -46,7 +50,7 @@ namespace ResourceStringsTranslate
         private void timer_Tick(object sender, EventArgs e)
         {
             timer.Enabled = false;
-            
+
             progressBarStatus.Value = _engine.Data.Progress;
 
             if (listViewSelectResource.Tag != _engine.Data.ResourceFiles)
@@ -86,15 +90,31 @@ namespace ResourceStringsTranslate
 
             if (_engine.Data.CheckNewFiles) textBoxSelectFolder.Text += " ";
 
-            while (!_engine.Data.TranslatingRunning && waitForTranslate.Count > 0)
+            while (!_engine.Data.TranslatingRunning &&
+                   _waitForTranslate.Count > 0)
             {
-                var translated = waitForTranslate[0];
-                waitForTranslate.RemoveAt(0);
-                UpdateDataGrid(translated);
+                var translated = _waitForTranslate[0];
+                _waitForTranslate.RemoveAt(0);
+                if (translated.ContainsKey(EngineForFormMain.FlagForTranslated))
+                    UpdateDataGrid(translated);
+                else
+                    _continuousTranslation = false;
+            }
+
+            if (!_engine.Data.TranslatingRunning &&
+                _continuousTranslation) buttonTranslateNext.PerformClick();
+
+            if (_continuousTranslation && buttonTranslateAll.BackColor != Color.SteelBlue)
+            {
+                buttonTranslateAll.BackColor = Color.SteelBlue;
+            }
+            else if (!_continuousTranslation && buttonTranslateAll.BackColor == Color.SteelBlue)
+            {
+                buttonTranslateAll.BackColor = buttonTranslateNext.BackColor;
             }
 
             DataGridReadOnly(_engine.Data.TranslatingRunning);
-            
+
             timer.Enabled = true;
         }
 
@@ -102,13 +122,14 @@ namespace ResourceStringsTranslate
         {
             var row = dataGridViewData.Rows
                 .Cast<DataGridViewRow>()
-                .First(row => 
+                .First(row =>
                     row.Cells[TableForTranslations.ColumnKeyName].Value.ToString()
                         .Equals(translated[TableForTranslations.ColumnKeyName]));
 
             foreach (var column in translated)
             {
-                if (column.Key == TableForTranslations.ColumnKeyName) continue;
+                if (column.Key == TableForTranslations.ColumnKeyName ||
+                    column.Key == EngineForFormMain.FlagForTranslated) continue;
                 row.Cells[column.Key].Value = column.Value;
             }
         }
@@ -178,7 +199,7 @@ namespace ResourceStringsTranslate
             var translationService =
                 radioButtonModeGoogleTranslate.Checked ? _engine.Data.TranslationGoogleTranslate :
                 radioButtonModeGoogleApi.Checked ? _engine.Data.TranslationGoogleApi :
-                radioButtonModeMicrosoftApi.Checked ? (ITranslation)_engine.Data.TranslationMicrosoftApi :
+                radioButtonModeMicrosoftApi.Checked ? (ITranslation) _engine.Data.TranslationMicrosoftApi :
                 throw new NotImplementedException();
 
             var translationGoogleTranslateUrl = textBoxModeGoogleTranslateUrl.Text;
@@ -275,12 +296,10 @@ namespace ResourceStringsTranslate
             textBoxManageLanguage.SelectionStart = selectionStart;
             textBoxManageLanguage.SelectionLength = 0;
         }
-        
-        private IList<IDictionary<string, string>> waitForTranslate = new List<IDictionary<string, string>>();
 
         private void buttonTranslateNext_Click(object sender, EventArgs e)
         {
-            if (dataGridViewData.RowCount == 0) return;
+            if (dataGridViewData.RowCount == 0 || _engine.Data.TranslatingRunning) return;
 
             var row = dataGridViewData.Rows
                 .Cast<DataGridViewRow>()
@@ -288,6 +307,12 @@ namespace ResourceStringsTranslate
                     a.Cells
                         .Cast<DataGridViewCell>()
                         .Any(b => string.IsNullOrWhiteSpace($"{b.Value}")));
+
+            if (row == null)
+            {
+                _continuousTranslation = false;
+                return;
+            }
 
             var firstColumn = dataGridViewData.Columns.GetFirstColumn(DataGridViewElementStates.Displayed);
             if (firstColumn.Index == 0)
@@ -303,7 +328,7 @@ namespace ResourceStringsTranslate
                 data.Add(dataGridViewData.Columns[i].Name, $"{row.Cells[i].Value}");
             }
 
-            waitForTranslate.Add(data);
+            _waitForTranslate.Add(data);
             _engine.QueueTranslate(data, textBoxDefaultLanguage.Text);
 
             DataGridReadOnly(true);
@@ -319,6 +344,17 @@ namespace ResourceStringsTranslate
                 column.SortMode = mode
                     ? DataGridViewColumnSortMode.NotSortable
                     : DataGridViewColumnSortMode.Automatic;
+        }
+
+        private void buttonTranslateAll_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewData.RowCount == 0) return;
+            _continuousTranslation = true;
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            _continuousTranslation = false;
         }
     }
 }

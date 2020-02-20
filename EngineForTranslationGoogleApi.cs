@@ -1,6 +1,6 @@
 ﻿namespace ResourceStringsTranslate
 {
-    public class EngineForTranslationGoogleApi: ITranslation
+    public class EngineForTranslationGoogleApi : ITranslation
     {
         private const string UrlMarkText = "{text}";
         private const string UrlMarkLanguageFrom = "{languageFrom}";
@@ -13,6 +13,11 @@
 
         public string Key { get; set; }
 
+        public string Translate(string languageFrom, string languageTo, string text)
+        {
+            return text;
+        }
+
         public static EngineForTranslationGoogleApi Default()
         {
             return new EngineForTranslationGoogleApi
@@ -20,11 +25,6 @@
                 Url = UrlValue,
                 Key = string.Empty
             };
-        }
-
-        public string Translate(string languageFrom, string languageTo, string text)
-        {
-            return text;
         }
     }
 }

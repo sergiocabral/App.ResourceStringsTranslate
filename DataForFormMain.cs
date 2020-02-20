@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 namespace ResourceStringsTranslate
@@ -8,12 +7,13 @@ namespace ResourceStringsTranslate
     {
         public const string DefaultLanguageValue = "en";
 
+        private bool _checkNewFiles;
+
         public DataForFormMain()
         {
             TranslationService = TranslationGoogleTranslate;
         }
 
-        private bool _checkNewFiles;
         public List<string> Status { get; } = new List<string>();
 
         public int Progress { get; set; }
@@ -32,7 +32,8 @@ namespace ResourceStringsTranslate
         public EngineForTranslationGoogleTranslate TranslationGoogleTranslate { get; set; } =
             EngineForTranslationGoogleTranslate.Default();
 
-        public EngineForTranslationGoogleApi TranslationGoogleApi { get; set; } = EngineForTranslationGoogleApi.Default();
+        public EngineForTranslationGoogleApi TranslationGoogleApi { get; set; } =
+            EngineForTranslationGoogleApi.Default();
 
         public EngineForTranslationMicrosoftApi TranslationMicrosoftApi { get; set; } =
             EngineForTranslationMicrosoftApi.Default();

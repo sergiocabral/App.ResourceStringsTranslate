@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,6 +10,8 @@ namespace ResourceStringsTranslate
 {
     public class EngineForFormMain
     {
+        public const string FlagForTranslated = "FlagForTranslated";
+
         private readonly IList<DataForQueue> _queueActions = new List<DataForQueue>();
 
         private readonly BackgroundWorker _queueWorker = new BackgroundWorker();
@@ -323,16 +324,16 @@ namespace ResourceStringsTranslate
                 try
                 {
                     data.ProgressCount += texts.Count;
-                    
-                    if (!texts.ContainsKey(TableForTranslations.ColumnKeyName) || 
+
+                    if (!texts.ContainsKey(TableForTranslations.ColumnKeyName) ||
                         string.IsNullOrWhiteSpace(texts[TableForTranslations.ColumnKeyName]))
                     {
                         Log("Key of Translation not informed.", false);
                         return;
                     }
-                    
+
                     Log($"  Translation KEY = {texts[TableForTranslations.ColumnKeyName]}");
-                    
+
                     var textToTranslate = string.Empty;
                     var languageFrom = string.Empty;
                     foreach (var text in texts
@@ -351,7 +352,9 @@ namespace ResourceStringsTranslate
                             }
                             else if (string.IsNullOrWhiteSpace(languageFrom))
                             {
-                                Log($"Language \"from\" is empty. Cannot translate text:{Environment.NewLine}{textToTranslate}", false);
+                                Log(
+                                    $"Language \"from\" is empty. Cannot translate text:{Environment.NewLine}{textToTranslate}",
+                                    false);
                                 return;
                             }
                             else if (string.IsNullOrWhiteSpace(textToTranslate))
@@ -365,15 +368,18 @@ namespace ResourceStringsTranslate
                             var languageTo = text.Key;
                             if (string.IsNullOrWhiteSpace(languageTo))
                             {
-                                Log($"Language \"to\" is empty. Cannot translate text:{Environment.NewLine}{textToTranslate}", false);
+                                Log(
+                                    $"Language \"to\" is empty. Cannot translate text:{Environment.NewLine}{textToTranslate}",
+                                    false);
                                 return;
                             }
                             else
                             {
                                 languageFrom = GetLanguage(languageFrom, languageDefault);
                                 languageTo = GetLanguage(languageTo, languageDefault);
-                                
-                                Log($"  Language \"from\" = {languageFrom}{Environment.NewLine}  Language   \"to\" = {languageTo}{Environment.NewLine}Text to translate = {textToTranslate}");
+
+                                Log(
+                                    $"  Language \"from\" = {languageFrom}{Environment.NewLine}  Language   \"to\" = {languageTo}{Environment.NewLine}Text to translate = {textToTranslate}");
 
                                 try
                                 {
@@ -383,12 +389,13 @@ namespace ResourceStringsTranslate
                                         textToTranslate);
 
                                     texts[text.Key] = textTranslated;
+                                    texts[FlagForTranslated] = "OK";
 
                                     Log($"  Text translated = {textTranslated}");
                                 }
                                 catch (Exception ex)
                                 {
-                                    Log($"  Text translated = ERROR", false, ex);
+                                    Log("  Text translated = ERROR", false, ex);
                                 }
                             }
                         }
@@ -397,9 +404,7 @@ namespace ResourceStringsTranslate
                     }
 
                     if (textToTranslate == string.Empty && languageFrom == string.Empty)
-                    {
                         Log("Text source not found.", false);
-                    }
                 }
                 finally
                 {

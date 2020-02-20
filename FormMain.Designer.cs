@@ -426,6 +426,7 @@
             this.buttonTranslateAll.TabIndex = 3;
             this.buttonTranslateAll.Text = "Translate All";
             this.buttonTranslateAll.UseVisualStyleBackColor = true;
+            this.buttonTranslateAll.Click += new System.EventHandler(this.buttonTranslateAll_Click);
             // 
             // buttonStop
             // 
@@ -438,6 +439,7 @@
             this.buttonStop.TabIndex = 4;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // dataGridViewData
             // 
@@ -482,7 +484,7 @@
             this.panelModeMicrosoftApi.Controls.Add(this.label1ModeMicrosoftApiKey);
             this.panelModeMicrosoftApi.Location = new System.Drawing.Point(7, 276);
             this.panelModeMicrosoftApi.Name = "panelModeMicrosoftApi";
-            this.panelModeMicrosoftApi.Size = new System.Drawing.Size(646, 60);
+            this.panelModeMicrosoftApi.Size = new System.Drawing.Size(647, 60);
             this.panelModeMicrosoftApi.TabIndex = 5;
             // 
             // textBoxModeMicrosoftApiUrl
@@ -493,7 +495,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeMicrosoftApiUrl.Location = new System.Drawing.Point(210, 3);
             this.textBoxModeMicrosoftApiUrl.Name = "textBoxModeMicrosoftApiUrl";
-            this.textBoxModeMicrosoftApiUrl.Size = new System.Drawing.Size(431, 23);
+            this.textBoxModeMicrosoftApiUrl.Size = new System.Drawing.Size(433, 23);
             this.textBoxModeMicrosoftApiUrl.TabIndex = 1;
             this.textBoxModeMicrosoftApiUrl.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
@@ -514,7 +516,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeMicrosoftApiKey.Location = new System.Drawing.Point(210, 33);
             this.textBoxModeMicrosoftApiKey.Name = "textBoxModeMicrosoftApiKey";
-            this.textBoxModeMicrosoftApiKey.Size = new System.Drawing.Size(431, 23);
+            this.textBoxModeMicrosoftApiKey.Size = new System.Drawing.Size(433, 23);
             this.textBoxModeMicrosoftApiKey.TabIndex = 3;
             this.textBoxModeMicrosoftApiKey.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
@@ -551,7 +553,7 @@
             this.panelModeGoogleApi.Controls.Add(this.labelModeGoogleApiKey);
             this.panelModeGoogleApi.Location = new System.Drawing.Point(7, 170);
             this.panelModeGoogleApi.Name = "panelModeGoogleApi";
-            this.panelModeGoogleApi.Size = new System.Drawing.Size(646, 60);
+            this.panelModeGoogleApi.Size = new System.Drawing.Size(647, 60);
             this.panelModeGoogleApi.TabIndex = 3;
             // 
             // textBoxModeGoogleApiUrl
@@ -562,7 +564,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeGoogleApiUrl.Location = new System.Drawing.Point(210, 3);
             this.textBoxModeGoogleApiUrl.Name = "textBoxModeGoogleApiUrl";
-            this.textBoxModeGoogleApiUrl.Size = new System.Drawing.Size(431, 23);
+            this.textBoxModeGoogleApiUrl.Size = new System.Drawing.Size(433, 23);
             this.textBoxModeGoogleApiUrl.TabIndex = 1;
             this.textBoxModeGoogleApiUrl.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
@@ -583,7 +585,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeGoogleApiKey.Location = new System.Drawing.Point(210, 33);
             this.textBoxModeGoogleApiKey.Name = "textBoxModeGoogleApiKey";
-            this.textBoxModeGoogleApiKey.Size = new System.Drawing.Size(431, 23);
+            this.textBoxModeGoogleApiKey.Size = new System.Drawing.Size(433, 23);
             this.textBoxModeGoogleApiKey.TabIndex = 3;
             this.textBoxModeGoogleApiKey.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
@@ -624,7 +626,7 @@
             this.panelModeGoogleTranslate.Controls.Add(this.labelModeGoogleTranslateBetweenRequests);
             this.panelModeGoogleTranslate.Location = new System.Drawing.Point(7, 33);
             this.panelModeGoogleTranslate.Name = "panelModeGoogleTranslate";
-            this.panelModeGoogleTranslate.Size = new System.Drawing.Size(646, 90);
+            this.panelModeGoogleTranslate.Size = new System.Drawing.Size(647, 90);
             this.panelModeGoogleTranslate.TabIndex = 1;
             // 
             // label7
@@ -655,7 +657,7 @@
                                                        System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxModeGoogleTranslateUrl.Location = new System.Drawing.Point(210, 63);
             this.textBoxModeGoogleTranslateUrl.Name = "textBoxModeGoogleTranslateUrl";
-            this.textBoxModeGoogleTranslateUrl.Size = new System.Drawing.Size(431, 23);
+            this.textBoxModeGoogleTranslateUrl.Size = new System.Drawing.Size(433, 23);
             this.textBoxModeGoogleTranslateUrl.TabIndex = 9;
             this.textBoxModeGoogleTranslateUrl.TextChanged += new System.EventHandler(this.controlMode_Changed);
             // 
