@@ -218,7 +218,7 @@ namespace ResourceStringsTranslate
             {
                 try
                 {
-                    if (dataTable == null)
+                    if (dataTable == null || Data.SelectedResourceFileGroup.Count == 0)
                     {
                         Log("No data to save.", false);
                         return;
