@@ -84,7 +84,7 @@ namespace ResourceStringsTranslate
 
         private static string FormatKeyCSharp(string key)
         {
-            return key.Replace("-", "_");
+            return Regex.Replace(key, @"[^a-z0-9]", "_", RegexOptions.IgnoreCase);
         }
 
         private void SaveDataCSharp(IDictionary<string, string> translations)
